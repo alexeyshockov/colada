@@ -1,0 +1,26 @@
+{
+    "name":        "cormorant/cormorant",
+    "description": "Collections framework (interfaces and implementations) for PHP 5.4",
+    "keywords":    ["collections"],
+    "homepage":    "http://github.com/alexeyshockov/Cormorant",
+    "type":        "library",
+    "license":     "MIT",
+
+    "authors": [
+        {
+            "name":     "Alexey Shockov",
+            "email":    "alexey@shockov.com",
+            "homepage": "http://alexey.shockov.com/"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.4.0"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "Cormorant": "src/"
+        }
+    }
+}
