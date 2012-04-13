@@ -105,12 +105,18 @@ class IteratorCollection
     /**
      * Lazy.
      *
-     * @param callable $mapper
+     * @param callable|mixed $mapper
      *
      * @return Collection
      */
-    public function mapBy(callable $mapper)
+    public function mapBy($mapper)
     {
+        if (!is_callable($mapper)) {
+            $element = $mapper;
+
+            $mapper = function() use($element) { return $element; };
+        }
+
         return new static(
             new CollectionMapIterator(
                 $this->collection,
@@ -124,12 +130,22 @@ class IteratorCollection
      *
      * @see http://www.scala-lang.org/api/current/scala/collection/immutable/Set.html
      *
-     * @param callable $mapper
+     * @param callable|Traversable $mapper
      *
      * @return Collection
      */
-    public function flatMapBy(callable $mapper)
+    public function flatMapBy($mapper)
     {
+        if (!is_callable($mapper)) {
+            if (is_object($mapper) && ($mapper instanceof \Traversable)) {
+                $elements = $mapper;
+
+                $mapper = function() use($elements) { return $elements; };
+            } else {
+                throw new \InvalidArgumentException();
+            }
+        }
+
         return new static(
             new CollectionFlatMapIterator(
                 $this->collection,
