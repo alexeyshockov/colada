@@ -1,8 +1,8 @@
 {
-    "name":        "cormorant/cormorant",
+    "name":        "colada/colada",
     "description": "Collections framework (interfaces and implementations) for PHP 5.4",
     "keywords":    ["collections"],
-    "homepage":    "http://github.com/alexeyshockov/Cormorant",
+    "homepage":    "http://github.com/alexeyshockov/colada",
     "type":        "library",
     "license":     "MIT",
 
@@ -20,7 +20,7 @@
 
     "autoload": {
         "psr-0": {
-            "Cormorant": "src/"
+            "Colada": "src/"
         }
     }
 }

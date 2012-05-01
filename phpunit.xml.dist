@@ -12,14 +12,14 @@
          bootstrap                   = "vendor/.composer/autoload.php"
 >
     <testsuites>
-        <testsuite name="Cormorant test suite">
-            <directory>./src/Cormorant/Tests</directory>
+        <testsuite name="Colada test suite">
+            <directory>./src/Colada/Tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>./src/Cormorant</directory>
+            <directory>./src/Colada</directory>
         </whitelist>
     </filter>
 </phpunit>
