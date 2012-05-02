@@ -46,6 +46,16 @@ class SplObjectStorageMap implements Map, \Countable
         return count($this->map);
     }
 
+    // TODO Lazy.
+    public function flip()
+    {
+        return $this->asPairs()
+            ->foldBy(
+                function($builder, $pair) { return $builder->put($pair[1], $pair[0]); },
+                new MapBuilder()
+            )->build();
+    }
+
     /**
      * @return Collection
      */
