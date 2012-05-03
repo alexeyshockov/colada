@@ -13,26 +13,26 @@ interface Map
      */
     function isEmpty();
 
-	/**
-	 * @param mixed $key
+    /**
+     * @param mixed $key
      *
      * @return bool
-	 */
-	function containsKey($key);
+     */
+    function containsKey($key);
 
-	/**
-	 * @param mixed $element
+    /**
+     * @param mixed $element
      *
      * @return bool
-	 */
-	function contains($element);
+     */
+    function contains($element);
 
-	/**
+    /**
      * @param mixed $key
      *
      * @return Option
-	 */
-	function get($key);
+     */
+    function get($key);
 
     /**
      * Return associated value or throw exception, if key not exists in map.
