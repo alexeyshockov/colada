@@ -9,6 +9,9 @@ class Some extends Option
 {
     private $data;
 
+    /**
+     * @param mixed $data
+     */
     public function __construct($data)
     {
         $this->data = $data;
