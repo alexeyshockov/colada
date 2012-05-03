@@ -249,18 +249,18 @@ class IteratorCollection
 
         $this->collection->rewind();
 
-        $previousElement = $this->collection->current();
+        $reduced = $this->collection->current();
         $this->collection->next();
-
-        $reduced = null;
 
         while ($this->collection->valid()) {
             $element = $this->collection->current();
 
-            $reduced = $reducer($previousElement, $element);
+            $reduced = $reducer($reduced, $element);
 
             $this->collection->next();
         }
+
+        return $reduced;
     }
 
     /**
