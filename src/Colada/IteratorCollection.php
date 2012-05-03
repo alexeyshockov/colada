@@ -116,15 +116,17 @@ class IteratorCollection
      *
      * @param callable $finder
      *
-     * @return mixed
+     * @return Option
      */
     public function findBy(callable $finder)
     {
         foreach ($this->collection as $element) {
             if ($finder($element)) {
-                return $element;
+                return new Some($element);
             }
         }
+
+        return new None();
     }
 
     /**
