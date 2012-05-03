@@ -110,4 +110,45 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(array(1, 2, 3, 4, 5), $collection->toArray());
     }
+
+    /**
+     * @test
+     */
+    public function reduceShouldBeCorrectForFilledCollection()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array(1, 5, 4, 3, 2)));
+
+        $string = $collection->reduceBy(function($string, $element) { return $string.' '.$element; });
+
+        $this->assertSame('1 5 4 3 2', $string);
+    }
+
+    /**
+     * @test
+     */
+    // TODO Concrete exception class in reduceBy()...
+    public function reduceShouldNotBeAvailableForEmptyCollection()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array()));
+
+        try {
+            $collection->reduceBy(function($string, $element) { return $string.' '.$element; });
+
+            $this->fail();
+        } catch (\Exception $exception) {
+
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function reduceShouldBeCorrectForCollectionWithOnlyOneElement()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array(1)));
+
+        $string = $collection->reduceBy(function($string, $element) { return $string.' '.$element; });
+
+        $this->assertEquals('1', $string);
+    }
 }
