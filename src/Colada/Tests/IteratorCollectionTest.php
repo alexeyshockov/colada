@@ -14,7 +14,7 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldBeGroupable()
+    public function groupingShouldBeCorrectForFilledCollection()
     {
         $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
 
@@ -31,7 +31,7 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldBeFilterable()
+    public function filtrationShouldBeCorrect()
     {
         $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
 
@@ -47,7 +47,7 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldBeFoldable()
+    public function foldingShouldBeCorrectForFilledCollection()
     {
         $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
 
@@ -61,7 +61,7 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldBeMappable()
+    public function mappingShouldBeCorrect()
     {
         $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
 
@@ -73,9 +73,9 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldBeFlatMappable()
+    public function flatMappingShouldBeCorrectForFilledCollection()
     {
-        $collection = new IteratorCollection(new \ArrayIterator(array('Some text.')));
+        $collection = new IteratorCollection(new \ArrayIterator(array('Some ', 'text.')));
 
         // Split by chars.
         $collection = $collection->flatMapBy(function($element) { return str_split($element); });
@@ -87,7 +87,7 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldBeSliceable()
+    public function slicingShouldBeCorrectForCorrectBounds()
     {
         $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3, 4, 5)));
 
@@ -100,7 +100,7 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldBeSortable()
+    public function sortingShouldBeCorrect()
     {
         $collection = new IteratorCollection(new \ArrayIterator(array(1, 5, 4, 3, 2)));
 
