@@ -165,6 +165,24 @@ class EntityCollection extends \Colada\IteratorCollection
         }
     }
 
+    protected function findInQueryBuilderBy(callable $finder, callable $nativeFinder)
+    {
+        if ($this->queryBuilder) {
+            $queryBuilder = clone $this->queryBuilder;
+
+            $alias = $queryBuilder->getRootAliases();
+            $alias = $alias[0];
+
+            $finder($queryBuilder, $alias);
+
+            $entity = $queryBuilder->getQuery()->getOneOrNullResult();
+
+            return \Colada\Option::from($entity);
+        } else {
+            return $this->findBy($nativeFinder);
+        }
+    }
+
     protected function sortQueryBuilderBy(callable $comparator, callable $nativeComparator)
     {
         if ($this->queryBuilder) {
