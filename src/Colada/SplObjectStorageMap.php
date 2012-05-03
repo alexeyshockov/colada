@@ -107,7 +107,7 @@ class SplObjectStorageMap implements Map, \Countable
                     }
 
                     // Is pair?
-                    if (is_array($pair) && (count($pair) >= 2)) {
+                    if (is_array($pair) && (count($pair) == 2)) {
                         return $builder->put($pair[0], $pair[1]);
                     } else {
                         // Downgrade to collection...
