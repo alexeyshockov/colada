@@ -130,14 +130,16 @@ class SplObjectStorageMap implements Map, \Countable
     // TODO Lazy.
     public function pick($keys)
     {
-        $checker = function($key) use ($keys) { return in_array($key, $keys); };
+        $checker = function($key) use ($keys) { return \Colada\Helpers\CollectionHelper::in($key, $keys); };
 
-        $this->asPairs()
+        return $this->asPairs()
             ->foldBy(
                 function($builder, $pair) use($checker) {
                     if ($checker($pair[0])) {
-                        return $builder->put($pair[0], $pair[1]);
+                        $builder->put($pair[0], $pair[1]);
                     }
+
+                    return $builder;
                 },
                 new MapBuilder()
             )->build();
