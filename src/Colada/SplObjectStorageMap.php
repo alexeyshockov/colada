@@ -77,8 +77,8 @@ class SplObjectStorageMap implements Map, \Countable
     // TODO Lazy.
     public function filterBy(callable $filter)
     {
-        $this->asPairs()
-            ->filterBy(function($pair) use($filter) { return $filter($pair[0], $pair[1]); })
+        return $this->asPairs()
+            ->filterBy($filter)
             ->foldBy(
                 function($builder, $pair) { return $builder->put($pair[0], $pair[1]); },
                 new MapBuilder()
@@ -86,20 +86,20 @@ class SplObjectStorageMap implements Map, \Countable
     }
 
     // TODO Lazy.
-    public function mapElements(callable $mapper)
+    public function mapElementsBy(callable $mapper)
     {
-        $this->asPairs()
-            ->mapBy(function($pair) use($mapper) { return $mapper($pair[0], $pair[1]); })
+        return $this->asPairs()
+            ->mapBy(function($pair) use($mapper) { return [$pair[0], $mapper($pair[1])]; })
             ->foldBy(
                 function($builder, $pair) { return $builder->put($pair[0], $pair[1]); },
                 new MapBuilder()
             )->build();
     }
 
-    private function mapPairs(callable $mapper, $mapType = 'map')
+    private function mapPairsBy(callable $mapper, $mapType = 'mapBy')
     {
         return $this->asPairs()
-            ->{$mapType}(function($pair) use($mapper) { return $mapper($pair[0], $pair[1]); })
+            ->{$mapType}($mapper)
             ->foldBy(
                 function($builder, $pair) {
                     if ($builder instanceof CollectionBuilder) {
@@ -149,9 +149,9 @@ class SplObjectStorageMap implements Map, \Countable
      * @return mixed Map or Collection.
      */
     // TODO Is this method lazy?
-    public function map(callable $mapper)
+    public function mapBy(callable $mapper)
     {
-        return $this->mapPairs($mapper);
+        return $this->mapPairsBy($mapper);
     }
 
     /**
@@ -159,9 +159,9 @@ class SplObjectStorageMap implements Map, \Countable
      *
      * @return mixed Map or Collection.
      */
-    public function flatMap(callable $mapper)
+    public function flatMapBy(callable $mapper)
     {
-        return $this->mapPairs($mapper, 'flatMap');
+        return $this->mapPairsBy($mapper, 'flatMapBy');
     }
 
     /**
