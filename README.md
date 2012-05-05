@@ -24,7 +24,7 @@ Follow project's [wiki](https://github.com/alexeyshockov/colada/wiki) for usage 
 
 ## Roadmap
 
-* 0.1-0.x — API stabilization.
+* 0.x — API stabilization.
 * 1.0 — Stable API.
 * 1.x — Other persistent collections (for Doctrine ODM and others).
 * 2.0 — Mutable collections and other features (may be).
