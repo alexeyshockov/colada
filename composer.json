@@ -1,6 +1,6 @@
 {
-    "name":        "colada/colada",
-    "description": "Collections framework (interfaces and implementations) for PHP 5.4",
+    "name":        "alexeyshockov/colada",
+    "description": "Collections framework for PHP",
     "keywords":    ["collections"],
     "homepage":    "http://github.com/alexeyshockov/colada",
     "type":        "library",
