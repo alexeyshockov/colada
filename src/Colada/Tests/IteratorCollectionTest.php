@@ -35,7 +35,7 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
     {
         $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
 
-        $filteredCollection = $collection->filterBy(function($element) {
+        $filteredCollection = $collection->acceptBy(function($element) {
             return ($element % 2);
         });
 

@@ -3,9 +3,12 @@
 namespace Colada;
 
 /**
+ * @todo Implement Equalable?
+ *
+ * General map interface (immutable). Supports all types of keys, not only scalars (like PHP core collections).
+ *
  * @author Alexey Shockov <alexey@shockov.com>
  */
-// TODO Implement Equalable?
 interface Map
 {
     /**
@@ -37,11 +40,22 @@ interface Map
     /**
      * Return associated value or throw exception, if key not exists in map.
      *
+     * @todo Right exception.
+     *
+     * @throws \InvalidArgumentException
+     *
      * @param $key
      *
      * @return mixed
-     *
-     * @throw \InvalidArgumentException
      */
     function apply($key);
+
+    /**
+     * Alias for get().
+     *
+     * @param mixed $key
+     *
+     * @return mixed
+     */
+    function __invoke($key);
 }

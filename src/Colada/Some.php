@@ -17,60 +17,100 @@ class Some extends Option
         $this->data = $data;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function isEqualTo($some)
     {
         return (is_object($some) && ($some instanceof static) && ComparisonHelper::isEquals($this->get(), $some->get()));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function isDefined()
     {
         return true;
     }
 
-    public function flatMapBy(callable $mapper)
+    /**
+     * {@inheritDoc}
+     */
+    public function flatMapBy($mapper)
     {
+        Contracts::ensureCallable($mapper);
+
         // Grecefully handle not Option return value.
-        if (!(($option = $mapper($this->data)) instanceof Option)) {
+        if (!(($option = call_user_func($mapper, $this->data)) instanceof Option)) {
             $option = Option::from($option);
         }
 
         return $option;
     }
 
-    public function mapBy(callable $mapper)
+    /**
+     * {@inheritDoc}
+     */
+    public function mapBy($mapper)
     {
-        return new static($mapper($this->data));
+        Contracts::ensureCallable($mapper);
+
+        return new static(call_user_func($mapper, $this->data));
     }
 
-    public function filterBy(callable $filter)
+    /**
+     * {@inheritDoc}
+     */
+    public function acceptBy($filter)
     {
-        if ($filter($this->data)) {
+        Contracts::ensureCallable($filter);
+
+        if (call_user_func($filter, $this->data)) {
             return $this;
         } else {
             return new None();
         }
     }
 
-    public function eachBy(callable $processor)
+    /**
+     * {@inheritDoc}
+     */
+    public function eachBy($processor)
     {
-        $processor($this->data);
+        Contracts::ensureCallable($processor);
+
+        call_user_func($processor, $this->data);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function orNull()
     {
         return $this->data;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function orElse($else)
     {
         return $this->data;
     }
 
+    /**
+     * Original value.
+     *
+     * @return mixed
+     */
     public function get()
     {
         return $this->data;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getIterator()
     {
         return new \ArrayIterator(array($this->data));

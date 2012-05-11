@@ -3,6 +3,8 @@
 namespace Colada;
 
 /**
+ * @internal
+ *
  * @author Alexey Shockov <alexey@shockov.com>
  */
 class IteratorProxy implements \Iterator

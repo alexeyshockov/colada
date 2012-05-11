@@ -2,7 +2,12 @@
 
 namespace Colada;
 
-class MapElements extends PairParts
+/**
+ * @internal
+ *
+ * @author Alexey Shockov <alexey@shockov.com>
+ */
+class PairMapElements extends PairParts
 {
     public function __construct($pairs)
     {

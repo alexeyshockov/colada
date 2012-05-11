@@ -3,38 +3,42 @@
 namespace Colada;
 
 /**
+ * Optional value.
+ *
+ * @todo Links to examples.
+ *
  * @author Alexey Shockov <alexey@shockov.com>
  */
 abstract class Option implements \IteratorAggregate, Equalable
 {
     /**
-     * @param callable $mapper
+     * @param callback $mapper
      *
      * @return Option
      */
-    abstract public function flatMapBy(callable $mapper);
+    abstract public function flatMapBy($mapper);
 
     /**
-     * @param callable $mapper
+     * @param callback $mapper
      *
      * @return Option
      */
-    abstract public function mapBy(callable $mapper);
+    abstract public function mapBy($mapper);
 
     /**
-     * @param callable $filter
+     * @param callback $filter
      *
      * @return Option
      */
-    abstract public function filterBy(callable $filter);
+    abstract public function acceptBy($filter);
 
     /**
-     * @param callable $processor
+     * @param callback $processor
      */
-    abstract public function eachBy(callable $processor);
+    abstract public function eachBy($processor);
 
     /**
-     * @param $else
+     * @param callback|mixed $else
      *
      * @return mixed
      */
@@ -46,11 +50,15 @@ abstract class Option implements \IteratorAggregate, Equalable
     abstract public function orNull();
 
     /**
+     * Always true for {@link Some}, always false for {@link None}.
+     *
      * @return bool
      */
     abstract public function isDefined();
 
     /**
+     * None for nulls, Some for other values.
+     *
      * @param mixed $data
      *
      * @return Option
@@ -60,6 +68,9 @@ abstract class Option implements \IteratorAggregate, Equalable
         return (is_null($data) ? new None() : new Some($data));
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return (string) $this->orNull();

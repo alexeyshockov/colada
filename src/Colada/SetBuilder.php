@@ -3,10 +3,19 @@
 namespace Colada;
 
 /**
+ * Builder for constructing immutable sets.
+ *
  * @author Alexey Shockov <alexey@shockov.com>
  */
 class SetBuilder extends CollectionBuilder
 {
+    /**
+     * Adds only unique elements.
+     *
+     * @param mixed $element
+     *
+     * @return SetBuilder
+     */
     public function add($element)
     {
         foreach ($this->array as $collectionElement) {
@@ -19,6 +28,13 @@ class SetBuilder extends CollectionBuilder
         return parent::add($element);
     }
 
+    /**
+     * Adds only unique elements.
+     *
+     * @param array|\Traversable|mixed $elements
+     *
+     * @return SetBuilder
+     */
     public function addAll($elements)
     {
         if (!(is_array($elements) || (is_object($elements) && ($elements instanceof \Traversable)))) {

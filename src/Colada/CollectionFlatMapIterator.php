@@ -13,8 +13,10 @@ class CollectionFlatMapIterator extends CollectionMapIterator
 
     private $mapper;
 
-    public function __construct(\Iterator $iterator, callable $mapper)
+    public function __construct(\Iterator $iterator, $mapper)
     {
+        Contracts::ensureCallable($mapper);
+
         $this->flattingIterator = $iterator;
         $this->mapper           = $mapper;
 
@@ -37,11 +39,8 @@ class CollectionFlatMapIterator extends CollectionMapIterator
 
     private function prepareCurrentIterator()
     {
-        // Some better syntax?
-        $mapper = $this->mapper;
-
         if ($this->flattingIterator->valid()) {
-            $elements = $mapper($this->flattingIterator->current());
+            $elements = call_user_func($this->mapper, $this->flattingIterator->current());
 
             if (!(is_array($elements) || (is_object($elements) && ($elements instanceof \Traversable)))) {
                 // Process not iterable values gracefully.

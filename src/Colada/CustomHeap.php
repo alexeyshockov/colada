@@ -3,6 +3,8 @@
 namespace Colada;
 
 /**
+ * @internal
+ *
  * @author Alexey Shockov <alexey@shockov.com>
  */
 class CustomHeap
@@ -13,8 +15,10 @@ class CustomHeap
      */
     private $comparator;
 
-    public function __construct(callable $comparator)
+    public function __construct($comparator)
     {
+        Contracts::ensureCallable($comparator);
+
         $this->comparator = $comparator;
     }
 
@@ -25,6 +29,6 @@ class CustomHeap
 
         // For some reasons, elements in heap are in descending order...
         // TODO Result type check?
-        return -$comparator($element1, $element2);
+        return -call_user_func($comparator, $element1, $element2);
     }
 }

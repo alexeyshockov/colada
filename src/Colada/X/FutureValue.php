@@ -3,8 +3,12 @@
 namespace Colada\X;
 
 /**
+ * Functor.
+ *
  * @todo __isset()
  * @todo __unset()
+ *
+ * @internal
  *
  * @author Alexey Shockov <alexey@shockov.com>
  */
@@ -19,27 +23,27 @@ class FutureValue implements \ArrayAccess
 
     public function __construct()
     {
-        $this->mapper = function($value) { return x($value); };
+        $this->mapper = function($value) { return new Value($value); };
     }
 
     public function offsetGet($key)
     {
-        return $this->__call(__FUNCTION__, [$key]);
+        return $this->__call(__FUNCTION__, array($key));
     }
 
     public function offsetUnset($key)
     {
-        return $this->__call(__FUNCTION__, [$key]);
+        return $this->__call(__FUNCTION__, array($key));
     }
 
     public function offsetExists($key)
     {
-        return $this->__call(__FUNCTION__, [$key]);
+        return $this->__call(__FUNCTION__, array($key));
     }
 
     public function offsetSet($key, $value)
     {
-        return $this->__call(__FUNCTION__, [$key, $value]);
+        return $this->__call(__FUNCTION__, array($key, $value));
     }
 
     public function __set($property, $value)

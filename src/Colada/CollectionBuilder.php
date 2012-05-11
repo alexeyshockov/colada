@@ -3,6 +3,8 @@
 namespace Colada;
 
 /**
+ * Builder for constructing immutable collections.
+ *
  * @author Alexey Shockov <alexey@shockov.com>
  */
 class CollectionBuilder
@@ -14,15 +16,32 @@ class CollectionBuilder
 
     private $index = 0;
 
+    /**
+     * Useful helper for PHP versions less than 5.4.
+     *
+     * @param mixed $collection
+     *
+     * @return Collection
+     */
+    public static function buildFrom($collection)
+    {
+        $builder = new static($collection);
+
+        return $builder->addAll($collection)->build();
+    }
+
+    /**
+     * @param int|\Countable|mixed $sizeHint Hint for resulting collection size.
+     */
     public function __construct($sizeHint = 0)
     {
-        // "Like other".
+        // "Like other" collection.
         if (is_object($sizeHint) && ($sizeHint instanceof \Countable)) {
             $sizeHint = count($sizeHint);
         }
 
-        if (!is_int($sizeHint)) {
-            throw new \InvalidArgumentException();
+        if (!is_numeric($sizeHint)) {
+            $sizeHint = 1;
         }
 
         $this->array = new \SplFixedArray($sizeHint);
@@ -74,6 +93,9 @@ class CollectionBuilder
         return $this;
     }
 
+    /**
+     * @return CollectionBuilder
+     */
     public function clear()
     {
         // Restore previous size?
@@ -82,6 +104,9 @@ class CollectionBuilder
         return $this;
     }
 
+    /**
+     * @return Collection
+     */
     public function build()
     {
         // Shrink array to actual size.

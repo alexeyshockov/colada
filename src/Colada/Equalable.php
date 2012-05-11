@@ -7,5 +7,12 @@ namespace Colada;
  */
 interface Equalable
 {
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param mixed $object
+     *
+     * @return bool
+     */
     function isEqualTo($object);
 }

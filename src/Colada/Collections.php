@@ -3,6 +3,8 @@
 namespace Colada;
 
 /**
+ * Helper for common collections build patters.
+ *
  * @author Alexey Shockov <alexey@shockov.com>
  */
 class Collections

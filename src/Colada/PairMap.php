@@ -5,48 +5,50 @@ namespace Colada;
 /**
  * Universal map implementation.
  *
- * P.S. foldBy(), eachBy() not implemented for simplify. KISS. All this methods available for pairs in $map->asPairs().
- *
  * @author Alexey Shockov <alexey@shockov.com>
  */
-class SplObjectStorageMap implements Map, \Countable
+class PairMap implements Map, \Countable
 {
-    /**
-     * @var \SplObjectStorage
-     */
-    protected $map;
-
-    /**
-     * @var SplObjectStoragePairs
-     */
     private $pairs;
 
-    private $keys;
+    private $pairSet;
+
+    private $keySet;
 
     private $elements;
 
-    public function __construct(\SplObjectStorage $map)
+    /**
+     * @param Pairs $pairs
+     */
+    public function __construct(Pairs $pairs)
     {
-        $this->map = $map;
-
-        $pairs = new SplObjectStoragePairs($this->map);
-
-        $this->keys     = new IteratorCollection(new MapKeys($pairs));
-        $this->elements = new IteratorCollection(new MapElements($pairs));
-        $this->pairs    = new IteratorCollection($pairs);
+        $this->pairs    = $pairs;
+        $this->pairSet  = new IteratorCollection($pairs);
+        $this->keySet   = new PairMapKeySet(new PairMapKeys($pairs));
+        $this->elements = new IteratorCollection(new PairMapElements($pairs));
     }
 
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->pairs);
+    }
+
+    /**
+     * @return bool
+     */
     public function isEmpty()
     {
         return (count($this) > 0);
     }
 
-    public function count()
-    {
-        return count($this->map);
-    }
-
-    // TODO Lazy.
+    /**
+     * @todo Lazy.
+     *
+     * @return Map
+     */
     public function flip()
     {
         return $this->asPairs()
@@ -71,32 +73,49 @@ class SplObjectStorageMap implements Map, \Countable
      */
     public function asKeys()
     {
-        return $this->keys;
+        return $this->keySet;
     }
 
-    // TODO Lazy.
-    public function filterBy(callable $filter)
+    /**
+     * @todo Lazy.
+     *
+     * @param callback $filter
+     *
+     * @return Map
+     */
+    public function acceptBy($filter)
     {
+        Contracts::ensureCallable($filter);
+
         return $this->asPairs()
-            ->filterBy($filter)
+            ->acceptBy($filter)
+            ->foldBy(
+                function($builder, $pair) { return $builder->put($pair[0], $pair[1]); },
+                new MapBuilder()
+            )
+            ->build();
+    }
+
+    /**
+     * @todo Lazy.
+     *
+     * @param callback $mapper
+     *
+     * @return Map
+     */
+    public function mapElementsBy($mapper)
+    {
+        Contracts::ensureCallable($mapper);
+
+        return $this->asPairs()
+            ->mapBy(function($pair) use($mapper) { return array($pair[0], call_user_func($mapper, $pair[1])); })
             ->foldBy(
                 function($builder, $pair) { return $builder->put($pair[0], $pair[1]); },
                 new MapBuilder()
             )->build();
     }
 
-    // TODO Lazy.
-    public function mapElementsBy(callable $mapper)
-    {
-        return $this->asPairs()
-            ->mapBy(function($pair) use($mapper) { return [$pair[0], $mapper($pair[1])]; })
-            ->foldBy(
-                function($builder, $pair) { return $builder->put($pair[0], $pair[1]); },
-                new MapBuilder()
-            )->build();
-    }
-
-    private function mapPairsBy(callable $mapper, $mapType = 'mapBy')
+    private function mapPairsBy($mapper, $mapType = 'mapBy')
     {
         return $this->asPairs()
             ->{$mapType}($mapper)
@@ -110,8 +129,10 @@ class SplObjectStorageMap implements Map, \Countable
                     if (is_array($pair) && (count($pair) == 2)) {
                         return $builder->put($pair[0], $pair[1]);
                     } else {
+                        $builder = new CollectionBuilder(count($this));
+
                         // Downgrade to collection...
-                        return (new CollectionBuilder(count($this)))
+                        return $builder
                             ->addAll($builder->build()->asPairs())
                             ->add($pair);
                     }
@@ -121,13 +142,14 @@ class SplObjectStorageMap implements Map, \Countable
     }
 
     /**
+     * @todo Lazy.
+     *
      * Return a new Map, filtered to only have elements for the whitelisted keys.
      *
-     * @param $keys
+     * @param array|\Traversable $keys
      *
      * @return Map
      */
-    // TODO Lazy.
     public function pick($keys)
     {
         $checker = function($key) use ($keys) { return \Colada\Helpers\CollectionHelper::in($key, $keys); };
@@ -146,97 +168,80 @@ class SplObjectStorageMap implements Map, \Countable
     }
 
     /**
-     * @param callable $mapper
+     * @param callback $mapper
      *
-     * @return mixed Map or Collection.
+     * @return Map|Collection
      */
-    // TODO Is this method lazy?
-    public function mapBy(callable $mapper)
+    public function mapBy($mapper)
     {
+        Contracts::ensureCallable($mapper);
+
         return $this->mapPairsBy($mapper);
     }
 
     /**
-     * @param callable $mapper
+     * @param callback $mapper
      *
-     * @return mixed Map or Collection.
+     * @return Map|Collection
      */
-    public function flatMapBy(callable $mapper)
+    public function flatMapBy($mapper)
     {
+        Contracts::ensureCallable($mapper);
+
         return $this->mapPairsBy($mapper, 'flatMapBy');
     }
 
     /**
+     * View.
+     *
      * @return Collection
      */
     public function asPairs()
     {
-        return $this->pairs;
+        return $this->pairSet;
     }
 
     /**
-     * @param mixed $key
-     *
-     * @return Option
-     */
-    protected function getMapKey($key)
-    {
-        $key = $this->getObjectKey($key);
-
-        if ($this->map->contains($key)) {
-            return new Some($key);
-        }
-
-        // Search by equalable...
-        foreach ($this->map as $mapKey) {
-            if (ComparisonHelper::isEquals($key, $mapKey)) {
-                return new Some($mapKey);
-            }
-        }
-
-        return new None();
-    }
-
-    protected function getObjectKey($key)
-    {
-        return ((!is_object($key) || ($key instanceof NotObjectKey)) ? new NotObjectKey($key) : $key);
-    }
-
-    protected function getOriginalKey($key)
-    {
-        return (($key instanceof NotObjectKey) ? $key->key : $key);
-    }
-
-    /**
-     * @param mixed $key
-     *
-     * @return Option
+     * {@inheritDoc}
      */
     public function get($key)
     {
-        return $this->getMapKey($key)->mapBy(function($key) { return $this->map[$key]; });
+        return $this->pairs->getElementByKey($key);
     }
 
     /**
-     * @throws \InvalidArgumentException
-     *
-     * @param mixed $key
-     *
-     * @return mixed
+     * {@inheritDoc}
+     */
+    public function __invoke($key)
+    {
+        return $this->get($key);
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public function apply($key)
     {
-        // TODO Right exception.
-        return $this->get($key)->orElse(function() { throw new \InvalidArgumentException(); });
+        return $this->get($key)->orElse(function() { throw new \InvalidArgumentException('Key not found.'); });
     }
 
+    /**
+     * @param mixed $element
+     *
+     * @return bool
+     */
     public function contains($element)
     {
         return $this->asElements()->contains($element);
     }
 
+    /**
+     * @param mixed $key
+     *
+     * @return bool
+     */
     public function containsKey($key)
     {
-        return ($this->getMapKey($key) instanceof Some);
+        return $this->pairs->containsKey($key);
     }
 }

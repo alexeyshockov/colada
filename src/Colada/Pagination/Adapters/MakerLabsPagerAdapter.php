@@ -1,6 +1,6 @@
 <?php
 
-namespace Colada;
+namespace Colada\Pagination\Adapters;
 
 /**
  * @author Alexey Shockov <alexey@shockov.com>
@@ -12,7 +12,7 @@ class MakerLabsPagerAdapter implements \MakerLabs\PagerBundle\Adapter\PagerAdapt
      */
     private $collection;
 
-    public function __construct(Collection $collection)
+    public function __construct(\Colada\Collection $collection)
     {
         $this->collection = $collection;
     }

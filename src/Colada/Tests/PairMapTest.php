@@ -2,10 +2,13 @@
 
 namespace Colada\Tests;
 
+use Colada\PairMap,
+    Colada\SplObjectStoragePairs;
+
 /**
  * @author Alexey Shockov <alexey@shockov.com>
  */
-class SplObjectStorageMapTest extends \PHPUnit_Framework_TestCase
+class PairMapTest extends \PHPUnit_Framework_TestCase
 {
     private $dayNames;
 
@@ -13,11 +16,11 @@ class SplObjectStorageMapTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->dayDates = [
-            'today'     => new \DateTime(),
-            'yesterday' => (new \DateTime())->modify('-1 day'),
-            'tomorrow'  => (new \DateTime())->modify('+1 day'),
-        ];
+        $this->dayDates = array(
+            'today'     => ($today = new \DateTime()),
+            'yesterday' => date_modify(clone $today, '-1 day'),
+            'tomorrow'  => date_modify(clone $today, '+1 day'),
+        );
 
         $storage = new \SplObjectStorage();
 
@@ -26,7 +29,7 @@ class SplObjectStorageMapTest extends \PHPUnit_Framework_TestCase
         $storage[$this->dayDates['tomorrow']]  = 'tomorrow';
 
         // Assume we have map with 3 pairs.
-        $this->dayNames = new \Colada\SplObjectStorageMap($storage);
+        $this->dayNames = new PairMap(new SplObjectStoragePairs($storage));
     }
 
     /**
@@ -60,11 +63,11 @@ class SplObjectStorageMapTest extends \PHPUnit_Framework_TestCase
         $map = $this->dayNames;
 
         $this->assertEquals(
-            [
-                [$this->dayDates['today'],     'today'],
-                [$this->dayDates['yesterday'], 'yesterday'],
-                [$this->dayDates['tomorrow'],  'tomorrow'],
-            ],
+            array(
+                array($this->dayDates['today'],     'today'),
+                array($this->dayDates['yesterday'], 'yesterday'),
+                array($this->dayDates['tomorrow'],  'tomorrow'),
+            ),
             $map->asPairs()->toArray()
         );
     }
@@ -79,15 +82,15 @@ class SplObjectStorageMapTest extends \PHPUnit_Framework_TestCase
         // Assume we have map with 3 pairs.
         $map = $this->dayNames;
 
-        $map = $map->filterBy(function($pair) {
+        $map = $map->acceptBy(function($pair) {
             return ($pair[1] != 'yesterday');
         });
 
         $this->assertEquals(
-            [
-                [$this->dayDates['today'],    'today'],
-                [$this->dayDates['tomorrow'], 'tomorrow'],
-            ],
+            array(
+                array($this->dayDates['today'],    'today'),
+                array($this->dayDates['tomorrow'], 'tomorrow'),
+            ),
             $map->asPairs()->toArray()
         );
     }
@@ -103,15 +106,15 @@ class SplObjectStorageMapTest extends \PHPUnit_Framework_TestCase
         $map = $this->dayNames;
 
         $map = $map->mapBy(function($pair) {
-            return [$pair[0], strlen($pair[1])];
+            return array($pair[0], strlen($pair[1]));
         });
 
         $this->assertEquals(
-            [
-                [$this->dayDates['today'],     5],
-                [$this->dayDates['yesterday'], 9],
-                [$this->dayDates['tomorrow'],  8],
-            ],
+            array(
+                array($this->dayDates['today'],     5),
+                array($this->dayDates['yesterday'], 9),
+                array($this->dayDates['tomorrow'],  8),
+            ),
             $map->asPairs()->toArray()
         );
     }
@@ -127,16 +130,16 @@ class SplObjectStorageMapTest extends \PHPUnit_Framework_TestCase
         $map = $this->dayNames;
 
         $map = $map->flatMapBy(function($pair) {
-            return [$pair, $pair];
+            return array($pair, $pair);
         });
 
         // Same keys will be merged.
         $this->assertEquals(
-            [
-                [$this->dayDates['today'],     'today'],
-                [$this->dayDates['yesterday'], 'yesterday'],
-                [$this->dayDates['tomorrow'],  'tomorrow'],
-            ],
+            array(
+                array($this->dayDates['today'],     'today'),
+                array($this->dayDates['yesterday'], 'yesterday'),
+                array($this->dayDates['tomorrow'],  'tomorrow'),
+            ),
             $map->asPairs()->toArray()
         );
     }
@@ -151,14 +154,14 @@ class SplObjectStorageMapTest extends \PHPUnit_Framework_TestCase
         // Assume we have map with 3 pairs.
         $map = $this->dayNames;
 
-        $map = $map->pick([$this->dayDates['today'], $this->dayDates['yesterday']]);
+        $map = $map->pick(array($this->dayDates['today'], $this->dayDates['yesterday']));
 
         // Same keys will be merged.
         $this->assertEquals(
-            [
-                [$this->dayDates['today'],     'today'],
-                [$this->dayDates['yesterday'], 'yesterday'],
-            ],
+            array(
+                array($this->dayDates['today'],     'today'),
+                array($this->dayDates['yesterday'], 'yesterday'),
+            ),
             $map->asPairs()->toArray()
         );
     }
@@ -177,11 +180,11 @@ class SplObjectStorageMapTest extends \PHPUnit_Framework_TestCase
 
         // Same keys will be merged.
         $this->assertEquals(
-            [
-                ['today',     $this->dayDates['today']],
-                ['yesterday', $this->dayDates['yesterday']],
-                ['tomorrow',  $this->dayDates['tomorrow']]
-            ],
+            array(
+                array('today',     $this->dayDates['today']),
+                array('yesterday', $this->dayDates['yesterday']),
+                array('tomorrow',  $this->dayDates['tomorrow']),
+            ),
             $map->asPairs()->toArray()
         );
     }

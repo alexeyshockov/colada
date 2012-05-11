@@ -3,6 +3,8 @@
 namespace Colada;
 
 /**
+ * @internal
+ *
  * @author Alexey Shockov <alexey@shockov.com>
  */
 abstract class PairParts extends CollectionMapIterator implements \Countable
@@ -10,9 +12,9 @@ abstract class PairParts extends CollectionMapIterator implements \Countable
     const PART_KEY     = 0;
     const PART_ELEMENT = 1;
 
-    private $pairs;
+    protected $pairs;
 
-    public function __construct($pairs, $part)
+    public function __construct(Pairs $pairs, $part)
     {
         if (!in_array($part, array(static::PART_KEY, static::PART_ELEMENT))) {
             throw new \InvalidArgumentException('Unknown part.');

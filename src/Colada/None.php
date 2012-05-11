@@ -7,50 +7,83 @@ namespace Colada;
  */
 class None extends Option
 {
+    /**
+     * {@inheritDoc}
+     */
     public function isEqualTo($none)
     {
         return (is_object($none) && ($none instanceof static));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function isDefined()
     {
         return false;
     }
 
-    public function flatMapBy(callable $mapper)
+    /**
+     * {@inheritDoc}
+     */
+    public function flatMapBy($mapper)
     {
+        Contracts::ensureCallable($mapper);
+
         return $this;
     }
 
-    public function mapBy(callable $mapper)
+    /**
+     * {@inheritDoc}
+     */
+    public function mapBy($mapper)
     {
+        Contracts::ensureCallable($mapper);
+
         return $this;
     }
 
-    public function filterBy(callable $filter)
+    /**
+     * {@inheritDoc}
+     */
+    public function acceptBy($filter)
     {
+        Contracts::ensureCallable($filter);
+
         return $this;
     }
 
-    public function eachBy(callable $processor)
+    /**
+     * {@inheritDoc}
+     */
+    public function eachBy($processor)
     {
-
+        Contracts::ensureCallable($processor);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function orNull()
     {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function orElse($else)
     {
         if (is_callable($else)) {
-            return $else();
+            return call_user_func($else);
         } else {
             return $else;
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getIterator()
     {
         return new \ArrayIterator(array());

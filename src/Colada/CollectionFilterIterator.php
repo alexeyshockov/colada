@@ -3,11 +3,12 @@
 namespace Colada;
 
 /**
+ * @todo Extract common methods with CollectionMapIterator.
+ *
  * @internal
  *
  * @author Alexey Shockov <alexey@shockov.com>
  */
-// TODO Extract common methods with CollectionMapIterator.
 class CollectionFilterIterator implements \Iterator
 {
     private $iterator;
@@ -20,8 +21,10 @@ class CollectionFilterIterator implements \Iterator
 
     private $index = 0;
 
-    public function __construct(\Iterator $iterator, callable $filter)
+    public function __construct(\Iterator $iterator, $filter)
     {
+        Contracts::ensureCallable($filter);
+
         $this->iterator = $iterator;
         $this->filter   = $filter;
 
@@ -37,11 +40,8 @@ class CollectionFilterIterator implements \Iterator
 
     private function findCurrent()
     {
-        // Some better syntax?
-        $filter = $this->filter;
-
         while ($this->iterator->valid()) {
-            if ($filter($element = $this->iterator->current())) {
+            if (call_user_func($this->filter, ($element = $this->iterator->current()))) {
                 $this->element = $element;
                 $this->key     = $this->index;
 

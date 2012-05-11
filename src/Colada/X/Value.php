@@ -95,10 +95,10 @@ class Value implements \ArrayAccess
     public function __call($name, $arguments)
     {
         $method = null;
-        if (is_object($this->value) && is_callable([$this->value, $name])) {
-            $method = [$this->value, $name];
+        if (is_object($this->value) && is_callable(array($this->value, $name))) {
+            $method = array($this->value, $name);
         } elseif (isset(static::$methods[$name])) {
-            $method = [static::$methods[$name], $name];
+            $method = array(static::$methods[$name], $name);
 
             array_unshift($arguments, $this->value);
         } else {
@@ -108,6 +108,11 @@ class Value implements \ArrayAccess
         $result = call_user_func_array($method, $arguments);
 
         return new static($result);
+    }
+
+    public function __toString()
+    {
+        return (string) $this->value;
     }
 }
 

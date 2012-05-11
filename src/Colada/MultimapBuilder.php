@@ -3,6 +3,8 @@
 namespace Colada;
 
 /**
+ * Builder for constructing immutable multimaps (Map<K, Collection<V>>).
+ *
  * @author Alexey Shockov <alexey@shockov.com>
  */
 class MultimapBuilder extends MapBuilder
@@ -14,6 +16,10 @@ class MultimapBuilder extends MapBuilder
      */
     private $elementCollectionBuilder;
 
+    /**
+     * @param CollectionBuilder $elementCollectionBuilder Concrete collection builder (for example, collections or sets
+     * for elements).
+     */
     public function __construct(CollectionBuilder $elementCollectionBuilder)
     {
         parent::__construct();
@@ -21,6 +27,12 @@ class MultimapBuilder extends MapBuilder
         $this->elementCollectionBuilder = $elementCollectionBuilder;
     }
 
+    /**
+     * @param mixed $key
+     * @param mixed $element
+     *
+     * @return MultimapBuilder
+     */
     public function add($key, $element)
     {
         $this->apply($key, clone $this->elementCollectionBuilder)->add($element);
@@ -38,18 +50,34 @@ class MultimapBuilder extends MapBuilder
      */
     protected function apply($key, $element)
     {
-        return $this->getMapKey($key)->mapBy(function($key) {
-            return $this->map[$key];
-        })->orElse(function() use ($key, $element) {
-            $this->put($key, $element);
+        $map    = $this->map;
+        $putter = array($this, 'put');
 
-            return $element;
-        });
+        return $this->getMapKey($key)
+            ->mapBy(function($key) use($map) {
+                return $map[$key];
+            })
+            ->orElse(function() use ($putter, $key, $element) {
+                call_user_func($putter, $key, $element);
+
+                return $element;
+            });
     }
 
-    // TODO Duplicate from SplObjectStorageMap. Remove.
     protected function getMapKey($key)
     {
+        if ($this->map instanceof \ArrayIterator) {
+            if (!is_scalar($key)) {
+                return new None();
+            }
+
+            if (isset($this->map[$key])) {
+                return new Some($key);
+            }
+
+            return new None();
+        }
+
         $key = $this->getObjectKey($key);
 
         if ($this->map->contains($key)) {
@@ -66,6 +94,9 @@ class MultimapBuilder extends MapBuilder
         return new None();
     }
 
+    /**
+     * @return Map
+     */
     public function build()
     {
         $this->mapElements(function($collectionBuilder) {

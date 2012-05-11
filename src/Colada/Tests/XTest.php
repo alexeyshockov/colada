@@ -12,7 +12,7 @@ class XTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        \Colada\X::registerFunction();
+        \Colada\Colada::registerFunction();
     }
 
     /**
@@ -20,7 +20,7 @@ class XTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeChainable()
     {
-        $x = \x()->startsWith('Test')->isFalse();
+        $x = \Colada\_()->startsWith('Test')->isFalse();
 
         $this->assertFalse($x('Test string.'));
     }
@@ -30,20 +30,19 @@ class XTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldPreserveOriginalMethods()
     {
-        $x = \x()->getTimezone()->isNull();
+        $x = \Colada\_()->getTimezone()->isNull();
 
         $this->assertFalse($x(new \DateTime()));
     }
 
     /**
-     * @depends shouldBeChainable
+     * Only for PHP 5.4.
      *
-     * @test
+     * @depends shouldBeChainable
      */
+    // TODO What shall we do for 5.3?
     public function shouldProvideNativeArrayGet()
     {
-        $x = \x()[1]->isNull();
 
-        $this->assertFalse($x(array(1, 2, 3)));
     }
 }

@@ -19,8 +19,10 @@ class CollectionMapIterator implements \Iterator
 
     private $index = 0;
 
-    public function __construct(\Iterator $iterator, callable $mapper)
+    public function __construct(\Iterator $iterator, $mapper)
     {
+        Contracts::ensureCallable($mapper);
+
         $this->iterator = $iterator;
         $this->mapper   = $mapper;
 
@@ -37,11 +39,8 @@ class CollectionMapIterator implements \Iterator
 
     protected function prepareCurrent()
     {
-        // Some better syntax?
-        $mapper = $this->mapper;
-
         if ($this->iterator->valid()) {
-            $this->element = $mapper($this->iterator->current());
+            $this->element = call_user_func($this->mapper, $this->iterator->current());
             $this->key     = $this->index;
 
             return new Some($this->element);
