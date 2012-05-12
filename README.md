@@ -22,6 +22,8 @@ or throught [Composer](https://github.com/composer/composer):
 
 Follow project's [wiki](https://github.com/alexeyshockov/colada/wiki) for usage information and examples.
 
+Detailed [API documentation](http://alexeyshockov.github.com/colada/api/) (for current stable release).
+
 ## Roadmap
 
 * 0.x — API stabilization.
