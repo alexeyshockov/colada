@@ -1,0 +1,3 @@
+
+var ApiGen = ApiGen || {};
+ApiGen.elements = [["f","Colada\\_()"],["c","Colada\\ArrayIteratorPairs"],["c","Colada\\Colada"],["c","Colada\\Collection"],["c","Colada\\CollectionBuilder"],["c","Colada\\Collections"],["c","Colada\\Equalable"],["c","Colada\\IteratorCollection"],["c","Colada\\Map"],["c","Colada\\MapBuilder"],["c","Colada\\MultimapBuilder"],["c","Colada\\None"],["c","Colada\\Option"],["c","Colada\\Pagination\\Adapters\\MakerLabsPagerAdapter"],["c","Colada\\Pagination\\Adapters\\PagerfantaAdapter"],["c","Colada\\PairMap"],["c","Colada\\Pairs"],["c","Colada\\SetBuilder"],["c","Colada\\Some"],["c","Colada\\SplObjectStoragePairs"]];
