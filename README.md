@@ -30,3 +30,5 @@ Detailed [API documentation](http://alexeyshockov.github.com/colada/api/) (for c
 * 1.0 — Stable API.
 * 1.x — Other minor features (sorted collections, etc.).
 * 2.0 — Mutable collections.
+
+More detailed view may be found in [appropriate page](https://github.com/alexeyshockov/colada/issues/milestones).
