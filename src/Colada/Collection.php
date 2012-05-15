@@ -31,18 +31,22 @@ interface Collection
     /**
      * Constructs new collection with elements, for which $filter returns false.
      *
+     * Lazy.
+     *
      * @param callback $filter
      *
-     * @return Collection
+     * @return \Colada\Collection
      */
     function acceptBy($filter);
 
     /**
      * Constructs new collection with elements, for which $filter returns false.
      *
+     * Lazy.
+     *
      * @param callback $filter
      *
-     * @return Collection
+     * @return \Colada\Collection
      */
     function rejectBy($filter);
 
@@ -58,9 +62,11 @@ interface Collection
     /**
      * Applies $mapper to each element of collection and constructs new one with results.
      *
-     * @param callback $mapper
+     * Lazy.
      *
-     * @return Collection
+     * @param callback|mixed $mapper
+     *
+     * @return \Colada\Collection
      */
     function mapBy($mapper);
 
@@ -68,9 +74,13 @@ interface Collection
      * Applies $mapper to each element of collection and constructs new one with results (which must be collections of
      * new elements for each original element).
      *
-     * @param callback $mapper
+     * Lazy.
      *
-     * @return Collection
+     * @see http://www.scala-lang.org/api/current/scala/collection/immutable/Set.html
+     *
+     * @param callback|\Traversable $mapper
+     *
+     * @return \Colada\Collection
      */
     function flatMapBy($mapper);
 
@@ -79,16 +89,25 @@ interface Collection
      *
      * @param callback $keyFinder
      *
-     * @return Map
+     * @return \Colada\Map
      */
     function groupBy($keyFinder);
+
+    /**
+     * Is passed collection contains all elements from this one?
+     *
+     * @param \Colada\Collection|\Iterator|\IteratorAggregate|mixed $collection
+     *
+     * @return boolean
+     */
+    function isPartOf($collection);
 
     /**
      * Divides collection into two parts, depending on $partitioner result for each element (boolean).
      *
      * @param callback $partitioner
      *
-     * @return Collection Of two elements.
+     * @return \Colada\Collection[] Array with two elements. Suitable for PHP's list().
      */
     function partitionBy($partitioner);
 
@@ -119,7 +138,7 @@ interface Collection
      * @param int $offset
      * @param int $length
      *
-     * @return Collection
+     * @return \Colada\Collection
      */
     function slice($offset, $length);
 
@@ -128,7 +147,7 @@ interface Collection
      *
      * @param mixed $key
      *
-     * @return Collection
+     * @return \Colada\Collection
      */
     function pluck($key);
 
@@ -138,4 +157,74 @@ interface Collection
      * @param callback $processor
      */
     function eachBy($processor);
+
+    /**
+     * @param callback $folder
+     * @param mixed    $accumulator
+     *
+     * @return mixed
+     */
+    function foldBy($folder, $accumulator);
+
+    /**
+     * Good introduction to reduce: {@link http://www.codecommit.com/blog/scala/scala-collections-for-the-easily-bored-part-2}.
+     *
+     * @todo Own exception class.
+     *
+     * @throws \Exception On empty collection.
+     *
+     * @param callback $reducer
+     *
+     * @return mixed
+     */
+    function reduceBy($reducer);
+
+    /**
+     * @param callback|null $unzipper
+     *
+     * @return \Colada\Collection[] Array with two elements. Suitable for PHP's list().
+     */
+    function unzip($unzipper = null);
+
+    /**
+     * Zips two collections into one.
+     *
+     * Example:
+     * <code>
+     * $collection1 = (new CollectionBuilder())->addAll(array("Alice", "Bob", "Joe"))->build();
+     * $collection2 = (new CollectionBuilder())->addAll(array(1, 2, 3))->build();
+     *
+     * $pairs = $collection1->zip($collection2)->toArray();
+     * // array(
+     * //     array('Alice', 1),
+     * //     array('Bob', 2),
+     * //     array('Joe', 3),
+     * // )
+     * </code>
+     *
+     * P.S. Haskell's and Scala's zipWith() may be implemented in two steps: 1. zip(), 2. mapBy().
+     *
+     * @todo Lazy. With CollectionZipIterator.
+     *
+     * @param \Colada\Collection|\Iterator|\IteratorAggregate|mixed $collection
+     *
+     * @return \Colada\Collection
+     */
+    function zip($collection);
+
+    /**
+     * @param callback $comparator
+     *
+     * @return \Colada\Collection
+     */
+    function sortBy($comparator);
+
+    /**
+     * Constructs new collection with elements from current one.
+     *
+     * Useful, for example, to "freeze" collections from Map::asKeys() or Map::asElements().
+     *
+     * @return \Colada\Collection
+     */
+    function __clone();
 }

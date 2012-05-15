@@ -2,6 +2,8 @@
 
 namespace Colada;
 
+Colada::registerFunction();
+
 /**
  * General purpose collection implementation.
  *
@@ -178,11 +180,7 @@ class IteratorCollection
     }
 
     /**
-     * Lazy.
-     *
-     * @param callback $filter
-     *
-     * @return Collection
+     * @{inheritDoc}
      */
     public function acceptBy($filter)
     {
@@ -197,11 +195,7 @@ class IteratorCollection
     }
 
     /**
-     * Lazy.
-     *
-     * @param callback $filter
-     *
-     * @return Collection
+     * @{inheritDoc}
      */
     public function rejectBy($filter)
     {
@@ -211,11 +205,7 @@ class IteratorCollection
     }
 
     /**
-     * Lazy.
-     *
-     * @param callback|mixed $mapper
-     *
-     * @return Collection
+     * @{inheritDoc}
      */
     public function mapBy($mapper)
     {
@@ -234,13 +224,7 @@ class IteratorCollection
     }
 
     /**
-     * Lazy.
-     *
-     * @see http://www.scala-lang.org/api/current/scala/collection/immutable/Set.html
-     *
-     * @param callback|\Traversable $mapper
-     *
-     * @return Collection
+     * @{inheritDoc}
      */
     public function flatMapBy($mapper)
     {
@@ -263,10 +247,7 @@ class IteratorCollection
     }
 
     /**
-     * @param callback $folder
-     * @param mixed    $accumulator
-     *
-     * @return mixed
+     * @{inheritDoc}
      */
     public function foldBy($folder, $accumulator)
     {
@@ -281,13 +262,7 @@ class IteratorCollection
     }
 
     /**
-     * Good introduction to reduce: http://www.codecommit.com/blog/scala/scala-collections-for-the-easily-bored-part-2.
-     *
-     * @throws \Exception On empty collection.
-     *
-     * @param callback $reducer
-     *
-     * @return mixed
+     * @{inheritDoc}
      */
     public function reduceBy($reducer)
     {
@@ -320,9 +295,7 @@ class IteratorCollection
     }
 
     /**
-     * @param callback $partitioner
-     *
-     * @return Collection[] Array with two elements. Suitable for PHP's list().
+     * @{inheritDoc}
      */
     public function partitionBy($partitioner)
     {
@@ -342,9 +315,7 @@ class IteratorCollection
     }
 
     /**
-     * @param callback|null $unzipper
-     *
-     * @return Collection[] Array with two elements. Suitable for PHP's list().
+     * @{inheritDoc}
      */
     public function unzip($unzipper = null)
     {
@@ -366,28 +337,7 @@ class IteratorCollection
     }
 
     /**
-     * Zips two collections into one.
-     *
-     * Example:
-     * <code>
-     * $collection1 = (new CollectionBuilder())->addAll(array("Alice", "Bob", "Joe"))->build();
-     * $collection2 = (new CollectionBuilder())->addAll(array(1, 2, 3))->build();
-     *
-     * $pairs = $collection1->zip($collection2)->toArray();
-     * // array(
-     * //     array('Alice', 1),
-     * //     array('Bob', 2),
-     * //     array('Joe', 3),
-     * // )
-     * </code>
-     *
-     * P.S. Haskell's and Scala's zipWith() may be implemented in two steps: 1. zip(), 2. mapBy().
-     *
-     * @todo Lazy. With CollectionZipIterator.
-     *
-     * @param Collection|\Iterator|\IteratorAggregate|mixed $collection
-     *
-     * @return Collection
+     * @{inheritDoc}
      */
     public function zip($collection)
     {
@@ -417,8 +367,6 @@ class IteratorCollection
      *
      * For example, we have two sets: (1, 2, 3) and (3, 4, 5). Union will be (1, 2, 3, 4, 5).
      *
-     * @todo Lazy. May be with CollectionFlatMapIterator.
-     *
      * @param Collection|\Iterator|\IteratorAggregate|mixed $collection
      *
      * @return Collection
@@ -438,7 +386,6 @@ class IteratorCollection
      *
      * For example, we have two sets: (1, 2, 3) and (3, 4, 5). Intersection will be (3).
      *
-     * @todo Optimize?..
      * @todo Rename to "intersection"?
      *
      * @param Collection|\Iterator|\IteratorAggregate|mixed $collection
@@ -468,10 +415,12 @@ class IteratorCollection
     }
 
     /**
-     * Lazy. Constructs set with elements which lie <i>outside</i> of a current collection and within another
+     * Constructs set with elements which lie <i>outside</i> of a current collection and within another
      * collection (suitable mostly for sets).
      *
      * For example, we have two sets: (1, 2, 3) and (3, 4, 5). Complement will be (4, 5).
+     *
+     * P.S. diff() is alias in other languages and libraries.
      *
      * @param Collection|\Iterator|\IteratorAggregate|mixed $collection
      *
@@ -482,19 +431,19 @@ class IteratorCollection
         $collection1 = $this;
         $collection2 = $this->normalizeCollection($collection);
 
-        return $collection2->flatMapBy(function($element) use($collection1) {
-            if (!$collection1->containts($element)) {
-                return array($element);
-            }
+        $setBuilder = new SetBuilder();
 
-            return array();
-        });
+        foreach ($collection2 as $element) {
+            if (!$collection1->contains($element)) {
+                $setBuilder->add($element);
+            }
+        }
+
+        return $setBuilder->build();
     }
 
     /**
-     * @param Collection|\Iterator|\IteratorAggregate|mixed $collection
-     *
-     * @return boolean
+     * @{inheritDoc}
      */
     public function isPartOf($collection)
     {
@@ -526,9 +475,7 @@ class IteratorCollection
     }
 
     /**
-     * @param callback $comparator
-     *
-     * @return Collection
+     * @{inheritDoc}
      */
     public function sortBy($comparator)
     {
@@ -543,9 +490,7 @@ class IteratorCollection
     }
 
     /**
-     * @param callback $keyFinder
-     *
-     * @return Map
+     * @{inheritDoc}
      */
     public function groupBy($keyFinder)
     {
@@ -560,11 +505,21 @@ class IteratorCollection
     }
 
     /**
-     * @return array
+     * @{inheritDoc}
      */
     public function toArray()
     {
         // TODO Drop keys to numeric indexes...
         return iterator_to_array($this->iterator);
+    }
+
+    /**
+     * @{inheritDoc}
+     */
+    public function __clone()
+    {
+        $collection = $this->createCollectionBuilder(count($this))->addAll($this->iterator)->build();
+
+        $this->iterator = $collection->iterator;
     }
 }
