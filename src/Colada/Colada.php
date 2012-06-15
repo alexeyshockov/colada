@@ -3,39 +3,23 @@
 namespace Colada;
 
 /**
- * _() function registrator (for quick access to “future” variables).
+ * x(), set(), collection() and other functions registrator (for quick access to “future” variables).
  *
  * @author Alexey Shockov <alexey@shockov.com>
  */
 class Colada
 {
+    private static $registered = false;
+
     /**
-     * Register \Colada\_() function for quick access to “future” variables.
+     * Register x(), set(), collection() and other functions for quick access to “future” variables.
      */
-    public static function registerFunction()
+    public static function registerFunctions()
     {
+        if (!static::$registered) {
+            require_once __DIR__.'/../functions.php';
 
+            static::$registered = true;
+        }
     }
-}
-
-/**
- * Some useful examples:
- *
- * <code>
- * $collection->acceptBy(_()->getName()->startsWith('Test'));
- * </code>
- *
- * vs.
- *
- * <code>
- * $collection->acceptBy(
- *     function($user) { return StringHelper::startsWith($user->getName(), 'Test'); }
- * );
- * </code>
- *
- * @return \Colada\X\FutureValue
- */
-function _()
-{
-    return new \Colada\X\FutureValue();
 }

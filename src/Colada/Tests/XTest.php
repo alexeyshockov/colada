@@ -12,7 +12,7 @@ class XTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        \Colada\Colada::registerFunction();
+        \Colada\Colada::registerFunctions();
     }
 
     /**
@@ -20,7 +20,7 @@ class XTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeChainable()
     {
-        $x = \Colada\_()->startsWith('Test')->isFalse();
+        $x = x()->startsWith('Test')->isFalse();
 
         $this->assertFalse($x('Test string.'));
     }
@@ -30,7 +30,7 @@ class XTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldPreserveOriginalMethods()
     {
-        $x = \Colada\_()->getTimezone()->isNull();
+        $x = x()->getTimezone()->isNull();
 
         $this->assertFalse($x(new \DateTime()));
     }

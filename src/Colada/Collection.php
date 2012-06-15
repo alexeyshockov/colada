@@ -12,104 +12,9 @@ namespace Colada;
 interface Collection
 {
     /**
-     * @param mixed $element
-     *
-     * @return bool
-     */
-    function contains($element);
-
-    /**
      * @return bool
      */
     function isEmpty();
-
-    /**
-     * @return array
-     */
-    function toArray();
-
-    /**
-     * Constructs new collection with elements, for which $filter returns false.
-     *
-     * Lazy.
-     *
-     * @param callback $filter
-     *
-     * @return \Colada\Collection
-     */
-    function acceptBy($filter);
-
-    /**
-     * Constructs new collection with elements, for which $filter returns false.
-     *
-     * Lazy.
-     *
-     * @param callback $filter
-     *
-     * @return \Colada\Collection
-     */
-    function rejectBy($filter);
-
-    /**
-     * Return first element from collection, that match $filter.
-     *
-     * @param callback $filter
-     *
-     * @return mixed
-     */
-    function findBy($filter);
-
-    /**
-     * Applies $mapper to each element of collection and constructs new one with results.
-     *
-     * Lazy.
-     *
-     * @param callback|mixed $mapper
-     *
-     * @return \Colada\Collection
-     */
-    function mapBy($mapper);
-
-    /**
-     * Applies $mapper to each element of collection and constructs new one with results (which must be collections of
-     * new elements for each original element).
-     *
-     * Lazy.
-     *
-     * @see http://www.scala-lang.org/api/current/scala/collection/immutable/Set.html
-     *
-     * @param callback|\Traversable $mapper
-     *
-     * @return \Colada\Collection
-     */
-    function flatMapBy($mapper);
-
-    /**
-     * Group each collection element in map with related key.
-     *
-     * @param callback $keyFinder
-     *
-     * @return \Colada\Map
-     */
-    function groupBy($keyFinder);
-
-    /**
-     * Is passed collection contains all elements from this one?
-     *
-     * @param \Colada\Collection|\Iterator|\IteratorAggregate|mixed $collection
-     *
-     * @return boolean
-     */
-    function isPartOf($collection);
-
-    /**
-     * Divides collection into two parts, depending on $partitioner result for each element (boolean).
-     *
-     * @param callback $partitioner
-     *
-     * @return \Colada\Collection[] Array with two elements. Suitable for PHP's list().
-     */
-    function partitionBy($partitioner);
 
     /**
      * @param callback $matcher
@@ -127,10 +32,17 @@ interface Collection
 
     /**
      * @param callback $matcher
-     *}
+     *
      * @return bool
      */
     function isNoneMatchBy($matcher);
+
+    /**
+     * @param mixed $element
+     *
+     * @return bool
+     */
+    function contains($element);
 
     /**
      * @throws \InvalidArgumentException
@@ -159,6 +71,62 @@ interface Collection
     function eachBy($processor);
 
     /**
+     * Return first element from collection, that match $filter.
+     *
+     * @param callback $filter
+     *
+     * @return mixed
+     */
+    function findBy($filter);
+
+    /**
+     * Constructs new collection with elements, for which $filter returns false.
+     *
+     * Lazy.
+     *
+     * @param callback $filter
+     *
+     * @return \Colada\Collection
+     */
+    function acceptBy($filter);
+
+    /**
+     * Constructs new collection with elements, for which $filter returns false.
+     *
+     * Lazy.
+     *
+     * @param callback $filter
+     *
+     * @return \Colada\Collection
+     */
+    function rejectBy($filter);
+
+    /**
+     * Applies $mapper to each element of collection and constructs new one with results.
+     *
+     * Lazy.
+     *
+     * @param callback|mixed $mapper
+     *
+     * @return \Colada\Collection
+     */
+    function mapBy($mapper);
+
+    /**
+     * Applies $mapper to each element of collection and constructs new one with results (which must be collections of
+     * new elements for each original element).
+     *
+     * Lazy.
+     *
+     * @see http://www.scala-lang.org/api/current/scala/collection/immutable/Set.html
+     *
+     * @param callback|\Traversable $mapper
+     *
+     * @return \Colada\Collection
+     */
+    function flatMapBy($mapper);
+
+    /**
      * @param callback $folder
      * @param mixed    $accumulator
      *
@@ -178,6 +146,15 @@ interface Collection
      * @return mixed
      */
     function reduceBy($reducer);
+
+    /**
+     * Divides collection into two parts, depending on $partitioner result for each element (boolean).
+     *
+     * @param callback $partitioner
+     *
+     * @return \Colada\Collection[] Array with two elements. Suitable for PHP's list().
+     */
+    function partitionBy($partitioner);
 
     /**
      * @param callback|null $unzipper
@@ -213,11 +190,72 @@ interface Collection
     function zip($collection);
 
     /**
+     * Constructs set with elements which are in <i>either</i> sets (suitable mostly for sets).
+     *
+     * For example, we have two sets: (1, 2, 3) and (3, 4, 5). Union will be (1, 2, 3, 4, 5).
+     *
+     * @param \Colada\Collection|\Iterator|\IteratorAggregate|mixed $collection
+     *
+     * @return \Colada\Collection
+     */
+    function union($collection);
+
+    /**
+     * Constructs set with elements which are in <i>both</i> sets (suitable mostly for sets).
+     *
+     * For example, we have two sets: (1, 2, 3) and (3, 4, 5). Intersection will be (3).
+     *
+     * @todo Rename to "intersection"?
+     *
+     * @param \Colada\Collection|\Iterator|\IteratorAggregate|mixed $collection
+     *
+     * @return \Colada\Collection
+     */
+    function intersect($collection);
+
+    /**
+     * Constructs set with elements which lie <i>outside</i> of a current collection and within another
+     * collection (suitable mostly for sets).
+     *
+     * For example, we have two sets: (1, 2, 3) and (3, 4, 5). Complement will be (4, 5).
+     *
+     * P.S. diff() is alias in other languages and libraries.
+     *
+     * @param \Colada\Collection|\Iterator|\IteratorAggregate|mixed $collection
+     *
+     * @return \Colada\Collection
+     */
+    function complement($collection);
+
+    /**
+     * Is passed collection contains all elements from this one?
+     *
+     * @param \Colada\Collection|\Iterator|\IteratorAggregate|mixed $collection
+     *
+     * @return boolean
+     */
+    function isPartOf($collection);
+
+    /**
      * @param callback $comparator
      *
      * @return \Colada\Collection
      */
     function sortBy($comparator);
+
+    /**
+     * Group each collection element in map with related key.
+     *
+     * @param callback $keyFinder
+     *
+     * @return \Colada\Map
+     */
+    function groupBy($keyFinder);
+
+    /**
+     * @return array
+     */
+    function toArray();
 
     /**
      * Constructs new collection with elements from current one.

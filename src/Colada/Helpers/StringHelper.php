@@ -11,19 +11,32 @@ namespace Colada\Helpers;
  */
 class StringHelper
 {
+    /**
+     * @param string $string
+     * @param string $needle
+     *
+     * @return bool
+     */
     public static function startsWith($string, $needle)
     {
         return (substr($string, 0, strlen($needle)) === $needle);
     }
 
+    /**
+     * @param string $string
+     * @param string $needle
+     *
+     * @return bool
+     */
     public static function endsWith($string, $needle)
     {
         $length = strlen($needle);
-        if ($length == 0) {
+        if (0 == $length) {
             return true;
         }
 
         $start = $length * -1; // Negative.
+
         return (substr($string, $start) === $needle);
     }
 
@@ -31,12 +44,11 @@ class StringHelper
      * @param string          $string
      * @param string|RegExp   $pattern
      * @param string|callback $replace
+     *
+     * @return string
      */
-    public function replace($string, $pattern, $replace)
+    public static function replace($string, $pattern, $replace)
     {
-        $string  = (string) $string;
-        $replace = (string) $replace;
-
         if (is_object($pattern) && ($pattern instanceof \Colada\RegExp)) {
             if (is_callable($replace)) {
                 return preg_replace_callback($pattern->getPattern(), $replace, $string);
@@ -44,8 +56,6 @@ class StringHelper
                 return preg_replace($pattern->getPattern(), $replace, $string);
             }
         } else {
-            $pattern = (string) $pattern;
-
             return str_replace($pattern, $replace, $string);
         }
     }
@@ -56,7 +66,7 @@ class StringHelper
      *
      * @return string
      */
-    public function append($string1, $string2)
+    public static function append($string1, $string2)
     {
         return $string1.$string2;
     }
@@ -67,7 +77,7 @@ class StringHelper
      *
      * @return string
      */
-    public function prepend($string1, $string2)
+    public static function prepend($string1, $string2)
     {
         return $string2.$string1;
     }
@@ -82,11 +92,15 @@ class StringHelper
      */
     public static function split($string, $delimiter)
     {
-        return explode($string, $delimiter);
+        if ($delimiter instanceof \Colada\RegExp) {
+            return preg_split($delimiter->getPattern(), $string);
+        } else {
+            return explode($string, $delimiter);
+        }
     }
 
     /**
-     * @param $string
+     * @param string $string
      *
      * @return int
      */
@@ -118,11 +132,22 @@ class StringHelper
         return (srtlen(trim($string)) == 0);
     }
 
-    public function isEqualTo($string1, $string2)
+    /**
+     * @param string $string1
+     * @param string $string2
+     *
+     * @return bool
+     */
+    public static function isEqualTo($string1, $string2)
     {
         return ($string1 == $string2);
     }
 
+    /**
+     * @param string $string
+     *
+     * @return string
+     */
     public static function trim($string)
     {
         return trim($string);

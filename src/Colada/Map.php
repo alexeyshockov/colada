@@ -17,18 +17,67 @@ interface Map
     function isEmpty();
 
     /**
-     * @param mixed $key
-     *
-     * @return bool
+     * @return \Colada\Map
      */
-    function containsKey($key);
+    function flip();
 
     /**
-     * @param mixed $element
+     * Elements view.
      *
-     * @return bool
+     * @return \Colada\Collection
      */
-    function contains($element);
+    function asElements();
+
+    /**
+     * Keys view.
+     *
+     * @return \Colada\Collection
+     */
+    function asKeys();
+
+    /**
+     * @param callback $filter
+     *
+     * @return \Colada\Map
+     */
+    function acceptBy($filter);
+
+    /**
+     * @param callback $mapper
+     *
+     * @return \Colada\Map
+     */
+    function mapElementsBy($mapper);
+
+    /**
+     * Return a new Map, filtered to only have elements for the whitelisted keys.
+     *
+     * @param array|\Traversable $keys
+     *
+     * @return \Colada\Map
+     */
+    function pick($keys);
+
+    /**
+     * @param callback $mapper
+     *
+     * @return \Colada\Map|\Colada\Collection
+     */
+    function mapBy($mapper);
+
+    /**
+     * @param callback $mapper
+     *
+     * @return \Colada\Map|\Colada\Collection
+     */
+    function flatMapBy($mapper);
+
+    /**
+     * Pairs view.
+     *
+     * @return \Colada\Collection
+     */
+    function asPairs();
 
     /**
      * @param mixed $key
@@ -36,6 +85,15 @@ interface Map
      * @return Option
      */
     function get($key);
+
+    /**
+     * Alias for get().
+     *
+     * @param mixed $key
+     *
+     * @return mixed
+     */
+    function __invoke($key);
 
     /**
      * Return associated value or throw exception, if key not exists in map.
@@ -51,11 +109,16 @@ interface Map
     function apply($key);
 
     /**
-     * Alias for get().
+     * @param mixed $element
      *
+     * @return bool
+     */
+    function contains($element);
+
+    /**
      * @param mixed $key
      *
-     * @return mixed
+     * @return bool
      */
-    function __invoke($key);
+    function containsKey($key);
 }

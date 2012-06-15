@@ -10,6 +10,46 @@ namespace Colada\Helpers;
 class CollectionHelper
 {
     /**
+     * @param array|\Traversable|mixed $value
+     *
+     * @return \Colada\Collection
+     */
+    public static function toCollection($value)
+    {
+        $builder = new \Colada\CollectionBuilder();
+
+        return $builder->addAll($value)->build();
+    }
+
+    /**
+     * @param array|\Traversable|mixed $value
+     *
+     * @return \Colada\Collection
+     */
+    public static function toSet($value)
+    {
+        $builder = new \Colada\SetBuilder();
+
+        return $builder->addAll($value)->build();
+    }
+
+    /**
+     * @param array|\Traversable $value
+     *
+     * @return \Colada\Map
+     */
+    public static function toMap($value)
+    {
+        $builder = new \Colada\MapBuilder();
+
+        foreach ($value as $key => $value) {
+            $builder->put($key, $value);
+        }
+
+        return $builder->build();
+    }
+
+    /**
      * @param mixed $value
      * @param \Colada\Collection|mixed $collection
      *

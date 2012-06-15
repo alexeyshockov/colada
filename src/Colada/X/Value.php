@@ -118,5 +118,6 @@ class Value implements \ArrayAccess
 
 // Register default helpers... Some better place for that?
 Value::registerHelper(new \Colada\Helpers\TypeHelper());
+Value::registerHelper(new \Colada\Helpers\NumericHelper());
 Value::registerHelper(new \Colada\Helpers\StringHelper());
 Value::registerHelper(new \Colada\Helpers\CollectionHelper());

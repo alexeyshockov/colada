@@ -9,12 +9,24 @@ namespace Colada;
  */
 class PairMap implements Map, \Countable
 {
+    /**
+     * @var \Colada\Pairs
+     */
     private $pairs;
 
+    /**
+     * @var \Colada\IteratorCollection
+     */
     private $pairSet;
 
+    /**
+     * @var \Colada\PairMapKeySet
+     */
     private $keySet;
 
+    /**
+     * @var \Colada\IteratorCollection
+     */
     private $elements;
 
     /**
@@ -37,7 +49,7 @@ class PairMap implements Map, \Countable
     }
 
     /**
-     * @return bool
+     * {@inheritDoc}
      */
     public function isEmpty()
     {
@@ -47,7 +59,7 @@ class PairMap implements Map, \Countable
     /**
      * @todo Lazy.
      *
-     * @return Map
+     * @return \Colada\Map
      */
     public function flip()
     {
@@ -59,7 +71,7 @@ class PairMap implements Map, \Countable
     }
 
     /**
-     * @return Collection
+     * {@inheritDoc}
      */
     public function asElements()
     {
@@ -67,9 +79,7 @@ class PairMap implements Map, \Countable
     }
 
     /**
-     * Key set.
-     *
-     * @return Collection
+     * {@inheritDoc}
      */
     public function asKeys()
     {
@@ -79,9 +89,7 @@ class PairMap implements Map, \Countable
     /**
      * @todo Lazy.
      *
-     * @param callback $filter
-     *
-     * @return Map
+     * {@inheritDoc}
      */
     public function acceptBy($filter)
     {
@@ -99,9 +107,7 @@ class PairMap implements Map, \Countable
     /**
      * @todo Lazy.
      *
-     * @param callback $mapper
-     *
-     * @return Map
+     * {@inheritDoc}
      */
     public function mapElementsBy($mapper)
     {
@@ -144,11 +150,7 @@ class PairMap implements Map, \Countable
     /**
      * @todo Lazy.
      *
-     * Return a new Map, filtered to only have elements for the whitelisted keys.
-     *
-     * @param array|\Traversable $keys
-     *
-     * @return Map
+     * {@inheritDoc}
      */
     public function pick($keys)
     {
@@ -168,9 +170,7 @@ class PairMap implements Map, \Countable
     }
 
     /**
-     * @param callback $mapper
-     *
-     * @return Map|Collection
+     * {@inheritDoc}
      */
     public function mapBy($mapper)
     {
@@ -180,9 +180,7 @@ class PairMap implements Map, \Countable
     }
 
     /**
-     * @param callback $mapper
-     *
-     * @return Map|Collection
+     * {@inheritDoc}
      */
     public function flatMapBy($mapper)
     {
@@ -192,9 +190,7 @@ class PairMap implements Map, \Countable
     }
 
     /**
-     * View.
-     *
-     * @return Collection
+     * {@inheritDoc}
      */
     public function asPairs()
     {
@@ -226,9 +222,7 @@ class PairMap implements Map, \Countable
     }
 
     /**
-     * @param mixed $element
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function contains($element)
     {
@@ -236,9 +230,7 @@ class PairMap implements Map, \Countable
     }
 
     /**
-     * @param mixed $key
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function containsKey($key)
     {

@@ -2,7 +2,7 @@
 
 namespace Colada;
 
-Colada::registerFunction();
+Colada::registerFunctions();
 
 /**
  * General purpose collection implementation.
@@ -31,7 +31,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function isEmpty()
     {
@@ -39,7 +39,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function isAnyMatchBy($matcher)
     {
@@ -55,7 +55,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function isAllMatchBy($matcher)
     {
@@ -71,7 +71,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function isNoneMatchBy($matcher)
     {
@@ -81,7 +81,7 @@ class IteratorCollection
     /**
      * @todo Binary search for sorted collections.
      *
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function contains($element)
     {
@@ -94,6 +94,9 @@ class IteratorCollection
         return false;
     }
 
+    /**
+     * @return int
+     */
     public function count()
     {
         if ($this->iterator instanceof \Countable) {
@@ -104,7 +107,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function slice($offset, $length)
     {
@@ -128,7 +131,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function pluck($key)
     {
@@ -152,7 +155,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function eachBy($processor)
     {
@@ -164,7 +167,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function findBy($filter)
     {
@@ -180,7 +183,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function acceptBy($filter)
     {
@@ -195,7 +198,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function rejectBy($filter)
     {
@@ -205,7 +208,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function mapBy($mapper)
     {
@@ -224,7 +227,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function flatMapBy($mapper)
     {
@@ -247,7 +250,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function foldBy($folder, $accumulator)
     {
@@ -262,7 +265,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function reduceBy($reducer)
     {
@@ -295,7 +298,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function partitionBy($partitioner)
     {
@@ -315,7 +318,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function unzip($unzipper = null)
     {
@@ -337,7 +340,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function zip($collection)
     {
@@ -363,13 +366,7 @@ class IteratorCollection
     }
 
     /**
-     * Constructs set with elements which are in <i>either</i> sets (suitable mostly for sets).
-     *
-     * For example, we have two sets: (1, 2, 3) and (3, 4, 5). Union will be (1, 2, 3, 4, 5).
-     *
-     * @param Collection|\Iterator|\IteratorAggregate|mixed $collection
-     *
-     * @return Collection
+     * {@inheritDoc}
      */
     public function union($collection)
     {
@@ -382,15 +379,7 @@ class IteratorCollection
     }
 
     /**
-     * Constructs set with elements which are in <i>both</i> sets (suitable mostly for sets).
-     *
-     * For example, we have two sets: (1, 2, 3) and (3, 4, 5). Intersection will be (3).
-     *
-     * @todo Rename to "intersection"?
-     *
-     * @param Collection|\Iterator|\IteratorAggregate|mixed $collection
-     *
-     * @return Collection
+     * {@inheritDoc}
      */
     public function intersect($collection)
     {
@@ -415,16 +404,7 @@ class IteratorCollection
     }
 
     /**
-     * Constructs set with elements which lie <i>outside</i> of a current collection and within another
-     * collection (suitable mostly for sets).
-     *
-     * For example, we have two sets: (1, 2, 3) and (3, 4, 5). Complement will be (4, 5).
-     *
-     * P.S. diff() is alias in other languages and libraries.
-     *
-     * @param Collection|\Iterator|\IteratorAggregate|mixed $collection
-     *
-     * @return Collection
+     * {@inheritDoc}
      */
     public function complement($collection)
     {
@@ -443,11 +423,11 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function isPartOf($collection)
     {
-        return $this->isAllMatchBy(_()->in($this->normalizeCollection($collection)));
+        return $this->isAllMatchBy(x()->in($this->normalizeCollection($collection)));
     }
 
     /**
@@ -475,7 +455,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function sortBy($comparator)
     {
@@ -490,7 +470,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function groupBy($keyFinder)
     {
@@ -505,7 +485,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function toArray()
     {
@@ -514,7 +494,7 @@ class IteratorCollection
     }
 
     /**
-     * @{inheritDoc}
+     * {@inheritDoc}
      */
     public function __clone()
     {

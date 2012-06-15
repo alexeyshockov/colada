@@ -14,7 +14,7 @@ class NumericHelper
      *
      * @return bool
      */
-    public function isNan($value)
+    public static function isNan($value)
     {
         return is_nan($value);
     }
@@ -24,7 +24,7 @@ class NumericHelper
      *
      * @return bool
      */
-    public function isFinite($value)
+    public static function isFinite($value)
     {
         return is_finite($value);
     }
@@ -34,7 +34,7 @@ class NumericHelper
      *
      * @return bool
      */
-    public function isInfinite($value)
+    public static function isInfinite($value)
     {
         return !is_finite($value);
     }
@@ -42,9 +42,29 @@ class NumericHelper
     /**
      * @param number $value
      *
+     * @return bool
+     */
+    public static function isPositive($value)
+    {
+        return ($value >= 0);
+    }
+
+    /**
+     * @param number $value
+     *
+     * @return bool
+     */
+    public static function isNegative($value)
+    {
+        return ($value < 0);
+    }
+
+    /**
+     * @param number $value
+     *
      * @return number
      */
-    public function increment($value)
+    public static function increment($value)
     {
         return $value + 1;
     }
@@ -54,7 +74,7 @@ class NumericHelper
      *
      * @return number
      */
-    public function decrement($value)
+    public static function decrement($value)
     {
         return $value - 1;
     }
