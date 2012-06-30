@@ -132,7 +132,7 @@ interface Collection
      *
      * @return mixed
      */
-    function foldBy($folder, $accumulator);
+    function foldBy($folder, $accumulator = null);
 
     /**
      * Good introduction to reduce: {@link http://www.codecommit.com/blog/scala/scala-collections-for-the-easily-bored-part-2}.
