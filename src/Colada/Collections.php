@@ -27,7 +27,7 @@ class Collections
 
     /**
      * @param mixed $element
-     * @param int $times
+     * @param int   $times
      *
      * @return Collection
      */
