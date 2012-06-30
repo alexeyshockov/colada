@@ -25,7 +25,7 @@ or throught [Composer](https://github.com/composer/composer):
 ``` json
 {
     "require": {
-        "colada/colada": "dev-master"
+        "alexeyshockov/colada": "dev-master"
     }
 }
 ```
