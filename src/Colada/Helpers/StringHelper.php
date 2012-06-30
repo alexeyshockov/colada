@@ -133,17 +133,6 @@ class StringHelper
     }
 
     /**
-     * @param string $string1
-     * @param string $string2
-     *
-     * @return bool
-     */
-    public static function isEqualTo($string1, $string2)
-    {
-        return ($string1 == $string2);
-    }
-
-    /**
      * @param string $string
      *
      * @return string
