@@ -1,5 +1,6 @@
 {
     "name":        "alexeyshockov/colada",
+    "type":        "library",
     "description": "Collections framework for PHP",
     "keywords":    ["collections"],
     "homepage":    "http://github.com/alexeyshockov/colada",
