@@ -3,7 +3,44 @@
 use Colada\CollectionBuilder,
     Colada\SetBuilder,
     Colada\MapBuilder,
-    Colada\MultimapBuilder;
+    Colada\RangeIterator;
+
+/**
+ * xrange() from Python. Generator.
+ *
+ * Like range(), but instead of returning a list, returns an object that generates the numbers in the
+ * range on demand.  For looping, this is slightly faster than range() and more memory efficient.
+ *
+ * Examples:
+ * <code>
+ * foreach (xrange(10) as $number) {
+ *     echo $number.' ';
+ * }
+ * // 0 1 2 3 4 5 6 7 8 9 10
+ * </code>
+ *
+ * <code>
+ * // Infinity sequence.
+ * foreach (xrange(10, null) as $number) {
+ *     if (($number % 20) == 0) {
+ *         break;
+ *     } else {
+ *         echo $number.' ';
+ *     }
+ * }
+ * // 10 11 12 13 14 15 16 17 18 19
+ * </code>
+ *
+ * @param int  $start
+ * @param null $stop
+ * @param int  $step
+ *
+ * @return \Colada\RangeIterator
+ */
+function xrange($start = 0, $stop = null, $step = 1)
+{
+    return new IteratorCollection(new RangeIterator($start, $stop, $step));
+}
 
 /**
  * Some useful examples:
@@ -108,4 +145,14 @@ function to_map($data)
     }
 
     return $builder->build();
+}
+
+
+
+/**
+ * P.S. to_set() will be equal to this function. Not needed.
+ */
+function as_collection(\Traversable $collection)
+{
+    return new \IteratorCollection($collection);
 }
