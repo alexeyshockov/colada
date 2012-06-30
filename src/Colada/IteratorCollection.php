@@ -18,10 +18,19 @@ class IteratorCollection
     protected $iterator;
 
     /**
-     * @param \Iterator|null $collection
+     * @param \Traversable $collection
      */
-    public function __construct(\Iterator $collection = null)
+    public function __construct(\Traversable $collection = null)
     {
+        if ($collection instanceof \IteratorAggregate) {
+            $collection = $collection->getIterator();
+        }
+
+        // Traversable?
+        if (!($collection instanceof \Iterator) && !($collection instanceof \IteratorAggregate)) {
+            $collection = new \IteratorIterator($collection);
+        }
+
         $this->iterator = $collection;
     }
 
