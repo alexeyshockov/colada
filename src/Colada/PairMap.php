@@ -100,8 +100,24 @@ class PairMap implements Map, \Countable
             ->foldBy(
                 function($builder, $pair) { return $builder->put($pair[0], $pair[1]); },
                 new MapBuilder()
-            )
-            ->build();
+            )->build();
+    }
+
+    /**
+     * @todo Lazy.
+     *
+     * {@inheritDoc}
+     */
+    public function rejectBy($filter)
+    {
+        Contracts::ensureCallable($filter);
+
+        return $this->asPairs()
+            ->rejectBy($filter)
+            ->foldBy(
+                function($builder, $pair) { return $builder->put($pair[0], $pair[1]); },
+                new MapBuilder()
+            )->build();
     }
 
     /**

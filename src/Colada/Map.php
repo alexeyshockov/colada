@@ -43,6 +43,13 @@ interface Map
     function acceptBy($filter);
 
     /**
+     * @param callback $filter
+     *
+     * @return \Colada\Map
+     */
+    function rejectBy($filter);
+
+    /**
      * @param callback $mapper
      *
      * @return \Colada\Map
