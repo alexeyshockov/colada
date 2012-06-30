@@ -261,7 +261,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
-    public function foldBy($folder, $accumulator)
+    public function foldBy($folder, $accumulator = null)
     {
         Contracts::ensureCallable($folder);
 
