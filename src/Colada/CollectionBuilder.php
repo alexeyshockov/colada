@@ -17,6 +17,11 @@ class CollectionBuilder
     private $index = 0;
 
     /**
+     * @var \ReflectionClass
+     */
+    private $class;
+
+    /**
      * Useful helper for PHP versions less than 5.4.
      *
      * @param mixed $collection
@@ -33,7 +38,7 @@ class CollectionBuilder
     /**
      * @param int|\Countable|mixed $sizeHint Hint for resulting collection size.
      */
-    public function __construct($sizeHint = 0)
+    public function __construct($sizeHint = 0, $class = '\\Colada\\IteratorCollection')
     {
         // "Like other" collection.
         if (is_object($sizeHint) && ($sizeHint instanceof \Countable)) {
@@ -45,6 +50,12 @@ class CollectionBuilder
         }
 
         $this->array = new \SplFixedArray($sizeHint);
+
+        if (is_string($class)) {
+            $class = new \ReflectionClass($class);
+        }
+
+        $this->class = $class;
     }
 
     /**
@@ -117,7 +128,7 @@ class CollectionBuilder
 
     protected function createCollection()
     {
-        return new IteratorCollection($this->array);
+        return $this->class->newInstance($this->array);
     }
 
     public function __clone()
