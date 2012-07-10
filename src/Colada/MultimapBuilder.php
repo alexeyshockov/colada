@@ -20,9 +20,13 @@ class MultimapBuilder extends MapBuilder
      * @param CollectionBuilder $elementCollectionBuilder Concrete collection builder (for example, collections or sets
      * for elements).
      */
-    public function __construct(CollectionBuilder $elementCollectionBuilder)
+    public function __construct(CollectionBuilder $elementCollectionBuilder = null)
     {
         parent::__construct();
+
+        if (!$elementCollectionBuilder) {
+            $elementCollectionBuilder = new CollectionBuilder();
+        }
 
         $this->elementCollectionBuilder = $elementCollectionBuilder;
     }
