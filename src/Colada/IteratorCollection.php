@@ -494,6 +494,38 @@ class IteratorCollection
     }
 
     /**
+     * Adds $elements to collection (copied from current) and return them...
+     *
+     * @param mixed $element
+     *
+     * @return \Colada\Collection
+     */
+    public function add($element)
+    {
+        $builder = new CollectionBuilder($this);
+
+        return $builder->addAll($this)->add($element)->build();
+    }
+
+    /**
+     * Removes all $element from collection (copied from current) and return them.
+     *
+     * @param mixed $element
+     *
+     * @return \Colada\Collection
+     */
+    public function remove($element)
+    {
+        if (!$this->contains($element)) {
+            return $this;
+        } else {
+            return $this->rejectBy(function($collectionElement) use ($element) {
+                return ComparisonHelper::isEquals($collectionElement, $element);
+            });
+        }
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function toArray()
