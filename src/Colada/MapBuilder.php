@@ -14,8 +14,19 @@ class MapBuilder
      */
     protected $map;
 
-    public function __construct()
+    /**
+     * @var \ReflectionClass
+     */
+    private $mapClass;
+
+    public function __construct($mapClass = '\\Colada\\PairMap')
     {
+        if (is_string($mapClass)) {
+            $mapClass = new \ReflectionClass($mapClass);
+        }
+
+        $this->mapClass = $mapClass;
+
         $this->map = new \ArrayIterator(array());
     }
 
@@ -93,6 +104,6 @@ class MapBuilder
             $pairs = new ArrayIteratorPairs($this->map);
         }
 
-        return new PairMap($pairs);
+        return $this->mapClass->newInstance($pairs);
     }
 }
