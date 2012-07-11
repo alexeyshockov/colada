@@ -258,6 +258,11 @@ interface Collection
     function toArray();
 
     /**
+     * @return \Colada\Collection
+     */
+    function toSet();
+
+    /**
      * Constructs new collection with elements from current one.
      *
      * Useful, for example, to "freeze" collections from Map::asKeys() or Map::asElements().

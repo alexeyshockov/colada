@@ -537,6 +537,16 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
+    public function toSet()
+    {
+        $builder = new SetBuilder($this);
+
+        return $builder->addAll($this)->build();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function __clone()
     {
         $collection = $this->createCollectionBuilder(count($this))->addAll($this->iterator)->build();
