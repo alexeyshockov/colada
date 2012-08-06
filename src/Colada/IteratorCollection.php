@@ -147,16 +147,42 @@ class IteratorCollection
         $builder = new CollectionBuilder(count($this));
 
         foreach ($this->iterator as $element) {
+            // array or \ArrayAccess.
             if (is_array($element) || (is_object($element) && ($element instanceof \ArrayAccess))) {
                 // \ArrayAccess allow any types for offsetExists() method, but core implementations throws warnings
                 // for not scalar keys.
                 if (@isset($element[$key])) {
                     $builder->add($element[$key]);
+
+                    continue;
                 }
             }
 
+            // \Colada\Map.
             if (is_object($element) && ($element instanceof Map)) {
                 $element->get($key)->map(function($element) use ($builder) { $builder->add($element); });
+
+                continue;
+            }
+
+            // Object. Getters or simple fields.
+            if (is_object($element)) {
+                $object = new \ReflectionObject($element);
+
+                // Fields.
+                if ($object->hasProperty($key) && $object->getProperty($key)->isPublic()) {
+                    $builder->add($element->$key);
+
+                    continue;
+                }
+
+                // Getters.
+                $getter = 'get'.ucfirst($key);
+                if ($object->hasMethod($getter) && $object->getMethod($getter)->isPublic()) {
+                    $builder->add($element->$getter());
+
+                    continue;
+                }
             }
         }
 
