@@ -190,6 +190,14 @@ class IteratorCollection
     }
 
     /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function eachBy($processor)

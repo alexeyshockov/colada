@@ -9,7 +9,7 @@ namespace Colada;
  *
  * @author Alexey Shockov <alexey@shockov.com>
  */
-interface Collection
+interface Collection extends \JsonSerializable
 {
     /**
      * @return bool

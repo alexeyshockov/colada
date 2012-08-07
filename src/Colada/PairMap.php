@@ -250,6 +250,18 @@ class PairMap implements Map, \Countable
     }
 
     /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        if ($this->pairs instanceof Arrayable) {
+            return $this->pairs->toArray();
+        } else {
+            return $this->asPairs()->toArray();
+        }
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function contains($element)

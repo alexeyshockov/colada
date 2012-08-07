@@ -3,7 +3,8 @@
 namespace Colada\Tests;
 
 use Colada\PairMap,
-    Colada\SplObjectStoragePairs;
+    Colada\SplObjectStoragePairs,
+    Colada\ArrayIteratorPairs;
 
 /**
  * @author Alexey Shockov <alexey@shockov.com>
@@ -30,6 +31,21 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
 
         // Assume we have map with 3 pairs.
         $this->dayNames = new PairMap(new SplObjectStoragePairs($storage));
+    }
+
+    /**
+     * @test
+     */
+    public function richMapShouldBeSerializedToJsonAsPairs()
+    {
+        if (!(version_compare(PHP_VERSION, '5.4.0') >= 0)) {
+            $this->markTestSkipped('Actual only for PHP 5.4.');
+        }
+
+        // Assume we have map with 3 pairs.
+        $map = new PairMap(new ArrayIteratorPairs(new \ArrayIterator($array = array('one' => 1))));
+
+        $this->assertSame(json_encode($array), json_encode($map));
     }
 
     /**

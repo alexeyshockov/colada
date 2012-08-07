@@ -25,7 +25,11 @@
 
     "autoload": {
         "psr-0": {
-            "Colada": "src/"
-        }
+            "Colada": "src/",
+            "JsonSerializable": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
     }
 }
