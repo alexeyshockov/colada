@@ -128,4 +128,11 @@ interface Map
      * @return bool
      */
     function containsKey($key);
+
+    /**
+     * @throws \RuntimeException If map can not be converted to native array.
+     *
+     * @return array
+     */
+    function toArray();
 }

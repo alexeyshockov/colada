@@ -240,6 +240,18 @@ class PairMap implements Map, \Countable
     /**
      * {@inheritDoc}
      */
+    public function toArray()
+    {
+        if ($this->pairs instanceof Arrayable) {
+            return $this->pairs->toArray();
+        }
+
+        throw new \RuntimeException('toArray() doesn\'t supported for this map.');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function contains($element)
     {
         return $this->asElements()->contains($element);

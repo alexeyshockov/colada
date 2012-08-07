@@ -7,7 +7,7 @@ namespace Colada;
  *
  * @author Alexey Shockov <alexey@shockov.com>
  */
-class ArrayIteratorPairs extends CollectionMapIterator implements Pairs
+class ArrayIteratorPairs extends CollectionMapIterator implements Pairs, Arrayable
 {
     /**
      * @var \ArrayIterator
@@ -65,5 +65,13 @@ class ArrayIteratorPairs extends CollectionMapIterator implements Pairs
         }
 
         return isset($this->map[$key]);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function toArray()
+    {
+        return $this->map->getArrayCopy();
     }
 }
