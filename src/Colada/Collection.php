@@ -67,6 +67,8 @@ interface Collection extends \JsonSerializable
      * Applies $processor to each element.
      *
      * @param callback $processor
+     *
+     * @return \Colada\Collection Self.
      */
     function eachBy($processor);
 

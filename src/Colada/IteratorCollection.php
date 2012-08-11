@@ -207,6 +207,8 @@ class IteratorCollection
         foreach ($this as $element) {
             call_user_func($processor, $element);
         }
+
+        return $this;
     }
 
     /**
