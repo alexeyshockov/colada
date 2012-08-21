@@ -82,14 +82,14 @@ class Value implements \ArrayAccess
 
     public function __get($property)
     {
-        return $this->value->$property;
+        return new static($this->value->$property);
     }
 
     public function __set($property, $value)
     {
         $this->value->$property = $value;
 
-        return $value;
+        return new static($value);
     }
 
     public function __call($name, $arguments)

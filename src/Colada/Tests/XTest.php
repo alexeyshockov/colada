@@ -23,6 +23,13 @@ class XTest extends \PHPUnit_Framework_TestCase
         $x = x()->startsWith('Test')->isFalse();
 
         $this->assertFalse($x('Test string.'));
+
+        $x = x()->content->isBlank();
+
+        $object = new \stdClass();
+        $object->content = '';
+
+        $this->assertTrue($x($object));
     }
 
     /**
