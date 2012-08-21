@@ -60,6 +60,8 @@ class StringHelper
         }
     }
 
+
+
     /**
      * @param string $string1
      * @param string $string2
@@ -115,9 +117,30 @@ class StringHelper
      *
      * @return bool
      */
-    public static function match($string, $pattern)
+    public static function isMatchBy($string, $pattern)
     {
         return preg_match($pattern, $string);
+    }
+
+    /**
+     * Returns collection of matches (match - collection too, of concrete matches).
+     *
+     * Example:
+     * <code>
+     *
+     * </code>
+     *
+     * @param $string
+     * @param $pattern
+     *
+     * @return array
+     */
+    // TODO Return list (\Colada\Collection).
+    public static function matches($string, $pattern)
+    {
+        preg_match_all($pattern, $string, $matches);
+
+        return $matches;
     }
 
     /**
@@ -129,7 +152,7 @@ class StringHelper
      */
     public static function isBlank($string)
     {
-        return (srtlen(trim($string)) == 0);
+        return (strlen(trim($string)) == 0);
     }
 
     /**
