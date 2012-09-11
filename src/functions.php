@@ -67,6 +67,19 @@ function x()
 }
 
 
+/**
+ * @see \Colada\Option::from()
+ *
+ * @param mixed $value
+ *
+ * @return \Colada\Option
+ */
+function option($value)
+{
+    return \Colada\Option::from($value);
+}
+
+
 
 /**
  * @todo Check with function_exists().
