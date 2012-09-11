@@ -18,7 +18,7 @@ class ComparisonHelper
     public static function isEquals($element1, $element2)
     {
         if (is_object($element1)) {
-            if (($element1 instanceof Equalable)) {
+            if (method_exists($element1, 'isEqualTo')) {
                 return $element1->isEqualTo($element2);
             } else {
                 return ($element1 === $element2);
