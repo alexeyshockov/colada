@@ -45,6 +45,15 @@ abstract class Option implements \IteratorAggregate, Equalable
     abstract public function orElse($else);
 
     /**
+     * @throws \Exception
+     *
+     * @param \Exception|string $else
+     *
+     * @return mixed
+     */
+    abstract public function orException($exception);
+
+    /**
      * @return mixed
      */
     abstract public function orNull();

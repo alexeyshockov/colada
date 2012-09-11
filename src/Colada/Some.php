@@ -99,6 +99,18 @@ class Some extends Option
     }
 
     /**
+     * @throws \Exception
+     *
+     * @param \Exception|string $else
+     *
+     * @return mixed
+     */
+    public function orException($exception)
+    {
+        return $this->data;
+    }
+
+    /**
      * Original value.
      *
      * @return mixed
