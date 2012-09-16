@@ -42,8 +42,8 @@ class CollectionHelper
     {
         $builder = new \Colada\MapBuilder();
 
-        foreach ($value as $key => $value) {
-            $builder->put($key, $value);
+        foreach ($value as $key => $element) {
+            $builder->put($key, $element);
         }
 
         return $builder->build();
