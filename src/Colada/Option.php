@@ -47,11 +47,25 @@ abstract class Option implements \IteratorAggregate, Equalable
     /**
      * @throws \Exception
      *
-     * @param \Exception|string $else
+     * @param \Exception|string $exception
      *
      * @return mixed
      */
-    abstract public function orException($exception);
+    abstract public function orThrow($exception);
+
+    /**
+     * @deprecated Use orThrow() instead.
+     *
+     * @throws \Exception
+     *
+     * @param \Exception|string $exception
+     *
+     * @return mixed
+     */
+    public function orException($exception)
+    {
+        return $this->orThrow($exception);
+    }
 
     /**
      * @return mixed

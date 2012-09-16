@@ -105,7 +105,7 @@ class Some extends Option
      *
      * @return mixed
      */
-    public function orException($exception)
+    public function orThrow($exception)
     {
         return $this->data;
     }

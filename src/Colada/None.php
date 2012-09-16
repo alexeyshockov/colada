@@ -88,7 +88,7 @@ class None extends Option
      *
      * @return mixed
      */
-    public function orException($exception)
+    public function orThrow($exception)
     {
         if (is_string($exception)) {
             $exception = new \RuntimeException($exception);
