@@ -82,7 +82,7 @@ interface Collection extends \JsonSerializable
     function findBy($filter);
 
     /**
-     * Constructs new collection with elements, for which $filter returns false.
+     * Constructs new collection with elements, for which $filter returns true.
      *
      * Lazy.
      *
