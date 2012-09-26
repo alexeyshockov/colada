@@ -9,7 +9,7 @@ namespace Colada;
  *
  * @author Alexey Shockov <alexey@shockov.com>
  */
-interface Map extends \JsonSerializable
+interface Map extends \JsonSerializable, \ArrayAccess
 {
     /**
      * @return bool

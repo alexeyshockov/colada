@@ -276,4 +276,84 @@ class PairMap implements Map, \Countable
     {
         return $this->pairs->containsKey($key);
     }
+
+    /**
+     * @param mixed $key
+     * @param mixed $element
+     *
+     * @return \Colada\Map
+     */
+    public function put($key, $element)
+    {
+        $builder = new MapBuilder();
+
+        // TODO MapBuilder::putAll()?
+        foreach ($this->asPairs() as $key => $element) {
+            $builder->put($key, $element);
+        }
+
+        // And last needed element...
+        return $builder->put($key, $element)->build();
+    }
+
+    /**
+     * @param mixed $key
+     *
+     * @return \Colada\Map
+     */
+    public function remove($key)
+    {
+        return $this->rejectBy(x()->at(0)->isEqualTo($key));
+    }
+
+    /**
+     * @see \Colada\Map::containsKey()
+     *
+     * @param mixed $key
+     *
+     * @return boolean
+     */
+    public function offsetExists($key)
+    {
+        return $this->containsKey($key);
+    }
+
+    /**
+     * @see \Colada\Map::get()
+     *
+     * @param mixed $key
+     *
+     * @return Option
+     */
+    public function offsetGet($key)
+    {
+        return $this->get($key);
+    }
+
+    /**
+     * Not useful without returning value...
+     *
+     * @param mixed $key
+     * @param mixed $element
+     *
+     * @return void
+     */
+    public function offsetSet($key, $element)
+    {
+        // TODO Proper exception type.
+        throw new \DomainException('Unable to modify immutable collection.');
+    }
+
+    /**
+     * Not useful without returning value...
+     *
+     * @param mixed $offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        // TODO Proper exception type.
+        throw new \DomainException('Unable to modify immutable collection.');
+    }
 }
