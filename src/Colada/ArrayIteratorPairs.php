@@ -38,9 +38,7 @@ class ArrayIteratorPairs extends CollectionMapIterator implements Pairs, Arrayab
     }
 
     /**
-     * @param mixed $key
-     *
-     * @return Option
+     * {@inheritDoc}
      */
     public function getElementByKey($key)
     {
@@ -54,9 +52,7 @@ class ArrayIteratorPairs extends CollectionMapIterator implements Pairs, Arrayab
     /**
      * @todo Use in keys set.
      *
-     * @param mixed $key
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function containsKey($key)
     {
@@ -73,5 +69,13 @@ class ArrayIteratorPairs extends CollectionMapIterator implements Pairs, Arrayab
     public function toArray()
     {
         return $this->map->getArrayCopy();
+    }
+
+    /**
+     * @return \ArrayIterator
+     */
+    public function getArrayIterator()
+    {
+        return $this->map;
     }
 }

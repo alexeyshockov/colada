@@ -41,6 +41,26 @@ class PairMap implements Map, \Countable
     }
 
     /**
+     * @throws \DomainException If map keys isn't scalars (PHP restrictions).
+     *
+     * @return \Iterator
+     */
+    public function getIterator()
+    {
+        // Check and method itself may be more smart, but...
+        if (!($this->pairs instanceof Arrayable)) {
+            throw new \DomainException('');
+        }
+
+        // Optimization for ArrayIteratorPairs.
+        if ($this->pairs instanceof ArrayIteratorPairs) {
+            return new IteratorProxy($this->pairs->getArrayIterator());
+        } else {
+            return new \ArrayIterator($this->pairs->toArray());
+        }
+    }
+
+    /**
      * @return int
      */
     public function count()
