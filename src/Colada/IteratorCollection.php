@@ -274,6 +274,14 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
+    public function flatten()
+    {
+        return $this->flatMapBy(x());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function flatMapBy($mapper)
     {
         if (!is_callable($mapper)) {

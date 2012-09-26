@@ -129,6 +129,14 @@ interface Collection extends \JsonSerializable
     function flatMapBy($mapper);
 
     /**
+     * Converts this collection of traversable collections into a collection formed by the elements of these traversable
+     * collections.
+     *
+     * @return \Colada\Collection
+     */
+    function flatten();
+
+    /**
      * @param callback $folder
      * @param mixed    $accumulator
      *

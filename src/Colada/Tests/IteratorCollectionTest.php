@@ -33,6 +33,22 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function flattenShouldBeCorrect()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array(array(1, 2), array(3, 4))));
+
+        $flattenCollection = $collection->flatten();
+
+        assertSame(4, count($flattenCollection));
+        assertTrue($flattenCollection->contains(1));
+        assertTrue($flattenCollection->contains(2));
+        assertTrue($flattenCollection->contains(3));
+        assertTrue($flattenCollection->contains(4));
+    }
+
+    /**
+     * @test
+     */
     public function filtrationShouldBeCorrect()
     {
         $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
