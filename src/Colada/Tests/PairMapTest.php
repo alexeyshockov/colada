@@ -2,6 +2,8 @@
 
 namespace Colada\Tests;
 
+require_once "PHPUnit/Framework/Assert/Functions.php";
+
 use Colada\PairMap,
     Colada\SplObjectStoragePairs,
     Colada\ArrayIteratorPairs;
@@ -45,7 +47,7 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
         // Assume we have map with 3 pairs.
         $map = new PairMap(new ArrayIteratorPairs(new \ArrayIterator($array = array('one' => 1))));
 
-        $this->assertSame(json_encode($array), json_encode($map));
+        assertSame(json_encode($array), json_encode($map));
     }
 
     /**
@@ -56,7 +58,7 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
         // Assume we have map with 3 pairs.
         $map = $this->dayNames;
 
-        $this->assertSame(3, count($map));
+        assertSame(3, count($map));
     }
 
     /**
@@ -67,7 +69,7 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
         // Assume we have map with 3 pairs.
         $map = $this->dayNames;
 
-        $this->assertSame(3, count($map->asPairs()));
+        assertSame(3, count($map->asPairs()));
     }
 
     /**
@@ -78,7 +80,7 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
         // Assume we have map with 3 pairs.
         $map = $this->dayNames;
 
-        $this->assertEquals(
+        assertEquals(
             array(
                 array($this->dayDates['today'],     'today'),
                 array($this->dayDates['yesterday'], 'yesterday'),
@@ -98,11 +100,11 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
         // Assume we have map with 3 pairs.
         $map = $this->dayNames;
 
-        $map = $map->acceptBy(function($pair) {
-            return ($pair[1] != 'yesterday');
+        $map = $map->acceptBy(function($key, $element) {
+            return ($element != 'yesterday');
         });
 
-        $this->assertEquals(
+        assertEquals(
             array(
                 array($this->dayDates['today'],    'today'),
                 array($this->dayDates['tomorrow'], 'tomorrow'),
@@ -121,11 +123,11 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
         // Assume we have map with 3 pairs.
         $map = $this->dayNames;
 
-        $map = $map->mapBy(function($pair) {
-            return array($pair[0], strlen($pair[1]));
+        $map = $map->mapBy(function($key, $element) {
+            return array($key, strlen($element));
         });
 
-        $this->assertEquals(
+        assertEquals(
             array(
                 array($this->dayDates['today'],     5),
                 array($this->dayDates['yesterday'], 9),
@@ -145,19 +147,14 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
         // Assume we have map with 3 pairs.
         $map = $this->dayNames;
 
-        $map = $map->flatMapBy(function($pair) {
-            return array($pair, $pair);
+        $map = $map->flatMapBy(function($key, $element) {
+            return array(array('some_key', $key), array('some_element', $element));
         });
 
-        // Same keys will be merged.
-        $this->assertEquals(
-            array(
-                array($this->dayDates['today'],     'today'),
-                array($this->dayDates['yesterday'], 'yesterday'),
-                array($this->dayDates['tomorrow'],  'tomorrow'),
-            ),
-            $map->asPairs()->toArray()
-        );
+        // All keys will be merged.
+        assertCount(2, $map);
+        assertTrue($map->containsKey('some_key'));
+        assertTrue($map->containsKey('some_element'));
     }
 
     /**
@@ -173,7 +170,7 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
         $map = $map->pick(array($this->dayDates['today'], $this->dayDates['yesterday']));
 
         // Same keys will be merged.
-        $this->assertEquals(
+        assertEquals(
             array(
                 array($this->dayDates['today'],     'today'),
                 array($this->dayDates['yesterday'], 'yesterday'),
@@ -195,7 +192,7 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
         $map = $map->flip();
 
         // Same keys will be merged.
-        $this->assertEquals(
+        assertEquals(
             array(
                 array('today',     $this->dayDates['today']),
                 array('yesterday', $this->dayDates['yesterday']),

@@ -26,6 +26,9 @@ class SplObjectStoragePairs extends CollectionMapIterator implements Pairs
         );
     }
 
+    /**
+     * @return int
+     */
     public function count()
     {
         return count($this->map);
@@ -60,16 +63,18 @@ class SplObjectStoragePairs extends CollectionMapIterator implements Pairs
     }
 
     /**
-     * @param mixed $key
-     *
-     * @return Option
+     * {@inheritDoc}
      */
     public function getElementByKey($key)
     {
         return $this->getMapKey($key)->mapBy(function($key) { return $this->map[$key]; });
     }
 
-    // TODO Use in keys set.
+    /**
+     * @todo Use in keys set.
+     *
+     * {@inheritDoc}
+     */
     public function containsKey($key)
     {
         return ($this->getMapKey($key) instanceof Some);

@@ -116,11 +116,23 @@ class PairMap implements Map, \Countable
         Contracts::ensureCallable($filter);
 
         return $this->asPairs()
-            ->acceptBy($filter)
+            ->acceptBy($this->getCollectionCallbackFor($filter))
             ->foldBy(
                 function($builder, $pair) { return $builder->put($pair[0], $pair[1]); },
                 new MapBuilder()
             )->build();
+    }
+
+    /**
+     * @param callback $callback
+     *
+     * @return callback
+     */
+    protected function getCollectionCallbackFor($callback)
+    {
+        return function($pair) use($callback) {
+            return call_user_func($callback, $pair[0], $pair[1]);
+        };
     }
 
     /**
@@ -133,7 +145,7 @@ class PairMap implements Map, \Countable
         Contracts::ensureCallable($filter);
 
         return $this->asPairs()
-            ->rejectBy($filter)
+            ->rejectBy($this->getCollectionCallbackFor($filter))
             ->foldBy(
                 function($builder, $pair) { return $builder->put($pair[0], $pair[1]); },
                 new MapBuilder()
@@ -157,24 +169,36 @@ class PairMap implements Map, \Countable
             )->build();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function eachBy($processor)
+    {
+        Contracts::ensureCallable($processor);
+
+        $this->asPairs()->eachBy($this->getCollectionCallbackFor($processor));
+
+        return $this;
+    }
+
     private function mapPairsBy($mapper, $mapType = 'mapBy')
     {
         return $this->asPairs()
-            ->{$mapType}($mapper)
+            ->{$mapType}($this->getCollectionCallbackFor($mapper))
             ->foldBy(
                 function($builder, $pair) {
                     if ($builder instanceof CollectionBuilder) {
                         return $builder->add($pair);
                     }
 
-                    // Is pair?
+                    // Is pair like?
                     if (is_array($pair) && (count($pair) == 2)) {
                         return $builder->put($pair[0], $pair[1]);
                     } else {
-                        $builder = new CollectionBuilder(count($this));
+                        $collectionBuilder = new CollectionBuilder();
 
                         // Downgrade to collection...
-                        return $builder
+                        return $collectionBuilder
                             ->addAll($builder->build()->asPairs())
                             ->add($pair);
                     }

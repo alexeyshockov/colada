@@ -57,6 +57,13 @@ interface Map extends \JsonSerializable, \ArrayAccess, \IteratorAggregate
     function mapElementsBy($mapper);
 
     /**
+     * @param callback $processor
+     *
+     * @return \Colada\Map Self.
+     */
+    function eachBy($processor);
+
+    /**
      * Return a new Map, filtered to only have elements for the whitelisted keys.
      *
      * @param array|\Traversable $keys
