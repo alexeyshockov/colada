@@ -18,7 +18,8 @@ class MultimapBuilder extends MapBuilder
 
     /**
      * @param CollectionBuilder $elementCollectionBuilder Concrete collection builder (for example, collections or sets
-     * for elements).
+     * for elements). CollectionBuilder by default.
+     * @param string            $mapClass                 Concrete Map class to build.
      */
     public function __construct(CollectionBuilder $elementCollectionBuilder = null, $mapClass = '\\Colada\\PairMap')
     {
