@@ -4,7 +4,6 @@
     "description": "Collections framework for PHP",
     "keywords":    ["collections"],
     "homepage":    "http://github.com/alexeyshockov/colada",
-    "type":        "library",
     "license":     "MIT",
     "support":     {
         "issues": "https://github.com/alexeyshockov/colada/issues",
