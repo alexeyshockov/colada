@@ -249,10 +249,11 @@ interface Collection extends \JsonSerializable
      * Group each collection element in map with related key.
      *
      * @param callback $keyFinder
+     * @param bool     $uniqueKeys
      *
      * @return \Colada\Map
      */
-    function groupBy($keyFinder);
+    function groupBy($keyFinder, $uniqueKeys = false);
 
     /**
      * @return array

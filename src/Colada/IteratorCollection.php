@@ -517,16 +517,25 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
-    public function groupBy($keyFinder)
+    public function groupBy($keyFinder, $uniqueKeys = false)
     {
         Contracts::ensureCallable($keyFinder);
 
-        return $this->foldBy(
-            function($multimapBuilder, $element) use($keyFinder) {
-                return $multimapBuilder->add(call_user_func($keyFinder, $element), $element);
-            },
-            new MultimapBuilder(static::createCollectionBuilder())
-        )->build();
+        if (!$uniqueKeys) {
+            return $this->foldBy(
+                function($multimapBuilder, $element) use($keyFinder) {
+                    return $multimapBuilder->add(call_user_func($keyFinder, $element), $element);
+                },
+                new MultimapBuilder(static::createCollectionBuilder())
+            )->build();
+        } else {
+            return $this->foldBy(
+                function($mapBuilder, $element) use($keyFinder) {
+                    return $mapBuilder->put(call_user_func($keyFinder, $element), $element);
+                },
+                new MapBuilder()
+            )->build();
+        }
     }
 
     /**
