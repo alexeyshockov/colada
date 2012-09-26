@@ -82,28 +82,4 @@ class None extends Option
             return $else;
         }
     }
-
-    /**
-     * @throws \Exception
-     *
-     * @param \Exception|string $else
-     *
-     * @return mixed
-     */
-    public function orThrow($exception)
-    {
-        if (is_string($exception)) {
-            $exception = new \RuntimeException($exception);
-        }
-
-        throw $exception;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator(array());
-    }
 }

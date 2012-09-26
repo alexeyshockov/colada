@@ -101,18 +101,6 @@ class Some extends Option
     }
 
     /**
-     * @throws \Exception
-     *
-     * @param \Exception|string $else
-     *
-     * @return mixed
-     */
-    public function orThrow($exception)
-    {
-        return $this->data;
-    }
-
-    /**
      * Original value.
      *
      * @return mixed
@@ -120,13 +108,5 @@ class Some extends Option
     public function get()
     {
         return $this->data;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator(array($this->data));
     }
 }

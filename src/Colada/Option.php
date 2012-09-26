@@ -9,7 +9,7 @@ namespace Colada;
  *
  * @author Alexey Shockov <alexey@shockov.com>
  */
-abstract class Option implements \IteratorAggregate, Equalable
+abstract class Option implements \IteratorAggregate, Equalable, \Countable
 {
     /**
      * @param callback $mapper
@@ -49,11 +49,22 @@ abstract class Option implements \IteratorAggregate, Equalable
     /**
      * @throws \Exception
      *
-     * @param \Exception|string $exception
+     * @param \Exception|string $else
      *
      * @return mixed
      */
-    abstract public function orThrow($exception);
+    public function orThrow($exception)
+    {
+        if (is_scalar($exception)) {
+            $exception = new \RuntimeException($exception);
+        }
+
+        if (!($exception instanceof \Exception)) {
+            throw new \InvalidArgumentException('Invalid argument.');
+        }
+
+        return $this->orElse(function() use($exception) { throw $exception; });
+    }
 
     /**
      * @deprecated Use orThrow() instead.
@@ -99,5 +110,25 @@ abstract class Option implements \IteratorAggregate, Equalable
     public function __toString()
     {
         return (string) $this->orNull();
+    }
+
+    /**
+     * @return \Iterator
+     */
+    public function getIterator()
+    {
+        return $this
+            ->mapBy(function($some) {
+                return new \ArrayIterator(array($some));
+            })
+            ->orElse(new \EmptyIterator());
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return iterator_count($this->getIterator());
     }
 }
