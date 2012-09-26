@@ -59,6 +59,8 @@ class None extends Option
     public function eachBy($processor)
     {
         Contracts::ensureCallable($processor);
+
+        return $this;
     }
 
     /**

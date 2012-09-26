@@ -80,6 +80,8 @@ class Some extends Option
         Contracts::ensureCallable($processor);
 
         call_user_func($processor, $this->data);
+
+        return $this;
     }
 
     /**

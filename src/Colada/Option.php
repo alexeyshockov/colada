@@ -34,6 +34,8 @@ abstract class Option implements \IteratorAggregate, Equalable
 
     /**
      * @param callback $processor
+     *
+     * @return Option Self (unmodified).
      */
     abstract public function eachBy($processor);
 
