@@ -10,6 +10,8 @@ namespace Colada;
 class Collections
 {
     /**
+     * @deprecated Use xrange() instead.
+     *
      * @param int $start
      * @param int $end
      *
@@ -26,6 +28,8 @@ class Collections
     }
 
     /**
+     * @todo Generator...
+     *
      * @param mixed $element
      * @param int   $times
      *
