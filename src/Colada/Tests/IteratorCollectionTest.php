@@ -6,6 +6,8 @@ require_once "PHPUnit/Framework/Assert/Functions.php";
 
 use Colada\IteratorCollection;
 
+use Colada\None;
+
 /**
  * @todo partitionBy()
  *
@@ -13,6 +15,72 @@ use Colada\IteratorCollection;
  */
 class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @test
+     */
+    public function headShouldBeCorrectOnNotEmptyCollection()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
+
+        assertEquals(option(1), $collection->head());
+    }
+
+    /**
+     * @test
+     */
+    public function headShouldBeCorrectOnEmptyCollection()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array()));
+
+        assertEquals(new None(), $collection->head());
+    }
+
+    /**
+     * @test
+     */
+    public function lastElementShouldBeCorrectOnNotEmptyCollection()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
+
+        assertEquals(option(3), $collection->last());
+    }
+
+    /**
+     * @test
+     */
+    public function lastElementShouldBeCorrectOnEmptyCollection()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array()));
+
+        assertEquals(new None(), $collection->last());
+    }
+
+    /**
+     * @test
+     */
+    public function tailShouldBeCorrectOnNotEmptyCollection()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
+
+        $tail = $collection->tail();
+
+        assertSame(2, count($tail));
+        assertTrue($tail->contains(2));
+        assertTrue($tail->contains(3));
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \UnderflowException
+     */
+    public function tailShouldBeCorrectOnEmptyCollection()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array()));
+
+        $tail = $collection->tail();
+    }
+
     /**
      * @test
      */

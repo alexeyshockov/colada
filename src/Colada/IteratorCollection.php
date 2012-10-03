@@ -525,6 +525,59 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
+    function first()
+    {
+        return $this->head();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    function last()
+    {
+        foreach ($this->iterator as $element) {
+            $last = $element;
+        }
+
+        if (isset($last)) {
+            return new Some($last);
+        } else {
+            return new None();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    function head()
+    {
+        foreach ($this->iterator as $element) {
+            return new Some($element);
+        }
+
+        return new None();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    function tail()
+    {
+        if ($this->head() instanceof None) {
+            // From PHP documentation: "Exception thrown when performing an invalid operation on an empty container,
+            // such as removing an element".
+            throw new \UnderflowException('Tail on empty collection is undefined.');
+        }
+
+        return new static(
+            new TailIterator($this->iterator)
+        );
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
     public function groupBy($keyFinder, $uniqueKeys = false)
     {
         Contracts::ensureCallable($keyFinder);

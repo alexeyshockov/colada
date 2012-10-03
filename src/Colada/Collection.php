@@ -254,6 +254,30 @@ interface Collection extends \JsonSerializable
     function sortBy($comparator);
 
     /**
+     * Alias for Collection::head().
+     *
+     * @return \Colada\Option One head element (first element).
+     */
+    function first();
+
+    /**
+     * @return \Colada\Option Last element.
+     */
+    function last();
+
+    /**
+     * @return \Colada\Option One head element (first element).
+     */
+    function head();
+
+    /**
+     * @throws \UnderflowException For empty collections.
+     *
+     * @return \Colada\Collection Tail — all elements, except one head element.
+     */
+    function tail();
+
+    /**
      * Group each collection element in map with related key.
      *
      * @param callback $keyFinder
