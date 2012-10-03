@@ -55,6 +55,33 @@ interface Collection extends \JsonSerializable
     function slice($offset, $length);
 
     /**
+     * Split collection (1, 2, 3, 4, 5) at 2 to get (1, 2) and (3, 4, 5).
+     *
+     * @param mixed $element
+     *
+     * @return \Colada\Collection[] Array with two elements. Suitable for PHP's list().
+     */
+    function splitAt($element);
+
+    /**
+     * (1, 2, 3, 4, 5).takeTo(2) = (1, 2)
+     *
+     * @param mixed $element
+     *
+     * @return \Colada\Collection
+     */
+    function takeTo($element);
+
+    /**
+     * (1, 2, 3, 4, 5).dropFrom(2) = (3, 4, 5)
+     *
+     * @param mixed $element
+     *
+     * @return \Colada\Collection
+     */
+    function dropFrom($element);
+
+    /**
      * A convenient version of what is perhaps the most common use-case for map: extracting a list of property values.
      *
      * @param mixed $key

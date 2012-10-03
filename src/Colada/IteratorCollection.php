@@ -129,6 +129,30 @@ class IteratorCollection
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function splitAt($element)
+    {
+        return array($this->takeTo($element), $this->dropFrom($element));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function takeTo($element)
+    {
+        return new static(new TakeIterator($this->iterator, $element));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function dropFrom($element)
+    {
+        return new static(new DropIterator($this->iterator, $element));
+    }
+
+    /**
      * Should "track" original object (immutable in our case, but source iterator may be not).
      *
      * @return \Iterator
@@ -525,7 +549,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
-    function first()
+    public function first()
     {
         return $this->head();
     }
@@ -533,7 +557,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
-    function last()
+    public function last()
     {
         foreach ($this->iterator as $element) {
             $last = $element;
@@ -549,7 +573,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
-    function head()
+    public function head()
     {
         foreach ($this->iterator as $element) {
             return new Some($element);
@@ -561,7 +585,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
-    function tail()
+    public function tail()
     {
         if ($this->head() instanceof None) {
             // From PHP documentation: "Exception thrown when performing an invalid operation on an empty container,
@@ -569,9 +593,7 @@ class IteratorCollection
             throw new \UnderflowException('Tail on empty collection is undefined.');
         }
 
-        return new static(
-            new TailIterator($this->iterator)
-        );
+        return new static(new TailIterator($this->iterator));
     }
 
 

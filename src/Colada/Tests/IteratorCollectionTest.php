@@ -16,6 +16,38 @@ use Colada\None;
 class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Covers not only splitAt() method, but takeTo() and dropFrom() too.
+     *
+     * @test
+     */
+    public function splitShouldBeCorrectOnNotEmptyCollection()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
+
+        list($collection1, $collection2) = $collection->splitAt(2);
+
+        assertSame(2, count($collection1));
+        assertTrue($collection1->contains(1));
+        assertTrue($collection1->contains(2));
+
+        assertSame(1, count($collection2));
+        assertTrue($collection2->contains(3));
+    }
+
+    /**
+     * @test
+     */
+    public function splitShouldBeCorrectOnEmptyCollection()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array()));
+
+        list($collection1, $collection2) = $collection->splitAt(2);
+
+        assertSame(0, count($collection1));
+        assertSame(0, count($collection2));
+    }
+
+    /**
      * @test
      */
     public function headShouldBeCorrectOnNotEmptyCollection()
