@@ -36,7 +36,7 @@ class IteratorCollection
 
     protected static function createCollectionBuilder($sizeHint = 0)
     {
-        return new CollectionBuilder($sizeHint);
+        return new CollectionBuilder($sizeHint, get_class());
     }
 
     /**
@@ -655,7 +655,7 @@ class IteratorCollection
      */
     public function __clone()
     {
-        $collection = $this->createCollectionBuilder(count($this))->addAll($this->iterator)->build();
+        $collection = static::createCollectionBuilder(count($this))->addAll($this->iterator)->build();
 
         $this->iterator = $collection->iterator;
     }
