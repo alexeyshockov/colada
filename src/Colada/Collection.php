@@ -104,7 +104,7 @@ interface Collection extends \JsonSerializable
      *
      * @param callback $filter
      *
-     * @return mixed
+     * @return \Colada\Option
      */
     function findBy($filter);
 
