@@ -60,8 +60,6 @@ class StringHelper
         }
     }
 
-
-
     /**
      * @param string $string1
      * @param string $string2

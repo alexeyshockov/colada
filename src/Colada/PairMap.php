@@ -2,6 +2,8 @@
 
 namespace Colada;
 
+use Colada\Helpers\CollectionHelper;
+
 /**
  * Universal map implementation.
  *
@@ -214,7 +216,7 @@ class PairMap implements Map, \Countable
      */
     public function pick($keys)
     {
-        $checker = function($key) use ($keys) { return \Colada\Helpers\CollectionHelper::in($key, $keys); };
+        $checker = function($key) use ($keys) { return CollectionHelper::in($key, $keys); };
 
         return $this->asPairs()
             ->foldBy(
