@@ -67,6 +67,19 @@ function x()
 }
 
 
+
+/**
+ * @param string $pattern
+ *
+ * @return \Colada\RegExp
+ */
+function regexp($pattern)
+{
+    return new \Colada\RegExp($pattern);
+}
+
+
+
 /**
  * @see \Colada\Option::from()
  *
