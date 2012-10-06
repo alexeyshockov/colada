@@ -3,6 +3,8 @@
 namespace Colada;
 
 /**
+ * @internal
+ *
  * @author Alexey Shockov <alexey@shockov.com>
  */
 interface Equalable

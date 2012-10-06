@@ -6,6 +6,9 @@ namespace Colada\X;
  * @todo __isset()
  * @todo __unset()
  *
+ * @todo \Iterator support.
+ * @todo \Countable support.
+ *
  * @author Alexey Shockov <alexey@shockov.com>
  *
  * @internal
@@ -121,6 +124,4 @@ Value::registerHelper(new \Colada\Helpers\TypeHelper());
 Value::registerHelper(new \Colada\Helpers\NumericHelper());
 Value::registerHelper(new \Colada\Helpers\StringHelper());
 Value::registerHelper(new \Colada\Helpers\CollectionHelper());
-
-// TODO Move class?
-Value::registerHelper(new \Colada\ComparisonHelper());
+Value::registerHelper(new \Colada\Helpers\ComparisonHelper());
