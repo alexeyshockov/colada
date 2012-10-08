@@ -9,7 +9,7 @@ use Colada\Helpers\CollectionHelper;
  *
  * @author Alexey Shockov <alexey@shockov.com>
  */
-class PairMap implements Map, \Countable
+class PairMap implements \Countable, \IteratorAggregate, Map
 {
     /**
      * @var \Colada\Pairs

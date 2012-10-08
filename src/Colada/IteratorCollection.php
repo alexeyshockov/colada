@@ -10,7 +10,7 @@ Colada::registerFunctions();
  * @author Alexey Shockov <alexey@shockov.com>
  */
 class IteratorCollection
-    implements Collection, \Countable, \IteratorAggregate
+    implements \Countable, \IteratorAggregate, Collection
 {
     /**
      * @var \Iterator
