@@ -142,6 +142,50 @@ interface Collection extends \JsonSerializable, \Traversable
     function mapBy($mapper);
 
     /**
+     * Short version of:
+     * <code>
+     *     $filter = function($element) { /* ... *&#47; };
+     *     $value  = '' // Some value for replace.
+     *
+     *     $collection->mapBy(function($element) use($filter, $value) {
+     *         if ($filter($element)) {
+     *             return $value;
+     *         } else {
+     *             return $element;
+     *         }
+     *     });
+     * </code>
+     *
+     * @param callback|mixed $filter
+     * @param mixed          $value
+     *
+     * @return \Colada\Collection
+     */
+    function replace($filter, $value);
+
+    /**
+     * Short version of:
+     * <code>
+     *     $filter = function($element) { /* ... *&#47; };
+     *     $value  = function($element) { /* ... *&#47; };
+     *
+     *     $collection->mapBy(function($element) use($filter, $value) {
+     *         if ($filter($element)) {
+     *             return $value($element);
+     *         } else {
+     *             return $element;
+     *         }
+     *     });
+     * </code>
+     *
+     * @param callback|mixed $filter
+     * @param callback       $value
+     *
+     * @return \Colada\Collection
+     */
+    function replaceBy($filter, $value);
+
+    /**
      * Applies $mapper to each element of collection and constructs new one with results (which must be collections of
      * new elements for each original element).
      *
@@ -313,6 +357,42 @@ interface Collection extends \JsonSerializable, \Traversable
      * @return \Colada\Map
      */
     function groupBy($keyFinder, $uniqueKeys = false);
+
+    /**
+     * Adds $elements to collection (copied from current) and return them.
+     *
+     * @param mixed $element
+     *
+     * @return \Colada\Collection
+     */
+    function add($element);
+
+    /**
+     * Removes all $element from collection (copied from current) and return them.
+     *
+     * @deprecated Use reject() instead.
+     *
+     * @param mixed $element
+     *
+     * @return \Colada\Collection
+     */
+    function remove($element);
+
+    /**
+     * @see \Colada\Collection::remove()
+     *
+     * @param mixed $element
+     *
+     * @return \Colada\Collection
+     */
+    function reject($element);
+
+    /**
+     * @param string $delimiter
+     *
+     * @return mixed
+     */
+    function join($delimiter);
 
     /**
      * @return array

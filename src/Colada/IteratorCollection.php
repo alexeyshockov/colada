@@ -31,12 +31,37 @@ class IteratorCollection
             $collection = new \IteratorIterator($collection);
         }
 
+        if ($collection instanceof \NoRewindIterator) {
+            throw new \InvalidArgumentException();
+        }
+
         $this->iterator = $collection;
     }
 
     protected static function createCollectionBuilder($sizeHint = 0)
     {
         return new CollectionBuilder($sizeHint, get_class());
+    }
+
+    protected static function createSetBuilder($sizeHint = 0)
+    {
+        return new SetBuilder($sizeHint, get_class());
+    }
+
+    /**
+     * @return \Colada\MapBuilder
+     */
+    protected static function createMapBuilder()
+    {
+        return new MapBuilder();
+    }
+
+    /**
+     * @return \Colada\MultimapBuilder
+     */
+    protected static function createMultimapBuilder()
+    {
+        return new MultimapBuilder(static::createCollectionBuilder());
     }
 
     /**
@@ -168,7 +193,7 @@ class IteratorCollection
      */
     public function pluck($key)
     {
-        $builder = new CollectionBuilder(count($this));
+        $builder = static::createCollectionBuilder(count($this));
 
         foreach ($this->iterator as $element) {
             // array or \ArrayAccess.
@@ -298,6 +323,52 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
+    public function replace($filter, $value)
+    {
+        if (!is_callable($filter)) {
+            $filterValue = $filter;
+            $filter      = function($element) use ($filterValue) {
+                return ComparisonHelper::isEquals($filterValue, $element);
+            };
+        }
+
+        Contracts::ensureCallable($filter);
+
+        return $this->mapBy(function($element) use($filter, $value) {
+            if (call_user_func($filter, $element)) {
+                return $value;
+            } else {
+                return $element;
+            }
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function replaceBy($filter, $value)
+    {
+        if (!is_callable($filter)) {
+            $filterValue = $filter;
+            $filter      = function($element) use ($filterValue) {
+                return ComparisonHelper::isEquals($filterValue, $element);
+            };
+        }
+
+        Contracts::ensureCallable($filter);
+
+        return $this->mapBy(function($element) use($filter, $value) {
+            if (call_user_func($filter, $element)) {
+                return call_user_func($value, $element);
+            } else {
+                return $element;
+            }
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function flatten()
     {
         return $this->flatMapBy(x());
@@ -349,7 +420,7 @@ class IteratorCollection
         Contracts::ensureCallable($reducer);
 
         if (count($this) == 0) {
-            throw new \Exception('Unable reduce empty collection.');
+            throw new \RuntimeException('Unable reduce empty collection.');
         }
 
         if (count($this) == 1) {
@@ -450,7 +521,7 @@ class IteratorCollection
         $collection1 = $this;
         $collection2 = $collection;
 
-        $builder = new SetBuilder($collection1->iterator);
+        $builder = static::createSetBuilder($collection1->iterator);
 
         return $builder->addAll($collection1)->addAll($collection2)->build();
     }
@@ -463,7 +534,7 @@ class IteratorCollection
         $collection1 = $this;
         $collection2 = $this->normalizeCollection($collection);
 
-        $builder = new SetBuilder();
+        $builder = static::createSetBuilder();
 
         foreach ($collection1 as $element) {
             if ($collection2->contains($element)) {
@@ -488,7 +559,7 @@ class IteratorCollection
         $collection1 = $this;
         $collection2 = $this->normalizeCollection($collection);
 
-        $setBuilder = new SetBuilder();
+        $setBuilder = static::createSetBuilder();
 
         foreach ($collection2 as $element) {
             if (!$collection1->contains($element)) {
@@ -508,6 +579,8 @@ class IteratorCollection
     }
 
     /**
+     * For internal usage only.
+     *
      * @param Collection|\Iterator|\IteratorAggregate|mixed $collection
      *
      * @return Collection
@@ -609,40 +682,40 @@ class IteratorCollection
                 function($multimapBuilder, $element) use($keyFinder) {
                     return $multimapBuilder->add(call_user_func($keyFinder, $element), $element);
                 },
-                new MultimapBuilder(static::createCollectionBuilder())
+                static::createMultimapBuilder()
             )->build();
         } else {
             return $this->foldBy(
                 function($mapBuilder, $element) use($keyFinder) {
                     return $mapBuilder->put(call_user_func($keyFinder, $element), $element);
                 },
-                new MapBuilder()
+                static::createMapBuilder()
             )->build();
         }
     }
 
     /**
-     * Adds $elements to collection (copied from current) and return them...
-     *
-     * @param mixed $element
-     *
-     * @return \Colada\Collection
+     * {@inheritDoc}
      */
     public function add($element)
     {
-        $builder = new CollectionBuilder($this);
+        $builder = static::createCollectionBuilder($this);
 
         return $builder->addAll($this)->add($element)->build();
     }
 
     /**
-     * Removes all $element from collection (copied from current) and return them.
-     *
-     * @param mixed $element
-     *
-     * @return \Colada\Collection
+     * {@inheritDoc}
      */
     public function remove($element)
+    {
+        return $this->reject($element);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function reject($element)
     {
         if (!$this->contains($element)) {
             return $this;
@@ -651,6 +724,28 @@ class IteratorCollection
                 return ComparisonHelper::isEquals($collectionElement, $element);
             });
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function join($delimiter)
+    {
+        if (!is_scalar($delimiter)) {
+            if (is_object($delimiter) && method_exists($delimiter, '__toString')) {
+                $delimiter = (string) $delimiter;
+            } else {
+                throw new \InvalidArgumentException('Delimiter must be compatible with a string.');
+            }
+        }
+
+        $delimiterValue = $delimiter;
+        // TODO If elements not compatible with a string?.. Throw exception.
+        $delimiter      = function($string, $element) use($delimiterValue) {
+            return $string.$delimiterValue.$element;
+        };
+
+        return $this->reduceBy($delimiter);
     }
 
     /**
@@ -667,7 +762,7 @@ class IteratorCollection
      */
     public function toSet()
     {
-        $builder = new SetBuilder($this);
+        $builder = static::createSetBuilder($this);
 
         return $builder->addAll($this)->build();
     }

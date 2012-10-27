@@ -50,6 +50,24 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function joinShouldBeCorrectForStringCollection()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
+
+        assertSame('1, 2, 3', $collection->join(', '));
+    }
+
+    /**
+     * @test
+     */
+    public function joinShouldNotWorkForNonStringCollection()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * @test
+     */
     public function headShouldBeCorrectOnNotEmptyCollection()
     {
         $collection = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
