@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 2.6.1" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
 	<title>Interface Colada\Collection | Colada</title>
 
-	<script type="text/javascript" src="resources/combined.js?144019575"></script>
-	<script type="text/javascript" src="elementlist.js?2937533831"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1532301413" />
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?2367336867"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -28,6 +28,8 @@
 				<li><a href="namespace-Colada.Pagination.Adapters.html">Adapters</a>
 						</li>
 							</ul></li></ul></li>
+				<li><a href="namespace-None.html">None</a>
+						</li>
 			</ul>
 		</div>
 
@@ -47,6 +49,7 @@
 				<li><a href="class-Colada.None.html">None</a></li>
 				<li><a href="class-Colada.Option.html">Option</a></li>
 				<li><a href="class-Colada.PairMap.html">PairMap</a></li>
+				<li><a href="class-Colada.RegExp.html">RegExp</a></li>
 				<li><a href="class-Colada.SetBuilder.html">SetBuilder</a></li>
 				<li><a href="class-Colada.Some.html">Some</a></li>
 				<li><a href="class-Colada.SplObjectStoragePairs.html">SplObjectStoragePairs</a></li>
@@ -55,7 +58,6 @@
 			<h3>Interfaces</h3>
 			<ul>
 				<li class="active"><a href="class-Colada.Collection.html">Collection</a></li>
-				<li><a href="class-Colada.Equalable.html">Equalable</a></li>
 				<li><a href="class-Colada.Map.html">Map</a></li>
 				<li><a href="class-Colada.Pairs.html">Pairs</a></li>
 			</ul>
@@ -63,10 +65,6 @@
 
 
 
-			<h3>Functions</h3>
-			<ul>
-				<li><a href="function-Colada._.html">_</a></li>
-			</ul>
 		</div>
 	</div>
 </div>
@@ -97,8 +95,14 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
 		</ul>
 		<ul>
+			<li>
+				<a href="colada-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+			</li>
 		</ul>
 	</div>
 
@@ -106,7 +110,24 @@
 	<h1>Interface Collection</h1>
 
 
+	<div class="description">
+	
+<p>General collection interface (immutable). Currently one for all collection
+types (lists, sets).</p>
 
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b><span>Colada\Collection</span></b>			
+			 implements 
+				<a href="class-JsonSerializable.html"><span>JsonSerializable</span></a>, 
+			
+<span>Traversable</span>
+			
+			
+		</dd>
+	</dl>
 
 
 
@@ -128,49 +149,15 @@
 				<b>Author:</b>
 				Alexey Shockov &lt;<a
 href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Colada.Collection.html#5" title="Go to source code">Colada/Collection.php</a><br />
+				<b>Todo:</b>
+				Implement Equalable?..<br />
+		<b>Located at</b> <a href="source-class-Colada.Collection.html#5-419" title="Go to source code">Colada/Collection.php</a><br />
 	</div>
+
 
 
 	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="contains" id="_contains">
-
-		<td class="attributes"><code>
-			 public 
-			boolean
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_contains">#</a>
-		<code><a href="source-class-Colada.Collection.html#14" title="Go to source code">contains</a>( <span>mixed <var>$element</var></span> )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$element</var></dt>
-					<dd><code>mixed</code></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>boolean</code><br />
-				</div>
-
-
-
-		</div>
-		</div></td>
-	</tr>
 	<tr data-order="isEmpty" id="_isEmpty">
 
 		<td class="attributes"><code>
@@ -182,7 +169,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isEmpty">#</a>
-		<code><a href="source-class-Colada.Collection.html#21" title="Go to source code">isEmpty</a>( )</code>
+		<code><a href="source-class-Colada.Collection.html#14-17" title="Go to source code">isEmpty</a>( )</code>
 
 		<div class="description short">
 			
@@ -198,332 +185,6 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 					<code>boolean</code><br />
 				</div>
 
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="toArray" id="_toArray">
-
-		<td class="attributes"><code>
-			 public 
-			array
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_toArray">#</a>
-		<code><a href="source-class-Colada.Collection.html#26" title="Go to source code">toArray</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>array</code><br />
-				</div>
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="acceptBy" id="_acceptBy">
-
-		<td class="attributes"><code>
-			 public 
-			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_acceptBy">#</a>
-		<code><a href="source-class-Colada.Collection.html#31" title="Go to source code">acceptBy</a>( <span>callback <var>$filter</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Constructs new collection with elements, for which $filter returns false.</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Constructs new collection with elements, for which $filter returns false.</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$filter</var></dt>
-					<dd><code>callback</code></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
-				</div>
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="rejectBy" id="_rejectBy">
-
-		<td class="attributes"><code>
-			 public 
-			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_rejectBy">#</a>
-		<code><a href="source-class-Colada.Collection.html#40" title="Go to source code">rejectBy</a>( <span>callback <var>$filter</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Constructs new collection with elements, for which $filter returns false.</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Constructs new collection with elements, for which $filter returns false.</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$filter</var></dt>
-					<dd><code>callback</code></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
-				</div>
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="findBy" id="_findBy">
-
-		<td class="attributes"><code>
-			 public 
-			mixed
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_findBy">#</a>
-		<code><a href="source-class-Colada.Collection.html#49" title="Go to source code">findBy</a>( <span>callback <var>$filter</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Return first element from collection, that match $filter.</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Return first element from collection, that match $filter.</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$filter</var></dt>
-					<dd><code>callback</code></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>mixed</code><br />
-				</div>
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="mapBy" id="_mapBy">
-
-		<td class="attributes"><code>
-			 public 
-			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_mapBy">#</a>
-		<code><a href="source-class-Colada.Collection.html#58" title="Go to source code">mapBy</a>( <span>callback <var>$mapper</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Applies $mapper to each element of collection and constructs new one with
-results.</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Applies $mapper to each element of collection and constructs new one with
-results.</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$mapper</var></dt>
-					<dd><code>callback</code></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
-				</div>
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="flatMapBy" id="_flatMapBy">
-
-		<td class="attributes"><code>
-			 public 
-			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_flatMapBy">#</a>
-		<code><a href="source-class-Colada.Collection.html#67" title="Go to source code">flatMapBy</a>( <span>callback <var>$mapper</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Applies $mapper to each element of collection and constructs new one with
-results (which must be collections of new elements for each original
-element).</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Applies $mapper to each element of collection and constructs new one with
-results (which must be collections of new elements for each original
-element).</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$mapper</var></dt>
-					<dd><code>callback</code></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
-				</div>
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="groupBy" id="_groupBy">
-
-		<td class="attributes"><code>
-			 public 
-			<code><a href="class-Colada.Map.html">Colada\Map</a></code>
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_groupBy">#</a>
-		<code><a href="source-class-Colada.Collection.html#77" title="Go to source code">groupBy</a>( <span>callback <var>$keyFinder</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Group each collection element in map with related key.</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Group each collection element in map with related key.</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$keyFinder</var></dt>
-					<dd><code>callback</code></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Colada.Map.html">Colada\Map</a></code></code><br />
-				</div>
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="partitionBy" id="_partitionBy">
-
-		<td class="attributes"><code>
-			 public 
-			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_partitionBy">#</a>
-		<code><a href="source-class-Colada.Collection.html#86" title="Go to source code">partitionBy</a>( <span>callback <var>$partitioner</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Divides collection into two parts, depending on $partitioner result for each
-element (boolean).</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Divides collection into two parts, depending on $partitioner result for each
-element (boolean).</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$partitioner</var></dt>
-					<dd><code>callback</code></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br>Of two elements.<br />
-				</div>
 
 
 
@@ -541,7 +202,7 @@ element (boolean).</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isAnyMatchBy">#</a>
-		<code><a href="source-class-Colada.Collection.html#95" title="Go to source code">isAnyMatchBy</a>( <span>callback <var>$matcher</var></span> )</code>
+		<code><a href="source-class-Colada.Collection.html#19-24" title="Go to source code">isAnyMatchBy</a>( <span>callable <var>$matcher</var></span> )</code>
 
 		<div class="description short">
 			
@@ -554,13 +215,14 @@ element (boolean).</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$matcher</var></dt>
-					<dd><code>callback</code></dd>
+					<dd><code>callable</code><br>$matcher</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
 					<code>boolean</code><br />
 				</div>
+
 
 
 
@@ -578,7 +240,7 @@ element (boolean).</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isAllMatchBy">#</a>
-		<code><a href="source-class-Colada.Collection.html#102" title="Go to source code">isAllMatchBy</a>( <span>callback <var>$matcher</var></span> )</code>
+		<code><a href="source-class-Colada.Collection.html#26-31" title="Go to source code">isAllMatchBy</a>( <span>callable <var>$matcher</var></span> )</code>
 
 		<div class="description short">
 			
@@ -591,13 +253,14 @@ element (boolean).</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$matcher</var></dt>
-					<dd><code>callback</code></dd>
+					<dd><code>callable</code><br>$matcher</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
 					<code>boolean</code><br />
 				</div>
+
 
 
 
@@ -615,7 +278,7 @@ element (boolean).</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isNoneMatchBy">#</a>
-		<code><a href="source-class-Colada.Collection.html#109" title="Go to source code">isNoneMatchBy</a>( <span>callback <var>$matcher</var></span> )</code>
+		<code><a href="source-class-Colada.Collection.html#33-38" title="Go to source code">isNoneMatchBy</a>( <span>callable <var>$matcher</var></span> )</code>
 
 		<div class="description short">
 			
@@ -628,13 +291,52 @@ element (boolean).</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$matcher</var></dt>
-					<dd><code>callback</code><br>}</dd>
+					<dd><code>callable</code><br>$matcher</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
 					<code>boolean</code><br />
 				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="contains" id="_contains">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_contains">#</a>
+		<code><a href="source-class-Colada.Collection.html#40-45" title="Go to source code">contains</a>( <span>mixed <var>$element</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$element</var></dt>
+					<dd><code>mixed</code><br>$element</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
 
 
 
@@ -652,7 +354,7 @@ element (boolean).</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_slice">#</a>
-		<code><a href="source-class-Colada.Collection.html#116" title="Go to source code">slice</a>( <span>integer <var>$offset</var></span>, <span>integer <var>$length</var></span> )</code>
+		<code><a href="source-class-Colada.Collection.html#47-55" title="Go to source code">slice</a>( <span>integer <var>$offset</var></span>, <span>integer <var>$length</var></span> )</code>
 
 		<div class="description short">
 			
@@ -665,9 +367,9 @@ element (boolean).</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$offset</var></dt>
-					<dd><code>integer</code></dd>
+					<dd><code>integer</code><br>$offset</dd>
 					<dt><var>$length</var></dt>
-					<dd><code>integer</code></dd>
+					<dd><code>integer</code><br>$length</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -679,6 +381,133 @@ element (boolean).</p>
 				<div class="list">
 					<code>InvalidArgumentException</code><br />
 				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="splitAt" id="_splitAt">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a>[]</code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_splitAt">#</a>
+		<code><a href="source-class-Colada.Collection.html#57-64" title="Go to source code">splitAt</a>( <span>mixed <var>$element</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Split collection (1, 2, 3, 4, 5) at 2 to get (1, 2) and (3, 4, 5).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Split collection (1, 2, 3, 4, 5) at 2 to get (1, 2) and (3, 4, 5).</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$element</var></dt>
+					<dd><code>mixed</code><br>$element</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a>[]</code></code><br>Array with two elements. Suitable for PHP's list().<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="takeTo" id="_takeTo">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_takeTo">#</a>
+		<code><a href="source-class-Colada.Collection.html#66-73" title="Go to source code">takeTo</a>( <span>mixed <var>$element</var></span> )</code>
+
+		<div class="description short">
+			
+<p>(1, 2, 3, 4, 5).takeTo(2) = (1, 2)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>(1, 2, 3, 4, 5).takeTo(2) = (1, 2)</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$element</var></dt>
+					<dd><code>mixed</code><br>$element</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="dropFrom" id="_dropFrom">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_dropFrom">#</a>
+		<code><a href="source-class-Colada.Collection.html#75-82" title="Go to source code">dropFrom</a>( <span>mixed <var>$element</var></span> )</code>
+
+		<div class="description short">
+			
+<p>(1, 2, 3, 4, 5).dropFrom(2) = (3, 4, 5)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>(1, 2, 3, 4, 5).dropFrom(2) = (3, 4, 5)</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$element</var></dt>
+					<dd><code>mixed</code><br>$element</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
 
 
 		</div>
@@ -695,7 +524,7 @@ element (boolean).</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_pluck">#</a>
-		<code><a href="source-class-Colada.Collection.html#126" title="Go to source code">pluck</a>( <span>mixed <var>$key</var></span> )</code>
+		<code><a href="source-class-Colada.Collection.html#84-91" title="Go to source code">pluck</a>( <span>mixed <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -714,13 +543,14 @@ extracting a list of property values.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>mixed</code></dd>
+					<dd><code>mixed</code><br>$key</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
 					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
 				</div>
+
 
 
 
@@ -731,14 +561,14 @@ extracting a list of property values.</p>
 
 		<td class="attributes"><code>
 			 public 
-			
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_eachBy">#</a>
-		<code><a href="source-class-Colada.Collection.html#135" title="Go to source code">eachBy</a>( <span>callback <var>$processor</var></span> )</code>
+		<code><a href="source-class-Colada.Collection.html#93-100" title="Go to source code">eachBy</a>( <span>callable <var>$processor</var></span> )</code>
 
 		<div class="description short">
 			
@@ -755,8 +585,1322 @@ extracting a list of property values.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$processor</var></dt>
-					<dd><code>callback</code></dd>
+					<dd><code>callable</code><br>$processor</dd>
 				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br>Self.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="findBy" id="_findBy">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Option.html">Colada\Option</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_findBy">#</a>
+		<code><a href="source-class-Colada.Collection.html#102-109" title="Go to source code">findBy</a>( <span>callable <var>$filter</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Return first element from collection, that match $filter.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Return first element from collection, that match $filter.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filter</var></dt>
+					<dd><code>callable</code><br>$filter</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Option.html">Colada\Option</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="acceptBy" id="_acceptBy">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_acceptBy">#</a>
+		<code><a href="source-class-Colada.Collection.html#111-120" title="Go to source code">acceptBy</a>( <span>callable <var>$filter</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Constructs new collection with elements, for which $filter returns true.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructs new collection with elements, for which $filter returns true.</p>
+
+<p>Lazy.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filter</var></dt>
+					<dd><code>callable</code><br>$filter</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="rejectBy" id="_rejectBy">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_rejectBy">#</a>
+		<code><a href="source-class-Colada.Collection.html#122-131" title="Go to source code">rejectBy</a>( <span>callable <var>$filter</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Constructs new collection with elements, for which $filter returns false.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructs new collection with elements, for which $filter returns false.</p>
+
+<p>Lazy.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filter</var></dt>
+					<dd><code>callable</code><br>$filter</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="mapBy" id="_mapBy">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_mapBy">#</a>
+		<code><a href="source-class-Colada.Collection.html#133-142" title="Go to source code">mapBy</a>( <span>callable|mixed <var>$mapper</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Applies $mapper to each element of collection and constructs new one with
+results.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Applies $mapper to each element of collection and constructs new one with
+results.</p>
+
+<p>Lazy.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$mapper</var></dt>
+					<dd><code>callable|mixed</code><br>$mapper</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="replace" id="_replace">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_replace">#</a>
+		<code><a href="source-class-Colada.Collection.html#144-166" title="Go to source code">replace</a>( <span>callable|mixed <var>$filter</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Replace all elements, matching $filter, with $value.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Replace all elements, matching $filter, with $value.</p>
+
+<p>Short version of:</p>
+
+<pre>
+<span class="php-var">$filter</span> = <span
+class="php-keyword1">function</span>(<span
+class="php-var">$element</span>) { ... };
+<span
+class="php-var">$value</span>  = <span class="php-quote">''</span> <span
+class="php-comment">// Some value for replace.</span>
+
+<span
+class="php-var">$collection</span>-&gt;mapBy(<span
+class="php-keyword1">function</span>(<span
+class="php-var">$element</span>) <span class="php-keyword1">use</span>(<span
+class="php-var">$filter</span>, <span class="php-var">$value</span>) {
+    <span
+class="php-keyword1">if</span> (<span class="php-var">$filter</span>(<span
+class="php-var">$element</span>)) {
+        <span
+class="php-keyword1">return</span> <span
+class="php-var">$value</span>;
+    } <span
+class="php-keyword1">else</span> {
+        <span
+class="php-keyword1">return</span> <span
+class="php-var">$element</span>;
+    }
+});
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filter</var></dt>
+					<dd><code>callable|mixed</code><br>$filter</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="replaceBy" id="_replaceBy">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_replaceBy">#</a>
+		<code><a href="source-class-Colada.Collection.html#168-190" title="Go to source code">replaceBy</a>( <span>callable|mixed <var>$filter</var></span>, <span>callable <var>$processor</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Process all elements, matching $filter, with $processor.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Process all elements, matching $filter, with $processor.</p>
+
+<p>Short version of:</p>
+
+<pre>
+<span class="php-var">$filter</span>    = <span
+class="php-keyword1">function</span>(<span
+class="php-var">$element</span>) { ... };
+<span
+class="php-var">$processor</span> = <span
+class="php-keyword1">function</span>(<span
+class="php-var">$element</span>) { ... };
+
+<span
+class="php-var">$collection</span>-&gt;mapBy(<span
+class="php-keyword1">function</span>(<span
+class="php-var">$element</span>) <span class="php-keyword1">use</span>(<span
+class="php-var">$filter</span>, <span
+class="php-var">$processor</span>) {
+    <span
+class="php-keyword1">if</span> (<span class="php-var">$filter</span>(<span
+class="php-var">$element</span>)) {
+        <span
+class="php-keyword1">return</span> <span class="php-var">$processor</span>(<span
+class="php-var">$element</span>);
+    } <span
+class="php-keyword1">else</span> {
+        <span
+class="php-keyword1">return</span> <span
+class="php-var">$element</span>;
+    }
+});
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filter</var></dt>
+					<dd><code>callable|mixed</code><br>$filter</dd>
+					<dt><var>$processor</var></dt>
+					<dd><code>callable</code><br>$processor</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="flatMapBy" id="_flatMapBy">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_flatMapBy">#</a>
+		<code><a href="source-class-Colada.Collection.html#192-204" title="Go to source code">flatMapBy</a>( <span>callable|Traversable <var>$mapper</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Applies $mapper to each element of collection and constructs new one with
+results (which must be collections of new elements for each original
+element).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Applies $mapper to each element of collection and constructs new one with
+results (which must be collections of new elements for each original
+element).</p>
+
+<p>Lazy.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$mapper</var></dt>
+					<dd><code>callable|Traversable</code><br>$mapper</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<a
+href="http://www.scala-lang.org/api/current/scala/collection/immutable/Set.html">http://www.scala-lang.org/api/current/scala/collection/immutable/Set.html</a><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="flatten" id="_flatten">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_flatten">#</a>
+		<code><a href="source-class-Colada.Collection.html#206-212" title="Go to source code">flatten</a>( )</code>
+
+		<div class="description short">
+			
+<p>Converts this collection of traversable collections into a collection formed
+by the elements of these traversable collections.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts this collection of traversable collections into a collection formed
+by the elements of these traversable collections.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="foldBy" id="_foldBy">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_foldBy">#</a>
+		<code><a href="source-class-Colada.Collection.html#214-220" title="Go to source code">foldBy</a>( <span>callable <var>$folder</var></span>, <span>mixed <var>$accumulator</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$folder</var></dt>
+					<dd><code>callable</code><br>$folder</dd>
+					<dt><var>$accumulator</var></dt>
+					<dd><code>mixed</code><br>$accumulator</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reduceBy" id="_reduceBy">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reduceBy">#</a>
+		<code><a href="source-class-Colada.Collection.html#222-233" title="Go to source code">reduceBy</a>( <span>callable <var>$reducer</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Good introduction to reduce: <a href="http://www.codecommit.com/blog/scala/scala-collections-for-the-easily-bored-part-2">http://www.codecommit.com/blog/scala/scala-collections-for-the-easily-bored-part-2</a>.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Good introduction to reduce: <a href="http://www.codecommit.com/blog/scala/scala-collections-for-the-easily-bored-part-2">http://www.codecommit.com/blog/scala/scala-collections-for-the-easily-bored-part-2</a>.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$reducer</var></dt>
+					<dd><code>callable</code><br>$reducer</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>Exception</code><br>On empty collection.<br />
+				</div>
+
+				<h4>Todo</h4>
+				<div class="list">
+						Own exception class.<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="partitionBy" id="_partitionBy">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a>[]</code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_partitionBy">#</a>
+		<code><a href="source-class-Colada.Collection.html#235-242" title="Go to source code">partitionBy</a>( <span>callable <var>$partitioner</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Divides collection into two parts, depending on $partitioner result for each
+element (boolean).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Divides collection into two parts, depending on $partitioner result for each
+element (boolean).</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$partitioner</var></dt>
+					<dd><code>callable</code><br>$partitioner</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a>[]</code></code><br>Array with two elements. Suitable for PHP's list().<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="unzip" id="_unzip">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a>[]</code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_unzip">#</a>
+		<code><a href="source-class-Colada.Collection.html#244-249" title="Go to source code">unzip</a>( <span>callable|null <var>$unzipper</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$unzipper</var></dt>
+					<dd><code>callable|null</code><br>$unzipper</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a>[]</code></code><br>Array with two elements. Suitable for PHP's list().<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="zip" id="_zip">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_zip">#</a>
+		<code><a href="source-class-Colada.Collection.html#251-275" title="Go to source code">zip</a>( <span><code><a href="class-Colada.Collection.html">Colada\Collection</a></code>|Iterator|IteratorAggregate|mixed <var>$collection</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Zips two collections into one.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Zips two collections into one.</p>
+
+<p>Example:</p>
+
+<pre>
+<span class="php-var">$collection1</span> = (<span
+class="php-keyword1">new</span> CollectionBuilder())-&gt;addAll(<span
+class="php-keyword1">array</span>(<span
+class="php-quote">&quot;Alice&quot;</span>, <span
+class="php-quote">&quot;Bob&quot;</span>, <span
+class="php-quote">&quot;Joe&quot;</span>))-&gt;build();
+<span
+class="php-var">$collection2</span> = (<span
+class="php-keyword1">new</span> CollectionBuilder())-&gt;addAll(<span
+class="php-keyword1">array</span>(<span class="php-num">1</span>, <span
+class="php-num">2</span>, <span class="php-num">3</span>))-&gt;build();
+
+<span
+class="php-var">$pairs</span> = <span
+class="php-var">$collection1</span>-&gt;zip(<span
+class="php-var">$collection2</span>)-&gt;toArray();
+<span
+class="php-comment">// array(</span>
+<span
+class="php-comment">//     array('Alice', 1),</span>
+<span
+class="php-comment">//     array('Bob', 2),</span>
+<span
+class="php-comment">//     array('Joe', 3),</span>
+<span
+class="php-comment">// )</span>
+</pre>
+
+<p>P.S. Haskell's and Scala's zipWith() may be implemented in two steps: 1.
+zip(), 2. mapBy().</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$collection</var></dt>
+					<dd><code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code>|Iterator|IteratorAggregate|mixed</code><br>$collection</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+				<h4>Todo</h4>
+				<div class="list">
+						Lazy. With CollectionZipIterator.<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="union" id="_union">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_union">#</a>
+		<code><a href="source-class-Colada.Collection.html#277-286" title="Go to source code">union</a>( <span><code><a href="class-Colada.Collection.html">Colada\Collection</a></code>|Iterator|IteratorAggregate|mixed <var>$collection</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Constructs set with elements which are in <i>either</i> sets (suitable mostly
+for sets).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructs set with elements which are in <i>either</i> sets (suitable mostly
+for sets).</p>
+
+<p>For example, we have two sets: (1, 2, 3) and (3, 4, 5). Union will be (1, 2,
+3, 4, 5).</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$collection</var></dt>
+					<dd><code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code>|Iterator|IteratorAggregate|mixed</code><br>$collection</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="intersect" id="_intersect">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_intersect">#</a>
+		<code><a href="source-class-Colada.Collection.html#288-299" title="Go to source code">intersect</a>( <span><code><a href="class-Colada.Collection.html">Colada\Collection</a></code>|Iterator|IteratorAggregate|mixed <var>$collection</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Constructs set with elements which are in <i>both</i> sets (suitable mostly
+for sets).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructs set with elements which are in <i>both</i> sets (suitable mostly
+for sets).</p>
+
+<p>For example, we have two sets: (1, 2, 3) and (3, 4, 5). Intersection will be
+(3).</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$collection</var></dt>
+					<dd><code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code>|Iterator|IteratorAggregate|mixed</code><br>$collection</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+				<h4>Todo</h4>
+				<div class="list">
+						Rename to "intersection"?<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="complement" id="_complement">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_complement">#</a>
+		<code><a href="source-class-Colada.Collection.html#301-313" title="Go to source code">complement</a>( <span><code><a href="class-Colada.Collection.html">Colada\Collection</a></code>|Iterator|IteratorAggregate|mixed <var>$collection</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Constructs set with elements which lie <i>outside</i> of a current collection
+and within another collection (suitable mostly for sets).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructs set with elements which lie <i>outside</i> of a current collection
+and within another collection (suitable mostly for sets).</p>
+
+<p>For example, we have two sets: (1, 2, 3) and (3, 4, 5). Complement will be
+(4, 5).</p>
+
+<p>P.S. diff() is alias in other languages and libraries.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$collection</var></dt>
+					<dd><code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code>|Iterator|IteratorAggregate|mixed</code><br>$collection</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPartOf" id="_isPartOf">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isPartOf">#</a>
+		<code><a href="source-class-Colada.Collection.html#315-322" title="Go to source code">isPartOf</a>( <span><code><a href="class-Colada.Collection.html">Colada\Collection</a></code>|Iterator|IteratorAggregate|mixed <var>$collection</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Is passed collection contains all elements from this one?</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Is passed collection contains all elements from this one?</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$collection</var></dt>
+					<dd><code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code>|Iterator|IteratorAggregate|mixed</code><br>$collection</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sortBy" id="_sortBy">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sortBy">#</a>
+		<code><a href="source-class-Colada.Collection.html#324-329" title="Go to source code">sortBy</a>( <span>callable <var>$comparator</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$comparator</var></dt>
+					<dd><code>callable</code><br>$comparator</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="first" id="_first">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Option.html">Colada\Option</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_first">#</a>
+		<code><a href="source-class-Colada.Collection.html#331-336" title="Go to source code">first</a>( )</code>
+
+		<div class="description short">
+			
+<p>Alias for Collection::head().</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Alias for Collection::head().</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Option.html">Colada\Option</a></code></code><br>One head element (first element).<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="last" id="_last">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Option.html">Colada\Option</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_last">#</a>
+		<code><a href="source-class-Colada.Collection.html#338-341" title="Go to source code">last</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Option.html">Colada\Option</a></code></code><br>Last element.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="head" id="_head">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Option.html">Colada\Option</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_head">#</a>
+		<code><a href="source-class-Colada.Collection.html#343-346" title="Go to source code">head</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Option.html">Colada\Option</a></code></code><br>One head element (first element).<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="tail" id="_tail">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_tail">#</a>
+		<code><a href="source-class-Colada.Collection.html#348-353" title="Go to source code">tail</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br>Tail — all elements, except one head element.<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>UnderflowException</code><br>For empty collections.<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="groupBy" id="_groupBy">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Map.html">Colada\Map</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_groupBy">#</a>
+		<code><a href="source-class-Colada.Collection.html#355-363" title="Go to source code">groupBy</a>( <span>callable <var>$keyFinder</var></span>, <span>boolean <var>$uniqueKeys</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Group each collection element in map with related key.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Group each collection element in map with related key.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$keyFinder</var></dt>
+					<dd><code>callable</code><br>$keyFinder</dd>
+					<dt><var>$uniqueKeys</var></dt>
+					<dd><code>boolean</code><br>$uniqueKeys</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Map.html">Colada\Map</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="add" id="_add">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_add">#</a>
+		<code><a href="source-class-Colada.Collection.html#365-372" title="Go to source code">add</a>( <span>mixed <var>$element</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds $elements to collection (copied from current) and return them.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds $elements to collection (copied from current) and return them.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$element</var></dt>
+					<dd><code>mixed</code><br>$element</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reject" id="_reject">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reject">#</a>
+		<code><a href="source-class-Colada.Collection.html#385-392" title="Go to source code">reject</a>( <span>mixed <var>$element</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$element</var></dt>
+					<dd><code>mixed</code><br>$element</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						\Colada\Collection::remove()<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="join" id="_join">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_join">#</a>
+		<code><a href="source-class-Colada.Collection.html#394-399" title="Go to source code">join</a>( <span>string <var>$delimiter</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$delimiter</var></dt>
+					<dd><code>string</code><br>$delimiter</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toArray" id="_toArray">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toArray">#</a>
+		<code><a href="source-class-Colada.Collection.html#401-404" title="Go to source code">toArray</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toSet" id="_toSet">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toSet">#</a>
+		<code><a href="source-class-Colada.Collection.html#406-409" title="Go to source code">toSet</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__clone" id="___clone">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Collection.html">Colada\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___clone">#</a>
+		<code><a href="source-class-Colada.Collection.html#411-418" title="Go to source code">__clone</a>( )</code>
+
+		<div class="description short">
+			
+<p>Constructs new collection with elements from current one.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructs new collection with elements from current one.</p>
+
+<p>Useful, for example, to "freeze" collections from Map::asKeys() or
+Map::asElements().</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Collection.html">Colada\Collection</a></code></code><br />
+				</div>
 
 
 
@@ -765,6 +1909,22 @@ extracting a list of property values.</p>
 		</div></td>
 	</tr>
 	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-JsonSerializable.html#methods">JsonSerializable</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-JsonSerializable.html#_jsonSerialize">jsonSerialize()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
 
 
 
@@ -778,7 +1938,7 @@ extracting a list of property values.</p>
 </div>
 
 	<div id="footer">
-		Colada API documentation generated by <a href="http://apigen.org">ApiGen 2.6.1</a>
+		Colada API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

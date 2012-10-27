@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 2.6.1" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
 	<title>Class Colada\PairMap | Colada</title>
 
-	<script type="text/javascript" src="resources/combined.js?144019575"></script>
-	<script type="text/javascript" src="elementlist.js?2937533831"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1532301413" />
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?2367336867"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -28,6 +28,8 @@
 				<li><a href="namespace-Colada.Pagination.Adapters.html">Adapters</a>
 						</li>
 							</ul></li></ul></li>
+				<li><a href="namespace-None.html">None</a>
+						</li>
 			</ul>
 		</div>
 
@@ -47,6 +49,7 @@
 				<li><a href="class-Colada.None.html">None</a></li>
 				<li><a href="class-Colada.Option.html">Option</a></li>
 				<li class="active"><a href="class-Colada.PairMap.html">PairMap</a></li>
+				<li><a href="class-Colada.RegExp.html">RegExp</a></li>
 				<li><a href="class-Colada.SetBuilder.html">SetBuilder</a></li>
 				<li><a href="class-Colada.Some.html">Some</a></li>
 				<li><a href="class-Colada.SplObjectStoragePairs.html">SplObjectStoragePairs</a></li>
@@ -55,7 +58,6 @@
 			<h3>Interfaces</h3>
 			<ul>
 				<li><a href="class-Colada.Collection.html">Collection</a></li>
-				<li><a href="class-Colada.Equalable.html">Equalable</a></li>
 				<li><a href="class-Colada.Map.html">Map</a></li>
 				<li><a href="class-Colada.Pairs.html">Pairs</a></li>
 			</ul>
@@ -63,10 +65,6 @@
 
 
 
-			<h3>Functions</h3>
-			<ul>
-				<li><a href="function-Colada._.html">_</a></li>
-			</ul>
 		</div>
 	</div>
 </div>
@@ -97,8 +95,14 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
 		</ul>
 		<ul>
+			<li>
+				<a href="colada-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+			</li>
 		</ul>
 	</div>
 
@@ -116,9 +120,11 @@
 		<dd style="padding-left:0px">
 <b><span>Colada\PairMap</span></b>			
 			 implements 
-				<a href="class-Colada.Map.html"><span>Colada\Map</span></a>, 
+<span>Countable</span>, 
 			
-<span>Countable</span>
+<span>IteratorAggregate</span>, 
+			
+				<a href="class-Colada.Map.html"><span>Colada\Map</span></a>
 			
 			
 		</dd>
@@ -140,8 +146,9 @@
 				<b>Author:</b>
 				Alexey Shockov &lt;<a
 href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Colada.PairMap.html#5" title="Go to source code">Colada/PairMap.php</a><br />
+		<b>Located at</b> <a href="source-class-Colada.PairMap.html#7-405" title="Go to source code">Colada/PairMap.php</a><br />
 	</div>
+
 
 
 	<table class="summary" id="methods">
@@ -157,7 +164,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Colada.PairMap.html#20" title="Go to source code">__construct</a>( <span><code><a href="class-Colada.Pairs.html">Colada\Pairs</a></code> <var>$pairs</var></span> )</code>
+		<code><a href="source-class-Colada.PairMap.html#34-43" title="Go to source code">__construct</a>( <span><code><a href="class-Colada.Pairs.html">Colada\Pairs</a></code> <var>$pairs</var></span> )</code>
 
 		<div class="description short">
 			
@@ -170,12 +177,52 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$pairs</var></dt>
-					<dd><code><code><a href="class-Colada.Pairs.html">Colada\Pairs</a></code></code></dd>
+					<dd><code><code><a href="class-Colada.Pairs.html">Colada\Pairs</a></code></code><br>$pairs</dd>
 				</dl></div>
 
 
 
 
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getIterator" id="_getIterator">
+
+		<td class="attributes"><code>
+			 public 
+			Iterator
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getIterator">#</a>
+		<code><a href="source-class-Colada.PairMap.html#45-63" title="Go to source code">getIterator</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Iterator</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>DomainException</code><br>If map keys isn't scalars (PHP restrictions).<br />
+				</div>
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code>IteratorAggregate::getIterator()</code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -190,7 +237,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_count">#</a>
-		<code><a href="source-class-Colada.PairMap.html#31" title="Go to source code">count</a>( )</code>
+		<code><a href="source-class-Colada.PairMap.html#65-71" title="Go to source code">count</a>( )</code>
 
 		<div class="description short">
 			
@@ -208,8 +255,9 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
 				<h4>Implementation of</h4>
-				<div class="list"><code>Countable::count</code></div>
+				<div class="list"><code>Countable::count()</code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -224,7 +272,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isEmpty">#</a>
-		<code><a href="source-class-Colada.PairMap.html#39" title="Go to source code">isEmpty</a>( )</code>
+		<code><a href="source-class-Colada.PairMap.html#73-79" title="Go to source code">isEmpty</a>( )</code>
 
 		<div class="description short">
 			
@@ -242,8 +290,9 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
 				<h4>Implementation of</h4>
-				<div class="list"><code><a href="class-Colada.Map.html#_isEmpty">Colada\Map::isEmpty</a></code></div>
+				<div class="list"><code><a href="class-Colada.Map.html#_isEmpty">Colada\Map::isEmpty()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -258,7 +307,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_flip">#</a>
-		<code><a href="source-class-Colada.PairMap.html#47" title="Go to source code">flip</a>( )</code>
+		<code><a href="source-class-Colada.PairMap.html#81-93" title="Go to source code">flip</a>( )</code>
 
 		<div class="description short">
 			
@@ -275,7 +324,14 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				</div>
 
 
+				<h4>Todo</h4>
+				<div class="list">
+						Lazy.<br />
+				</div>
 
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Colada.Map.html#_flip">Colada\Map::flip()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -290,14 +346,18 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_asElements">#</a>
-		<code><a href="source-class-Colada.PairMap.html#61" title="Go to source code">asElements</a>( )</code>
+		<code><a href="source-class-Colada.PairMap.html#95-101" title="Go to source code">asElements</a>( )</code>
 
 		<div class="description short">
 			
+<p>Elements view.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Elements view.</p>
+
 
 
 
@@ -308,6 +368,9 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Colada.Map.html#_asElements">Colada\Map::asElements()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -322,17 +385,17 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_asKeys">#</a>
-		<code><a href="source-class-Colada.PairMap.html#69" title="Go to source code">asKeys</a>( )</code>
+		<code><a href="source-class-Colada.PairMap.html#103-109" title="Go to source code">asKeys</a>( )</code>
 
 		<div class="description short">
 			
-<p>Key set.</p>
+<p>Keys view.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Key set.</p>
+<p>Keys view.</p>
 
 
 
@@ -344,6 +407,9 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Colada.Map.html#_asKeys">Colada\Map::asKeys()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -358,7 +424,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_acceptBy">#</a>
-		<code><a href="source-class-Colada.PairMap.html#79" title="Go to source code">acceptBy</a>( <span>callback <var>$filter</var></span> )</code>
+		<code><a href="source-class-Colada.PairMap.html#111-126" title="Go to source code">acceptBy</a>( <span>callable <var>$filter</var></span> )</code>
 
 		<div class="description short">
 			
@@ -371,7 +437,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$filter</var></dt>
-					<dd><code>callback</code></dd>
+					<dd><code>callable</code><br>$filter</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -380,7 +446,58 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				</div>
 
 
+				<h4>Todo</h4>
+				<div class="list">
+						Lazy.<br />
+				</div>
 
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Colada.Map.html#_acceptBy">Colada\Map::acceptBy()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="rejectBy" id="_rejectBy">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Map.html">Colada\Map</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_rejectBy">#</a>
+		<code><a href="source-class-Colada.PairMap.html#140-155" title="Go to source code">rejectBy</a>( <span>callable <var>$filter</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$filter</var></dt>
+					<dd><code>callable</code><br>$filter</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Map.html">Colada\Map</a></code></code><br />
+				</div>
+
+
+				<h4>Todo</h4>
+				<div class="list">
+						Lazy.<br />
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Colada.Map.html#_rejectBy">Colada\Map::rejectBy()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -395,7 +512,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_mapElementsBy">#</a>
-		<code><a href="source-class-Colada.PairMap.html#99" title="Go to source code">mapElementsBy</a>( <span>callback <var>$mapper</var></span> )</code>
+		<code><a href="source-class-Colada.PairMap.html#157-172" title="Go to source code">mapElementsBy</a>( <span>callable <var>$mapper</var></span> )</code>
 
 		<div class="description short">
 			
@@ -408,7 +525,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$mapper</var></dt>
-					<dd><code>callback</code></dd>
+					<dd><code>callable</code><br>$mapper</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -417,7 +534,54 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				</div>
 
 
+				<h4>Todo</h4>
+				<div class="list">
+						Lazy.<br />
+				</div>
 
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Colada.Map.html#_mapElementsBy">Colada\Map::mapElementsBy()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="eachBy" id="_eachBy">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Map.html">Colada\Map</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_eachBy">#</a>
+		<code><a href="source-class-Colada.PairMap.html#174-184" title="Go to source code">eachBy</a>( <span>callable <var>$processor</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$processor</var></dt>
+					<dd><code>callable</code><br>$processor</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Map.html">Colada\Map</a></code></code><br>Self.<br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Colada.Map.html#_eachBy">Colada\Map::eachBy()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -432,20 +596,26 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_pick">#</a>
-		<code><a href="source-class-Colada.PairMap.html#144" title="Go to source code">pick</a>( <span>array|Traversable <var>$keys</var></span> )</code>
+		<code><a href="source-class-Colada.PairMap.html#212-232" title="Go to source code">pick</a>( <span>array|Traversable <var>$keys</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Return a new Map, filtered to only have elements for the whitelisted
+keys.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Return a new Map, filtered to only have elements for the whitelisted
+keys.</p>
+
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$keys</var></dt>
-					<dd><code>array|Traversable</code></dd>
+					<dd><code>array|Traversable</code><br>$keys</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -454,7 +624,14 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				</div>
 
 
+				<h4>Todo</h4>
+				<div class="list">
+						Lazy.<br />
+				</div>
 
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Colada.Map.html#_pick">Colada\Map::pick()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -469,7 +646,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_mapBy">#</a>
-		<code><a href="source-class-Colada.PairMap.html#170" title="Go to source code">mapBy</a>( <span>callback <var>$mapper</var></span> )</code>
+		<code><a href="source-class-Colada.PairMap.html#234-242" title="Go to source code">mapBy</a>( <span>callable <var>$mapper</var></span> )</code>
 
 		<div class="description short">
 			
@@ -482,7 +659,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$mapper</var></dt>
-					<dd><code>callback</code></dd>
+					<dd><code>callable</code><br>$mapper</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -492,6 +669,9 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Colada.Map.html#_mapBy">Colada\Map::mapBy()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -506,7 +686,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_flatMapBy">#</a>
-		<code><a href="source-class-Colada.PairMap.html#182" title="Go to source code">flatMapBy</a>( <span>callback <var>$mapper</var></span> )</code>
+		<code><a href="source-class-Colada.PairMap.html#244-252" title="Go to source code">flatMapBy</a>( <span>callable <var>$mapper</var></span> )</code>
 
 		<div class="description short">
 			
@@ -519,7 +699,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$mapper</var></dt>
-					<dd><code>callback</code></dd>
+					<dd><code>callable</code><br>$mapper</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -529,6 +709,9 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Colada.Map.html#_flatMapBy">Colada\Map::flatMapBy()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -543,17 +726,17 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_asPairs">#</a>
-		<code><a href="source-class-Colada.PairMap.html#194" title="Go to source code">asPairs</a>( )</code>
+		<code><a href="source-class-Colada.PairMap.html#254-260" title="Go to source code">asPairs</a>( )</code>
 
 		<div class="description short">
 			
-<p>View.</p>
+<p>Pairs view.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>View.</p>
+<p>Pairs view.</p>
 
 
 
@@ -565,6 +748,9 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Colada.Map.html#_asPairs">Colada\Map::asPairs()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -579,7 +765,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_get">#</a>
-		<code><a href="source-class-Colada.PairMap.html#204" title="Go to source code">get</a>( <span>mixed <var>$key</var></span> )</code>
+		<code><a href="source-class-Colada.PairMap.html#262-268" title="Go to source code">get</a>( <span>mixed <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -592,7 +778,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>mixed</code></dd>
+					<dd><code>mixed</code><br>$key</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -602,8 +788,9 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
 				<h4>Implementation of</h4>
-				<div class="list"><code><a href="class-Colada.Map.html#_get">Colada\Map::get</a></code></div>
+				<div class="list"><code><a href="class-Colada.Map.html#_get">Colada\Map::get()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -618,7 +805,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#___invoke">#</a>
-		<code><a href="source-class-Colada.PairMap.html#212" title="Go to source code">__invoke</a>( <span>mixed <var>$key</var></span> )</code>
+		<code><a href="source-class-Colada.PairMap.html#270-276" title="Go to source code">__invoke</a>( <span>mixed <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -635,7 +822,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>mixed</code></dd>
+					<dd><code>mixed</code><br>$key</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -645,8 +832,9 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
 				<h4>Implementation of</h4>
-				<div class="list"><code><a href="class-Colada.Map.html#___invoke">Colada\Map::__invoke</a></code></div>
+				<div class="list"><code><a href="class-Colada.Map.html#___invoke">Colada\Map::__invoke()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -661,7 +849,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_apply">#</a>
-		<code><a href="source-class-Colada.PairMap.html#220" title="Go to source code">apply</a>( <span>$key <var>$key</var></span> )</code>
+		<code><a href="source-class-Colada.PairMap.html#278-284" title="Go to source code">apply</a>( <span>mixed <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -678,7 +866,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>$key</code></dd>
+					<dd><code>mixed</code><br>$key</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -692,8 +880,83 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				</div>
 
 
+
 				<h4>Implementation of</h4>
-				<div class="list"><code><a href="class-Colada.Map.html#_apply">Colada\Map::apply</a></code></div>
+				<div class="list"><code><a href="class-Colada.Map.html#_apply">Colada\Map::apply()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toArray" id="_toArray">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toArray">#</a>
+		<code><a href="source-class-Colada.PairMap.html#286-296" title="Go to source code">toArray</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>RuntimeException</code><br>If map can not be converted to native array.<br />
+				</div>
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Colada.Map.html#_toArray">Colada\Map::toArray()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="jsonSerialize" id="_jsonSerialize">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_jsonSerialize">#</a>
+		<code><a href="source-class-Colada.PairMap.html#298-308" title="Go to source code">jsonSerialize</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-JsonSerializable.html#_jsonSerialize">JsonSerializable::jsonSerialize()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -708,7 +971,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_contains">#</a>
-		<code><a href="source-class-Colada.PairMap.html#228" title="Go to source code">contains</a>( <span>mixed <var>$element</var></span> )</code>
+		<code><a href="source-class-Colada.PairMap.html#310-316" title="Go to source code">contains</a>( <span>mixed <var>$element</var></span> )</code>
 
 		<div class="description short">
 			
@@ -721,7 +984,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$element</var></dt>
-					<dd><code>mixed</code></dd>
+					<dd><code>mixed</code><br>$element</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -731,8 +994,9 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
 				<h4>Implementation of</h4>
-				<div class="list"><code><a href="class-Colada.Map.html#_contains">Colada\Map::contains</a></code></div>
+				<div class="list"><code><a href="class-Colada.Map.html#_contains">Colada\Map::contains()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -747,7 +1011,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_containsKey">#</a>
-		<code><a href="source-class-Colada.PairMap.html#238" title="Go to source code">containsKey</a>( <span>mixed <var>$key</var></span> )</code>
+		<code><a href="source-class-Colada.PairMap.html#318-324" title="Go to source code">containsKey</a>( <span>mixed <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -760,7 +1024,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>mixed</code></dd>
+					<dd><code>mixed</code><br>$key</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -770,8 +1034,249 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
 				<h4>Implementation of</h4>
-				<div class="list"><code><a href="class-Colada.Map.html#_containsKey">Colada\Map::containsKey</a></code></div>
+				<div class="list"><code><a href="class-Colada.Map.html#_containsKey">Colada\Map::containsKey()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="put" id="_put">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Map.html">Colada\Map</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_put">#</a>
+		<code><a href="source-class-Colada.PairMap.html#326-343" title="Go to source code">put</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$element</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$element</var></dt>
+					<dd><code>mixed</code><br>$element</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Map.html">Colada\Map</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="remove" id="_remove">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Map.html">Colada\Map</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_remove">#</a>
+		<code><a href="source-class-Colada.PairMap.html#345-353" title="Go to source code">remove</a>( <span>mixed <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Map.html">Colada\Map</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetExists" id="_offsetExists">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetExists">#</a>
+		<code><a href="source-class-Colada.PairMap.html#355-365" title="Go to source code">offsetExists</a>( <span>mixed <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Colada.Map.html#_containsKey">Colada\Map::containsKey()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetGet" id="_offsetGet">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Colada.Option.html">Colada\Option</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetGet">#</a>
+		<code><a href="source-class-Colada.PairMap.html#367-377" title="Go to source code">offsetGet</a>( <span>mixed <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Colada.Option.html">Colada\Option</a></code></code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Colada.Map.html#_get">Colada\Map::get()</a></code></code><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetSet" id="_offsetSet">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetSet">#</a>
+		<code><a href="source-class-Colada.PairMap.html#379-391" title="Go to source code">offsetSet</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$element</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Not useful without returning value...</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Not useful without returning value...</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$element</var></dt>
+					<dd><code>mixed</code><br>$element</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetUnset" id="_offsetUnset">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetUnset">#</a>
+		<code><a href="source-class-Colada.PairMap.html#393-404" title="Go to source code">offsetUnset</a>( <span>mixed <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Not useful without returning value...</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Not useful without returning value...</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>mixed</code><br>$offset</dd>
+				</dl></div>
+
+
+
+
+
 		</div>
 		</div></td>
 	</tr>
@@ -786,10 +1291,18 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
+
+
+
+
+
+
+
 </div>
 
 	<div id="footer">
-		Colada API documentation generated by <a href="http://apigen.org">ApiGen 2.6.1</a>
+		Colada API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

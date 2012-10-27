@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 2.6.1" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Interface Colada\Equalable | Colada</title>
+	<title>Class Colada\RegExp | Colada</title>
 
-	<script type="text/javascript" src="resources/combined.js?144019575"></script>
-	<script type="text/javascript" src="elementlist.js?2937533831"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1532301413" />
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?2367336867"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -28,6 +28,8 @@
 				<li><a href="namespace-Colada.Pagination.Adapters.html">Adapters</a>
 						</li>
 							</ul></li></ul></li>
+				<li><a href="namespace-None.html">None</a>
+						</li>
 			</ul>
 		</div>
 
@@ -47,6 +49,7 @@
 				<li><a href="class-Colada.None.html">None</a></li>
 				<li><a href="class-Colada.Option.html">Option</a></li>
 				<li><a href="class-Colada.PairMap.html">PairMap</a></li>
+				<li class="active"><a href="class-Colada.RegExp.html">RegExp</a></li>
 				<li><a href="class-Colada.SetBuilder.html">SetBuilder</a></li>
 				<li><a href="class-Colada.Some.html">Some</a></li>
 				<li><a href="class-Colada.SplObjectStoragePairs.html">SplObjectStoragePairs</a></li>
@@ -55,7 +58,6 @@
 			<h3>Interfaces</h3>
 			<ul>
 				<li><a href="class-Colada.Collection.html">Collection</a></li>
-				<li class="active"><a href="class-Colada.Equalable.html">Equalable</a></li>
 				<li><a href="class-Colada.Map.html">Map</a></li>
 				<li><a href="class-Colada.Pairs.html">Pairs</a></li>
 			</ul>
@@ -63,10 +65,6 @@
 
 
 
-			<h3>Functions</h3>
-			<ul>
-				<li><a href="function-Colada._.html">_</a></li>
-			</ul>
 		</div>
 	</div>
 </div>
@@ -97,30 +95,32 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
 		</ul>
 		<ul>
+			<li>
+				<a href="colada-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+			</li>
 		</ul>
 	</div>
 
 <div id="content" class="class">
-	<h1>Interface Equalable</h1>
+	<h1>Class RegExp</h1>
 
 
+	<div class="description">
+	
+<p>Regular expression descriptor. Functor for matching.</p>
 
-
-
-
-
-	<div>
-		<h4>Direct known implementers</h4>
-			<a href="class-Colada.Option.html">Colada\Option</a>
 	</div>
 
-	<div>
-		<h4>Indirect known implementers</h4>
-			<a href="class-Colada.None.html">Colada\None</a>, 
-			<a href="class-Colada.Some.html">Colada\Some</a>
-	</div>
+
+
+
+
+
 
 
 
@@ -133,13 +133,81 @@
 				<b>Author:</b>
 				Alexey Shockov &lt;<a
 href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Colada.Equalable.html#5" title="Go to source code">Colada/Equalable.php</a><br />
+		<b>Located at</b> <a href="source-class-Colada.RegExp.html#5-43" title="Go to source code">Colada/RegExp.php</a><br />
 	</div>
+
 
 
 	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="isEqualTo" id="_isEqualTo">
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Colada.RegExp.html#14-20" title="Go to source code">__construct</a>( <span>string <var>$pattern</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$pattern</var></dt>
+					<dd><code>string</code><br>$pattern</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPattern" id="_getPattern">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPattern">#</a>
+		<code><a href="source-class-Colada.RegExp.html#22-28" title="Go to source code">getPattern</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__invoke" id="___invoke">
 
 		<td class="attributes"><code>
 			 public 
@@ -149,31 +217,32 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_isEqualTo">#</a>
-		<code><a href="source-class-Colada.Equalable.html#10" title="Go to source code">isEqualTo</a>( <span>mixed <var>$object</var></span> )</code>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Colada.RegExp.html#30-42" title="Go to source code">__invoke</a>( <span>string <var>$string</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Indicates whether some other object is "equal to" this one.</p>
+<p>Match.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Indicates whether some other object is "equal to" this one.</p>
+<p>Match.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$object</var></dt>
-					<dd><code>mixed</code></dd>
+					<dt><var>$string</var></dt>
+					<dd><code>string</code><br>$string</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
 					<code>boolean</code><br />
 				</div>
+
 
 
 
@@ -191,10 +260,18 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
+
+
+
+
+
+
+
 </div>
 
 	<div id="footer">
-		Colada API documentation generated by <a href="http://apigen.org">ApiGen 2.6.1</a>
+		Colada API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

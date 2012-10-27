@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 2.6.1" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
 	<title>Class Colada\MultimapBuilder | Colada</title>
 
-	<script type="text/javascript" src="resources/combined.js?144019575"></script>
-	<script type="text/javascript" src="elementlist.js?2937533831"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1532301413" />
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?2367336867"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -28,6 +28,8 @@
 				<li><a href="namespace-Colada.Pagination.Adapters.html">Adapters</a>
 						</li>
 							</ul></li></ul></li>
+				<li><a href="namespace-None.html">None</a>
+						</li>
 			</ul>
 		</div>
 
@@ -47,6 +49,7 @@
 				<li><a href="class-Colada.None.html">None</a></li>
 				<li><a href="class-Colada.Option.html">Option</a></li>
 				<li><a href="class-Colada.PairMap.html">PairMap</a></li>
+				<li><a href="class-Colada.RegExp.html">RegExp</a></li>
 				<li><a href="class-Colada.SetBuilder.html">SetBuilder</a></li>
 				<li><a href="class-Colada.Some.html">Some</a></li>
 				<li><a href="class-Colada.SplObjectStoragePairs.html">SplObjectStoragePairs</a></li>
@@ -55,7 +58,6 @@
 			<h3>Interfaces</h3>
 			<ul>
 				<li><a href="class-Colada.Collection.html">Collection</a></li>
-				<li><a href="class-Colada.Equalable.html">Equalable</a></li>
 				<li><a href="class-Colada.Map.html">Map</a></li>
 				<li><a href="class-Colada.Pairs.html">Pairs</a></li>
 			</ul>
@@ -63,10 +65,6 @@
 
 
 
-			<h3>Functions</h3>
-			<ul>
-				<li><a href="function-Colada._.html">_</a></li>
-			</ul>
 		</div>
 	</div>
 </div>
@@ -97,8 +95,14 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
 		</ul>
 		<ul>
+			<li>
+				<a href="colada-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+			</li>
 		</ul>
 	</div>
 
@@ -144,8 +148,9 @@ Collection&lt;V&gt;&gt;).</p>
 				<b>Author:</b>
 				Alexey Shockov &lt;<a
 href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Colada.MultimapBuilder.html#5" title="Go to source code">Colada/MultimapBuilder.php</a><br />
+		<b>Located at</b> <a href="source-class-Colada.MultimapBuilder.html#5-113" title="Go to source code">Colada/MultimapBuilder.php</a><br />
 	</div>
+
 
 
 	<table class="summary" id="methods">
@@ -161,7 +166,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Colada.MultimapBuilder.html#19" title="Go to source code">__construct</a>( <span><code><a href="class-Colada.CollectionBuilder.html">Colada\CollectionBuilder</a></code> <var>$elementCollectionBuilder</var></span> )</code>
+		<code><a href="source-class-Colada.MultimapBuilder.html#19-33" title="Go to source code">__construct</a>( <span><code><a href="class-Colada.CollectionBuilder.html">Colada\CollectionBuilder</a></code> <var>$elementCollectionBuilder</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$mapClass</var> = <span class="php-quote">'\\Colada\\PairMap'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -174,11 +179,17 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$elementCollectionBuilder</var></dt>
-					<dd><code><code><a href="class-Colada.CollectionBuilder.html">Colada\CollectionBuilder</a></code></code><br> Concrete collection builder (for example, collections or sets for elements).</dd>
+					<dd><code><code><a href="class-Colada.CollectionBuilder.html">Colada\CollectionBuilder</a></code></code><br>$elementCollectionBuilder Concrete collection builder (for example, collections
+or sets for elements). CollectionBuilder by default.</dd>
+					<dt><var>$mapClass</var></dt>
+					<dd><code>string</code><br>$mapClass Concrete Map class to build.</dd>
 				</dl></div>
 
 
 
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Colada.MapBuilder.html#___construct">Colada\MapBuilder::__construct()</a></code></div>
 
 		</div>
 		</div></td>
@@ -194,7 +205,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_add">#</a>
-		<code><a href="source-class-Colada.MultimapBuilder.html#30" title="Go to source code">add</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$element</var></span> )</code>
+		<code><a href="source-class-Colada.MultimapBuilder.html#35-46" title="Go to source code">add</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$element</var></span> )</code>
 
 		<div class="description short">
 			
@@ -207,15 +218,16 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd><code>mixed</code></dd>
+					<dd><code>mixed</code><br>$key</dd>
 					<dt><var>$element</var></dt>
-					<dd><code>mixed</code></dd>
+					<dd><code>mixed</code><br>$element</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
 					<code><code><a href="class-Colada.MultimapBuilder.html">Colada\MultimapBuilder</a></code></code><br />
 				</div>
+
 
 
 
@@ -233,7 +245,7 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_build">#</a>
-		<code><a href="source-class-Colada.MultimapBuilder.html#97" title="Go to source code">build</a>( )</code>
+		<code><a href="source-class-Colada.MultimapBuilder.html#102-112" title="Go to source code">build</a>( )</code>
 
 		<div class="description short">
 			
@@ -250,6 +262,9 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 				</div>
 
 
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Colada.MapBuilder.html#_build">Colada\MapBuilder::build()</a></code></div>
 
 		</div>
 		</div></td>
@@ -275,10 +290,18 @@ href="mailto:alexey&#64;shockov.com">alexey&#64;<!---->shockov.com</a>&gt;<br />
 
 
 
+
+
+
+
+
+
+
+
 </div>
 
 	<div id="footer">
-		Colada API documentation generated by <a href="http://apigen.org">ApiGen 2.6.1</a>
+		Colada API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

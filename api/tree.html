@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 2.6.1" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
 	<title>Tree | Colada</title>
 
-	<script type="text/javascript" src="resources/combined.js?144019575"></script>
-	<script type="text/javascript" src="elementlist.js?2937533831"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1532301413" />
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?2367336867"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -28,6 +28,8 @@
 				<li><a href="namespace-Colada.Pagination.Adapters.html">Adapters</a>
 						</li>
 							</ul></li></ul></li>
+				<li><a href="namespace-None.html">None</a>
+						</li>
 			</ul>
 		</div>
 
@@ -49,6 +51,7 @@
 				<li><a href="class-Colada.Pagination.Adapters.MakerLabsPagerAdapter.html">Colada\Pagination\Adapters\MakerLabsPagerAdapter</a></li>
 				<li><a href="class-Colada.Pagination.Adapters.PagerfantaAdapter.html">Colada\Pagination\Adapters\PagerfantaAdapter</a></li>
 				<li><a href="class-Colada.PairMap.html">Colada\PairMap</a></li>
+				<li><a href="class-Colada.RegExp.html">Colada\RegExp</a></li>
 				<li><a href="class-Colada.SetBuilder.html">Colada\SetBuilder</a></li>
 				<li><a href="class-Colada.Some.html">Colada\Some</a></li>
 				<li><a href="class-Colada.SplObjectStoragePairs.html">Colada\SplObjectStoragePairs</a></li>
@@ -57,9 +60,9 @@
 			<h3>Interfaces</h3>
 			<ul>
 				<li><a href="class-Colada.Collection.html">Colada\Collection</a></li>
-				<li><a href="class-Colada.Equalable.html">Colada\Equalable</a></li>
 				<li><a href="class-Colada.Map.html">Colada\Map</a></li>
 				<li><a href="class-Colada.Pairs.html">Colada\Pairs</a></li>
+				<li><a href="class-JsonSerializable.html">JsonSerializable</a></li>
 			</ul>
 
 
@@ -67,7 +70,16 @@
 
 			<h3>Functions</h3>
 			<ul>
-				<li><a href="function-Colada._.html">Colada\_</a></li>
+				<li><a href="function-as_collection.html">as_collection</a></li>
+				<li><a href="function-collection.html">collection</a></li>
+				<li><a href="function-option.html">option</a></li>
+				<li><a href="function-regexp.html">regexp</a></li>
+				<li><a href="function-set.html">set</a></li>
+				<li><a href="function-to_collection.html">to_collection</a></li>
+				<li><a href="function-to_map.html">to_map</a></li>
+				<li><a href="function-to_set.html">to_set</a></li>
+				<li><a href="function-x.html">x</a></li>
+				<li><a href="function-xrange.html">xrange</a></li>
 			</ul>
 		</div>
 	</div>
@@ -97,8 +109,14 @@
 		<ul>
 			<li class="active">
 <span>Tree</span>			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
 		</ul>
 		<ul>
+			<li>
+				<a href="colada-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+			</li>
 		</ul>
 	</div>
 
@@ -140,7 +158,9 @@
 
 			<li><div class="notlast"><a href="class-Colada.ArrayIteratorPairs.html"><span>Colada\ArrayIteratorPairs</span></a>
 			 implements 
-				<a href="class-Colada.Pairs.html"><span>Colada\Pairs</span></a>
+				<a href="class-Colada.Pairs.html"><span>Colada\Pairs</span></a>, 
+			
+<span>Colada\Arrayable</span>
 			
 			
 			</div>
@@ -165,11 +185,11 @@
 
 			<li><div class="notlast"><a href="class-Colada.IteratorCollection.html"><span>Colada\IteratorCollection</span></a>
 			 implements 
-				<a href="class-Colada.Collection.html"><span>Colada\Collection</span></a>, 
-			
 <span>Countable</span>, 
 			
-<span>IteratorAggregate</span>
+<span>IteratorAggregate</span>, 
+			
+				<a href="class-Colada.Collection.html"><span>Colada\Collection</span></a>
 			
 			
 			</div>
@@ -194,7 +214,9 @@
 			 implements 
 <span>IteratorAggregate</span>, 
 			
-				<a href="class-Colada.Equalable.html"><span>Colada\Equalable</span></a>
+<span>Colada\Equalable</span>, 
+			
+<span>Countable</span>
 			
 			
 			</div>
@@ -233,11 +255,20 @@
 
 				</li>
 
-			<li class="last"><div class="last"><a href="class-Colada.PairMap.html"><span>Colada\PairMap</span></a>
+			<li><div class="notlast"><a href="class-Colada.PairMap.html"><span>Colada\PairMap</span></a>
 			 implements 
-				<a href="class-Colada.Map.html"><span>Colada\Map</span></a>, 
+<span>Countable</span>, 
 			
-<span>Countable</span>
+<span>IteratorAggregate</span>, 
+			
+				<a href="class-Colada.Map.html"><span>Colada\Map</span></a>
+			
+			
+			</div>
+
+				</li>
+
+			<li class="last"><div class="last"><a href="class-Colada.RegExp.html"><span>Colada\RegExp</span></a>
 			
 			
 			</div>
@@ -252,13 +283,10 @@
 	<ul>
 
 			<li><div class="notlast"><a href="class-Colada.Collection.html"><span>Colada\Collection</span></a>
+			 implements 
+				<a href="class-JsonSerializable.html"><span>JsonSerializable</span></a>, 
 			
-			
-			</div>
-
-				</li>
-
-			<li><div class="notlast"><a href="class-Colada.Equalable.html"><span>Colada\Equalable</span></a>
+<span>Traversable</span>
 			
 			
 			</div>
@@ -266,17 +294,30 @@
 				</li>
 
 			<li><div class="notlast"><a href="class-Colada.Map.html"><span>Colada\Map</span></a>
+			 implements 
+				<a href="class-JsonSerializable.html"><span>JsonSerializable</span></a>, 
+			
+<span>ArrayAccess</span>, 
+			
+<span>Traversable</span>
 			
 			
 			</div>
 
 				</li>
 
-			<li class="last"><div class="last"><a href="class-Colada.Pairs.html"><span>Colada\Pairs</span></a>
+			<li><div class="notlast"><a href="class-Colada.Pairs.html"><span>Colada\Pairs</span></a>
 			 implements 
 <span>Iterator</span>, 
 			
 <span>Countable</span>
+			
+			
+			</div>
+
+				</li>
+
+			<li class="last"><div class="last"><a href="class-JsonSerializable.html"><span>JsonSerializable</span></a>
 			
 			
 			</div>
@@ -290,7 +331,7 @@
 </div>
 
 	<div id="footer">
-		Colada API documentation generated by <a href="http://apigen.org">ApiGen 2.6.1</a>
+		Colada API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>
