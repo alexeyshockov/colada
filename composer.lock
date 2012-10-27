@@ -1,0 +1,49 @@
+{
+    "hash": "ff83354661303db6f314b5dcef2390b0",
+    "packages": [
+
+    ],
+    "packages-dev": [
+        {
+            "package": "mockery/mockery",
+            "version": "0.7.2"
+        },
+        {
+            "package": "phpspec/php-diff",
+            "version": "dev-master",
+            "source-reference": "7efe41e227eae44f3ad443905957f9081cf05e3b",
+            "commit-date": "1348700435"
+        },
+        {
+            "package": "phpspec/phpspec2",
+            "version": "dev-develop",
+            "source-reference": "09ce6f6df7bee7e0e9db9f2aea365487341c0ebe",
+            "commit-date": "1350639915"
+        },
+        {
+            "package": "symfony/console",
+            "version": "2.1.x-dev",
+            "source-reference": "7daac278f160073afccfcbf928ddb39282a8539d",
+            "commit-date": "1350313602"
+        },
+        {
+            "package": "symfony/event-dispatcher",
+            "version": "2.1.x-dev",
+            "source-reference": "fb273317c0505ba657aa3d727530d36ae671fb82",
+            "commit-date": "1349363877"
+        },
+        {
+            "package": "symfony/finder",
+            "version": "2.1.x-dev",
+            "source-reference": "3566ba9c000c40fb409de1ebdc6e390a14248c3c",
+            "commit-date": "1349363877"
+        }
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "phpspec/phpspec2": 20
+    }
+}
