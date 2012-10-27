@@ -3,9 +3,9 @@
 namespace Colada;
 
 /**
- * @todo Implement Equalable?
- *
  * General collection interface (immutable). Currently one for all collection types (lists, sets).
+ *
+ * @todo Implement Equalable?..
  *
  * @author Alexey Shockov <alexey@shockov.com>
  */
@@ -142,9 +142,11 @@ interface Collection extends \JsonSerializable, \Traversable
     function mapBy($mapper);
 
     /**
+     * Replace all elements, matching $filter, with $value.
+     *
      * Short version of:
      * <code>
-     *     $filter = function($element) { /* ... *&#47; };
+     *     $filter = function($element) { ... };
      *     $value  = '' // Some value for replace.
      *
      *     $collection->mapBy(function($element) use($filter, $value) {
@@ -164,14 +166,16 @@ interface Collection extends \JsonSerializable, \Traversable
     function replace($filter, $value);
 
     /**
+     * Process all elements, matching $filter, with $processor.
+     *
      * Short version of:
      * <code>
-     *     $filter = function($element) { /* ... *&#47; };
-     *     $value  = function($element) { /* ... *&#47; };
+     *     $filter    = function($element) { ... };
+     *     $processor = function($element) { ... };
      *
-     *     $collection->mapBy(function($element) use($filter, $value) {
+     *     $collection->mapBy(function($element) use($filter, $processor) {
      *         if ($filter($element)) {
-     *             return $value($element);
+     *             return $processor($element);
      *         } else {
      *             return $element;
      *         }
@@ -179,11 +183,11 @@ interface Collection extends \JsonSerializable, \Traversable
      * </code>
      *
      * @param callback|mixed $filter
-     * @param callback       $value
+     * @param callback       $processor
      *
      * @return \Colada\Collection
      */
-    function replaceBy($filter, $value);
+    function replaceBy($filter, $processor);
 
     /**
      * Applies $mapper to each element of collection and constructs new one with results (which must be collections of

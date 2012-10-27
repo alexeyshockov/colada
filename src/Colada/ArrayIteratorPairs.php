@@ -50,9 +50,9 @@ class ArrayIteratorPairs extends CollectionMapIterator implements Pairs, Arrayab
     }
 
     /**
-     * @todo Use in keys set.
-     *
      * {@inheritDoc}
+     *
+     * @todo Use in keys set.
      */
     public function containsKey($key)
     {

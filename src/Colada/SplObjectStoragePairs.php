@@ -71,9 +71,9 @@ class SplObjectStoragePairs extends CollectionMapIterator implements Pairs
     }
 
     /**
-     * @todo Use in keys set.
-     *
      * {@inheritDoc}
+     *
+     * @todo Use in keys set.
      */
     public function containsKey($key)
     {

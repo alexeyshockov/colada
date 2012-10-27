@@ -79,9 +79,9 @@ class PairMap implements \Countable, \IteratorAggregate, Map
     }
 
     /**
-     * @todo Lazy.
+     * {@inheritDoc}
      *
-     * @return \Colada\Map
+     * @todo Lazy.
      */
     public function flip()
     {
@@ -109,9 +109,9 @@ class PairMap implements \Countable, \IteratorAggregate, Map
     }
 
     /**
-     * @todo Lazy.
-     *
      * {@inheritDoc}
+     *
+     * @todo Lazy.
      */
     public function acceptBy($filter)
     {
@@ -138,9 +138,9 @@ class PairMap implements \Countable, \IteratorAggregate, Map
     }
 
     /**
-     * @todo Lazy.
-     *
      * {@inheritDoc}
+     *
+     * @todo Lazy.
      */
     public function rejectBy($filter)
     {
@@ -155,9 +155,9 @@ class PairMap implements \Countable, \IteratorAggregate, Map
     }
 
     /**
-     * @todo Lazy.
-     *
      * {@inheritDoc}
+     *
+     * @todo Lazy.
      */
     public function mapElementsBy($mapper)
     {
@@ -210,9 +210,9 @@ class PairMap implements \Countable, \IteratorAggregate, Map
     }
 
     /**
-     * @todo Lazy.
-     *
      * {@inheritDoc}
+     *
+     * @todo Lazy.
      */
     public function pick($keys)
     {

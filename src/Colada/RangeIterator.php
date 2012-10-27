@@ -3,6 +3,8 @@
 namespace Colada;
 
 /**
+ * @internal
+ *
  * @see xrange()
  *
  * @author Alexey Shockov <alexey@shockov.com>

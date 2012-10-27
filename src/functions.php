@@ -43,6 +43,8 @@ function xrange($start = 0, $stop = null, $step = 1)
 }
 
 /**
+ * Represents future value (useful for processing collection elements with {@see \Colada\Collection::mapBy()}, for example).
+ *
  * Some useful examples:
  *
  * <code>
@@ -95,13 +97,13 @@ function option($value)
 
 
 /**
- * @todo Check with function_exists().
- *
  * Like array(). Example:
  *
  * <code>
  * $collection = collection(1, 2, 3);
  * </code>
+ *
+ * @todo Check with function_exists().
  *
  * @return \Colada\Collection
  */
@@ -113,13 +115,13 @@ function collection()
 }
 
 /**
- * @todo Check with function_exists().
- *
  * Like array(). Example:
  *
  * <code>
  * $set = set(1, 2, 3);
  * </code>
+ *
+ * @todo Check with function_exists().
  *
  * @return \Colada\Collection
  */
@@ -176,7 +178,9 @@ function to_map($data)
 
 
 /**
- * P.S. to_set() will be equal to this function. Not needed.
+ * @param \Traversable $collection
+ *
+ * @return \Colada\Collection
  */
 function as_collection(\Traversable $collection)
 {

@@ -113,9 +113,9 @@ class IteratorCollection
     }
 
     /**
-     * @todo Binary search for sorted collections.
-     *
      * {@inheritDoc}
+     *
+     * @todo Binary search for sorted collections.
      */
     public function contains($element)
     {

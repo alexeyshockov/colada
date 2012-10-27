@@ -3,9 +3,9 @@
 namespace Colada;
 
 /**
- * @todo Implement Equalable?
- *
  * General map interface (immutable). Supports all types of keys, not only scalars (like PHP core collections).
+ *
+ * @todo Implement Equalable?..
  *
  * @author Alexey Shockov <alexey@shockov.com>
  */
