@@ -455,4 +455,14 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
 
         assertSame(array(1, 2, 3, 3), $freezedCollection->toArray());
     }
+
+    /**
+     * @test
+     */
+    public function methodIsEmptyShouldBeCorrect()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array()));
+
+        assertSame(true, $collection->isEmpty());
+    }
 }
