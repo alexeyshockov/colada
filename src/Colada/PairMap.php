@@ -75,7 +75,7 @@ class PairMap implements \Countable, \IteratorAggregate, Map
      */
     public function isEmpty()
     {
-        return (count($this) > 0);
+        return (count($this) == 0);
     }
 
     /**
