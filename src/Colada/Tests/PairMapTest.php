@@ -201,4 +201,14 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
             $map->asPairs()->toArray()
         );
     }
+
+    /**
+     * @test
+     */
+    public function methodIsEmptyShouldBeCorrect()
+    {
+        $map = new PairMap(new ArrayIteratorPairs(new \ArrayIterator(array())));
+
+        assertSame(true, $map->isEmpty());
+    }
 }
