@@ -776,4 +776,18 @@ class IteratorCollection
 
         $this->iterator = $collection->iterator;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function ifContains($element, $callback)
+    {
+        Contracts::ensureCallable($callback);
+
+        if ($this->contains($element)) {
+            return call_user_func($callback);
+        }
+
+        return $this;
+    }
 }

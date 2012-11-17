@@ -416,4 +416,12 @@ interface Collection extends \JsonSerializable, \Traversable
      * @return \Colada\Collection
      */
     function __clone();
+
+    /**
+     * @param mixed $element
+     * @param callback $callback
+     *
+     * @return mixed
+     */
+    function ifContains($element, $callback);
 }
