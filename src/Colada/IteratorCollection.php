@@ -40,12 +40,12 @@ class IteratorCollection
 
     protected static function createCollectionBuilder($sizeHint = 0)
     {
-        return new CollectionBuilder($sizeHint, get_class());
+        return new CollectionBuilder($sizeHint, get_called_class());
     }
 
     protected static function createSetBuilder($sizeHint = 0)
     {
-        return new SetBuilder($sizeHint, get_class());
+        return new SetBuilder($sizeHint, get_called_class());
     }
 
     /**
