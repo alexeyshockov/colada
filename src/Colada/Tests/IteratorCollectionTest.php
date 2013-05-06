@@ -465,4 +465,34 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
 
         assertSame(true, $collection->isEmpty());
     }
+
+    /**
+     * @test
+     */
+    public function methodIfContainsShouldNotCallCallbackIfElementNotExists()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array('pink', 'blue', 'red', 'green')));
+
+        $callback = function() {
+            throw new \Exception();
+        };
+
+        $collection->ifContains('black', $callback)->add('black')->toArray();
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \Exception
+     */
+    public function methodIfContainsShouldCallCallbackIfElementExists()
+    {
+        $collection = new IteratorCollection(new \ArrayIterator(array('pink', 'blue', 'red', 'green')));
+
+        $callback = function() {
+            throw new \Exception();
+        };
+
+        $collection->ifContains('pink', $callback)->add('pink')->toArray();
+    }
 }
