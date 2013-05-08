@@ -5,6 +5,8 @@ namespace Colada;
 /**
  * @internal
  *
+ * For PHP's foreach call sequence are: rewind() at start and then valid(), key(), current() and next() for a while.
+ *
  * @author Alexey Shockov <alexey@shockov.com>
  */
 class IteratorProxy implements \Iterator
@@ -12,7 +14,7 @@ class IteratorProxy implements \Iterator
     /**
      * @var \Iterator
      */
-    private $iterator;
+    protected $iterator;
 
     public function __construct(\Iterator $iterator)
     {
@@ -39,6 +41,7 @@ class IteratorProxy implements \Iterator
         return $this->iterator->valid();
     }
 
+    // In foreach and all other function rewind() will be called first.
     public function rewind()
     {
         $this->iterator->rewind();
