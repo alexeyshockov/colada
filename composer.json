@@ -23,14 +23,13 @@
     },
 
     "require-dev": {
-        "phpspec/phpspec2": "dev-develop"
+        "phpspec/phpspec": "2.0.*@beta",
+        "phpunit/phpunit": "3.7.*"
     },
 
     "config": {
         "bin-dir": "bin"
     },
-
-    "minimum-stability": "dev",
 
     "autoload": {
         "psr-0": {
