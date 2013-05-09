@@ -118,6 +118,43 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      */
+    public function putShouldBeCorrect()
+    {
+        // Assume we have map with 3 pairs.
+        $map = $this->dayNames;
+
+        $dayAfterTomorrow = new \DateTime();
+        $dayAfterTomorrow = $dayAfterTomorrow->modify('+2 days');
+
+        $modifiedMap = $map->put($dayAfterTomorrow, 'day after tomorrow');
+
+        // Map is immutable.
+        assertEquals(
+            array(
+                 array($this->dayDates['today'],     'today'),
+                 array($this->dayDates['yesterday'], 'yesterday'),
+                 array($this->dayDates['tomorrow'],  'tomorrow'),
+            ),
+            $map->asPairs()->toArray()
+        );
+
+        // Put works,
+        assertEquals(
+            array(
+                 array($this->dayDates['today'],     'today'),
+                 array($this->dayDates['yesterday'], 'yesterday'),
+                 array($this->dayDates['tomorrow'],  'tomorrow'),
+                 array($dayAfterTomorrow,  'day after tomorrow'),
+            ),
+            $modifiedMap->asPairs()->toArray()
+        );
+    }
+
+    /**
+     * @depends shouldBeAvailableAsPairsSet
+     *
+     * @test
+     */
     public function mappingShouldBeCorrect()
     {
         // Assume we have map with 3 pairs.

@@ -333,9 +333,9 @@ class PairMap implements \Countable, \IteratorAggregate, Map
     {
         $builder = new MapBuilder();
 
-        // TODO MapBuilder::putAll()?
-        foreach ($this->asPairs() as $key => $element) {
-            $builder->put($key, $element);
+        // TODO MapBuilder::putAll().
+        foreach ($this->asPairs() as $pair) {
+            $builder->put($pair[0], $pair[1]);
         }
 
         // And last needed element...
