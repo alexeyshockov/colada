@@ -148,9 +148,7 @@ class IteratorCollection
         Contracts::ensureInteger($offset, $length);
         Contracts::ensurePositiveNumber($offset, $length);
 
-        return static::createCollectionBuilder($length)
-            ->addAll(new \LimitIterator($this->iterator, $offset, $length))
-            ->build();
+        return new static(new \LimitIterator($this->iterator, $offset, $length));
     }
 
     /**
