@@ -323,22 +323,7 @@ class IteratorCollection
      */
     public function replace($filter, $value)
     {
-        if (!is_callable($filter)) {
-            $filterValue = $filter;
-            $filter      = function($element) use ($filterValue) {
-                return ComparisonHelper::isEquals($filterValue, $element);
-            };
-        }
-
-        Contracts::ensureCallable($filter);
-
-        return $this->mapBy(function($element) use($filter, $value) {
-            if (call_user_func($filter, $element)) {
-                return $value;
-            } else {
-                return $element;
-            }
-        });
+        return $this->replaceBy($filter, function() use($value) { return $value; });
     }
 
     /**
