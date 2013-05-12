@@ -13,13 +13,7 @@
 >
     <testsuites>
         <testsuite name="Colada test suite">
-            <directory>./src/Colada/Tests</directory>
+            <directory>./tests/Colada/Tests</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory>./src/Colada</directory>
-        </whitelist>
-    </filter>
 </phpunit>
