@@ -3,6 +3,7 @@
 namespace Colada;
 
 use Colada\Helpers\CollectionHelper;
+use Colada\Helpers\CallbackHelper;
 
 /**
  * Universal map implementation.
@@ -14,22 +15,22 @@ class PairMap implements \Countable, \IteratorAggregate, Map
     /**
      * @var \Colada\Pairs
      */
-    private $pairs;
+    protected $pairs;
 
     /**
-     * @var \Colada\IteratorCollection
+     * @var \Colada\Collection
      */
-    private $pairSet;
+    protected $pairSet;
 
     /**
      * @var \Colada\PairMapKeySet
      */
-    private $keySet;
+    protected $keySet;
 
     /**
-     * @var \Colada\IteratorCollection
+     * @var \Colada\Collection
      */
-    private $elements;
+    protected $elements;
 
     /**
      * @param Pairs $pairs
@@ -43,15 +44,33 @@ class PairMap implements \Countable, \IteratorAggregate, Map
     }
 
     /**
+     * @param bool $static
+     *
+     * @return \Colada\MapBuilder
+     */
+    protected static function createMapBuilder($static = true)
+    {
+        $class = get_called_class();
+        if (!$static) {
+            $class = get_class();
+        }
+
+        return new MapBuilder($class);
+    }
+
+    /**
+     * Mostly for standard PHP's foreach.
+     *
+     * @see asPairs()
+     *
      * @throws \DomainException If map keys isn't scalars (PHP restrictions).
      *
      * @return \Iterator
      */
     public function getIterator()
     {
-        // Check and method itself may be more smart, but...
         if (!($this->pairs instanceof Arrayable)) {
-            throw new \DomainException('');
+            throw new \DomainException('Only pairs with scalar keys are supported for standard PHP iterator.');
         }
 
         // Optimization for ArrayIteratorPairs.
@@ -88,7 +107,7 @@ class PairMap implements \Countable, \IteratorAggregate, Map
         return $this->asPairs()
             ->foldBy(
                 function($builder, $pair) { return $builder->put($pair[1], $pair[0]); },
-                new MapBuilder()
+                static::createMapBuilder(false)
             )->build();
     }
 
@@ -121,8 +140,18 @@ class PairMap implements \Countable, \IteratorAggregate, Map
             ->acceptBy($this->getCollectionCallbackFor($filter))
             ->foldBy(
                 function($builder, $pair) { return $builder->put($pair[0], $pair[1]); },
-                new MapBuilder()
+                static::createMapBuilder()
             )->build();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function rejectBy($filter)
+    {
+        Contracts::ensureCallable($filter);
+
+        return $this->acceptBy(CallbackHelper::invert($filter));
     }
 
     /**
@@ -142,23 +171,6 @@ class PairMap implements \Countable, \IteratorAggregate, Map
      *
      * @todo Lazy.
      */
-    public function rejectBy($filter)
-    {
-        Contracts::ensureCallable($filter);
-
-        return $this->asPairs()
-            ->rejectBy($this->getCollectionCallbackFor($filter))
-            ->foldBy(
-                function($builder, $pair) { return $builder->put($pair[0], $pair[1]); },
-                new MapBuilder()
-            )->build();
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @todo Lazy.
-     */
     public function mapElementsBy($mapper)
     {
         Contracts::ensureCallable($mapper);
@@ -167,7 +179,7 @@ class PairMap implements \Countable, \IteratorAggregate, Map
             ->mapBy(function($pair) use($mapper) { return array($pair[0], call_user_func($mapper, $pair[1])); })
             ->foldBy(
                 function($builder, $pair) { return $builder->put($pair[0], $pair[1]); },
-                new MapBuilder()
+                static::createMapBuilder(false)
             )->build();
     }
 
@@ -205,14 +217,14 @@ class PairMap implements \Countable, \IteratorAggregate, Map
                             ->add($pair);
                     }
                 },
-                new MapBuilder()
+                static::createMapBuilder(false)
             )->build();
     }
 
     /**
      * {@inheritDoc}
      *
-     * @todo Lazy.
+     * @todo Use acceptBy() inside.
      */
     public function pick($keys)
     {
@@ -227,7 +239,7 @@ class PairMap implements \Countable, \IteratorAggregate, Map
 
                     return $builder;
                 },
-                new MapBuilder()
+                static::createMapBuilder()
             )->build();
     }
 
@@ -280,7 +292,7 @@ class PairMap implements \Countable, \IteratorAggregate, Map
      */
     public function apply($key)
     {
-        return $this->get($key)->orElse(function() { throw new \InvalidArgumentException('Key not found.'); });
+        return $this->get($key)->orElse(function() { throw new \OutOfBoundsException('Key not found.'); });
     }
 
     /**
@@ -292,7 +304,7 @@ class PairMap implements \Countable, \IteratorAggregate, Map
             return $this->pairs->toArray();
         }
 
-        throw new \RuntimeException('toArray() doesn\'t supported for this map.');
+        throw new \DomainException('toArray() doesn\'t supported for this map object.');
     }
 
     /**
@@ -324,14 +336,11 @@ class PairMap implements \Countable, \IteratorAggregate, Map
     }
 
     /**
-     * @param mixed $key
-     * @param mixed $element
-     *
-     * @return \Colada\Map
+     * {@inheritDoc}
      */
     public function put($key, $element)
     {
-        $builder = new MapBuilder();
+        $builder = static::createMapBuilder();
 
         // TODO MapBuilder::putAll().
         foreach ($this->asPairs() as $pair) {
@@ -343,9 +352,7 @@ class PairMap implements \Countable, \IteratorAggregate, Map
     }
 
     /**
-     * @param mixed $key
-     *
-     * @return \Colada\Map
+     * {@inheritDoc}
      */
     public function remove($key)
     {
@@ -377,7 +384,9 @@ class PairMap implements \Countable, \IteratorAggregate, Map
     }
 
     /**
-     * Not useful without returning value...
+     * Not useful without ability to return new map (PHP restrictions).
+     *
+     * @throws \DomainException In all cases, this map are immutable.
      *
      * @param mixed $key
      * @param mixed $element
@@ -386,12 +395,13 @@ class PairMap implements \Countable, \IteratorAggregate, Map
      */
     public function offsetSet($key, $element)
     {
-        // TODO Proper exception type.
         throw new \DomainException('Unable to modify immutable collection.');
     }
 
     /**
-     * Not useful without returning value...
+     * Not useful without ability to return new map (PHP restrictions).
+     *
+     * @throws \DomainException In all cases, this map are immutable.
      *
      * @param mixed $offset
      *
@@ -399,7 +409,6 @@ class PairMap implements \Countable, \IteratorAggregate, Map
      */
     public function offsetUnset($offset)
     {
-        // TODO Proper exception type.
         throw new \DomainException('Unable to modify immutable collection.');
     }
 }

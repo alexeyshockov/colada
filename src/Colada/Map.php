@@ -38,14 +38,14 @@ interface Map extends \JsonSerializable, \ArrayAccess, \Traversable
     /**
      * @param callback $filter
      *
-     * @return \Colada\Map
+     * @return static
      */
     function acceptBy($filter);
 
     /**
      * @param callback $filter
      *
-     * @return \Colada\Map
+     * @return static
      */
     function rejectBy($filter);
 
@@ -68,9 +68,24 @@ interface Map extends \JsonSerializable, \ArrayAccess, \Traversable
      *
      * @param array|\Traversable $keys
      *
-     * @return \Colada\Map
+     * @return static
      */
     function pick($keys);
+
+    /**
+     * @param mixed $key
+     * @param mixed $element
+     *
+     * @return static
+     */
+    function put($key, $element);
+
+    /**
+     * @param mixed $key
+     *
+     * @return static
+     */
+    function remove($key);
 
     /**
      * @param callback $mapper
@@ -112,9 +127,7 @@ interface Map extends \JsonSerializable, \ArrayAccess, \Traversable
     /**
      * Return associated value or throw exception, if key not exists in map.
      *
-     * @todo Right exception.
-     *
-     * @throws \InvalidArgumentException
+     * @throws \OutOfBoundsException
      *
      * @param $key
      *
@@ -137,7 +150,7 @@ interface Map extends \JsonSerializable, \ArrayAccess, \Traversable
     function containsKey($key);
 
     /**
-     * @throws \RuntimeException If map can not be converted to native array.
+     * @throws \DomainException If map can not be converted to native array.
      *
      * @return array
      */

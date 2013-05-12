@@ -2,6 +2,9 @@
 
 namespace Colada;
 
+use Colada\Helpers\CallbackHelper;
+use Colada\Helpers\TypeHelper;
+
 Colada::registerFunctions();
 
 /**
@@ -18,6 +21,8 @@ class IteratorCollection
     protected $iterator;
 
     /**
+     * @throws \InvalidArgumentException For \NoRewindIterator iterators.
+     *
      * @param \Traversable $collection
      */
     public function __construct(\Traversable $collection = null)
@@ -32,20 +37,62 @@ class IteratorCollection
         }
 
         if ($collection instanceof \NoRewindIterator) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException('Only iterators with rewind() are supported by this implementation.');
         }
 
         $this->iterator = $collection;
     }
 
-    protected static function createCollectionBuilder($sizeHint = 0)
+    /**
+     * @param \Countable|int|mixed $sizeHint
+     * @param string|null          $class
+     *
+     * @return \Colada\CollectionBuilder
+     */
+    protected static function createCollectionBuilder($sizeHint = 0, $class = null)
     {
-        return new CollectionBuilder($sizeHint, get_called_class());
+        return new CollectionBuilder($sizeHint, ($class ?: static::getClass()));
     }
 
-    protected static function createSetBuilder($sizeHint = 0)
+    /**
+     * @param \Countable|int|mixed $sizeHint
+     * @param string|null          $class
+     *
+     * @return \Colada\SetBuilder
+     */
+    protected static function createSetBuilder($sizeHint = 0, $class = null)
     {
-        return new SetBuilder($sizeHint, get_called_class());
+        return new SetBuilder($sizeHint, ($class ?: static::getClass()));
+    }
+
+    /**
+     * Override this method in general purpose child classes.
+     *
+     * @param bool $static
+     *
+     * @return string
+     */
+    protected static function getClass($static = true)
+    {
+        $class = get_class();
+        if (!$static) {
+            $class = get_called_class();
+        }
+
+        return $class;
+    }
+
+    /**
+     * Small helper.
+     *
+     * @param string $class       Class name (mainly from getClass() method).
+     * @param mixed  $traversable Constructor parameter.
+     *
+     * @return \Colada\Collection
+     */
+    protected static function createCollection($class, $traversable = null)
+    {
+        return new $class($traversable);
     }
 
     /**
@@ -57,11 +104,13 @@ class IteratorCollection
     }
 
     /**
+     * @param \Colada\CollectionBuilder|null $collectionBuilder
+     *
      * @return \Colada\MultimapBuilder
      */
-    protected static function createMultimapBuilder()
+    protected static function createMultimapBuilder($collectionBuilder = null)
     {
-        return new MultimapBuilder(static::createCollectionBuilder());
+        return new MultimapBuilder($collectionBuilder ?: static::createCollectionBuilder());
     }
 
     /**
@@ -191,7 +240,7 @@ class IteratorCollection
      */
     public function pluck($key)
     {
-        $builder = static::createCollectionBuilder(count($this));
+        $builder = static::createCollectionBuilder(count($this), static::getClass(false));
 
         foreach ($this->iterator as $element) {
             // array or \ArrayAccess.
@@ -281,12 +330,10 @@ class IteratorCollection
     {
         Contracts::ensureCallable($filter);
 
-        return new static(
-            new CollectionFilterIterator(
-                $this->iterator,
-                $filter
-            )
-        );
+        return new static(new CollectionFilterIterator(
+            $this->iterator,
+            $filter
+        ));
     }
 
     /**
@@ -294,9 +341,8 @@ class IteratorCollection
      */
     public function rejectBy($filter)
     {
-        Contracts::ensureCallable($filter);
-
-        return $this->acceptBy(function($element) use($filter) { return !call_user_func($filter, $element); });
+        // $filter type will be checked inside acceptBy().
+        return $this->acceptBy(CallbackHelper::invert($filter));
     }
 
     /**
@@ -310,12 +356,10 @@ class IteratorCollection
             $mapper = function() use($element) { return $element; };
         }
 
-        return new static(
-            new CollectionMapIterator(
-                $this->iterator,
-                $mapper
-            )
-        );
+        return static::createCollection(static::getClass(false), new CollectionMapIterator(
+            $this->iterator,
+            $mapper
+        ));
     }
 
     /**
@@ -339,14 +383,18 @@ class IteratorCollection
         }
 
         Contracts::ensureCallable($filter);
+        Contracts::ensureCallable($value);
 
-        return $this->mapBy(function($element) use($filter, $value) {
-            if (call_user_func($filter, $element)) {
-                return call_user_func($value, $element);
-            } else {
-                return $element;
+        return new static(new CollectionMapIterator(
+            $this->iterator,
+            function($element) use($filter, $value) {
+                if (call_user_func($filter, $element)) {
+                    return call_user_func($value, $element);
+                } else {
+                    return $element;
+                }
             }
-        });
+        ));
     }
 
     /**
@@ -363,21 +411,19 @@ class IteratorCollection
     public function flatMapBy($mapper)
     {
         if (!is_callable($mapper)) {
-            if (is_object($mapper) && ($mapper instanceof \Traversable)) {
+            if (is_array($mapper) || TypeHelper::isTraversable($mapper)) {
                 $elements = $mapper;
 
                 $mapper = function() use($elements) { return $elements; };
             } else {
-                throw new \InvalidArgumentException();
+                throw new \InvalidArgumentException('Mapper must be callback, array or \Traversable.');
             }
         }
 
-        return new static(
-            new CollectionFlatMapIterator(
-                $this->iterator,
-                $mapper
-            )
-        );
+        return static::createCollection(static::getClass(false), new CollectionFlatMapIterator(
+            $this->iterator,
+            $mapper
+        ));
     }
 
     /**
@@ -403,7 +449,7 @@ class IteratorCollection
         Contracts::ensureCallable($reducer);
 
         if (count($this) == 0) {
-            throw new \RuntimeException('Unable reduce empty collection.');
+            throw new \UnderflowException('Unable reduce empty collection.');
         }
 
         if (count($this) == 1) {
@@ -453,10 +499,12 @@ class IteratorCollection
      */
     public function unzip($unzipper = null)
     {
-        Contracts::ensureCallable($unzipper);
+        if ($unzipper) {
+            Contracts::ensureCallable($unzipper);
+        }
 
-        $builder1 = static::createCollectionBuilder($this->iterator);
-        $builder2 = static::createCollectionBuilder($this->iterator);
+        $builder1 = static::createCollectionBuilder($this->iterator, static::getClass(false));
+        $builder2 = static::createCollectionBuilder($this->iterator, static::getClass(false));
 
         foreach ($this->iterator as $element) {
             if ($unzipper) {
@@ -481,7 +529,7 @@ class IteratorCollection
         $collection1Iterator = $collection1->iterator;
         $collection2Iterator = $collection2->iterator;
 
-        $builder = static::createCollectionBuilder($collection2Iterator);
+        $builder = static::createCollectionBuilder($collection2Iterator, static::getClass(false));
 
         $collection1Iterator->rewind();
         $collection2Iterator->rewind();
@@ -562,24 +610,18 @@ class IteratorCollection
     }
 
     /**
-     * For internal usage only.
+     * @param \Traversable|mixed $collection
      *
-     * @param Collection|\Iterator|\IteratorAggregate|mixed $collection
-     *
-     * @return Collection
+     * @return \Colada\Collection
      */
     protected function normalizeCollection($collection)
     {
-        if (is_object($collection) && (($collection instanceof Collection) || ($collection instanceof \Traversable))) {
+        if (is_object($collection) && ($collection instanceof \Traversable)) {
             if (!($collection instanceof Collection)) {
-                if ($collection instanceof \IteratorAggregate) {
-                    $collection = $collection->getIterator();
-                }
-
-                $collection = new IteratorCollection($collection);
+                $collection = static::createCollection(static::getClass(false), $collection);
             }
         } else {
-            $builder = new CollectionBuilder();
+            $builder = static::createCollectionBuilder(0, static::getClass(false));
 
             $collection = $builder->addAll($collection)->build();
         }
@@ -599,6 +641,7 @@ class IteratorCollection
             $heap->insert($element);
         }
 
+        // We cannot create collection from $heap, because it traversable only once.
         return static::createCollectionBuilder($heap)->addAll($heap)->build();
     }
 
@@ -723,7 +766,7 @@ class IteratorCollection
         }
 
         $delimiterValue = $delimiter;
-        // TODO If elements not compatible with a string?.. Throw exception.
+        // TODO If elements are not compatible with a string?.. Throw exception.
         $delimiter      = function($string, $element) use($delimiterValue) {
             return $string.$delimiterValue.$element;
         };
@@ -736,7 +779,6 @@ class IteratorCollection
      */
     public function toArray()
     {
-        // TODO Drop keys to numeric indexes...
         return iterator_to_array($this->iterator);
     }
 
@@ -755,8 +797,9 @@ class IteratorCollection
      */
     public function __clone()
     {
+        // “iterator” field must be present in all child classes. If not, this method must be overridden.
         $collection = static::createCollectionBuilder(count($this))->addAll($this->iterator)->build();
 
-        $this->iterator = $collection->iterator;
+        $this->__construct($collection->iterator);
     }
 }

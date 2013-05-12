@@ -45,12 +45,10 @@ interface Collection extends \JsonSerializable, \Traversable
     function contains($element);
 
     /**
-     * @throws \InvalidArgumentException
-     *
      * @param int $offset
      * @param int $length
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function slice($offset, $length);
 
@@ -68,7 +66,7 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * @param mixed $element
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function takeTo($element);
 
@@ -77,7 +75,7 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * @param mixed $element
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function dropFrom($element);
 
@@ -115,7 +113,7 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * @param callback $filter
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function acceptBy($filter);
 
@@ -126,7 +124,7 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * @param callback $filter
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function rejectBy($filter);
 
@@ -161,7 +159,7 @@ interface Collection extends \JsonSerializable, \Traversable
      * @param callback|mixed $filter
      * @param mixed          $value
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function replace($filter, $value);
 
@@ -185,7 +183,7 @@ interface Collection extends \JsonSerializable, \Traversable
      * @param callback|mixed $filter
      * @param callback       $processor
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function replaceBy($filter, $processor);
 
@@ -197,7 +195,7 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * @see http://www.scala-lang.org/api/current/scala/collection/immutable/Set.html
      *
-     * @param callback|\Traversable $mapper
+     * @param callback|array|\Traversable $mapper
      *
      * @return \Colada\Collection
      */
@@ -222,9 +220,7 @@ interface Collection extends \JsonSerializable, \Traversable
     /**
      * Good introduction to reduce: {@link http://www.codecommit.com/blog/scala/scala-collections-for-the-easily-bored-part-2}.
      *
-     * @todo Own exception class.
-     *
-     * @throws \Exception On empty collection.
+     * @throws \UnderflowException On empty collections.
      *
      * @param callback $reducer
      *
@@ -237,7 +233,7 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * @param callback $partitioner
      *
-     * @return \Colada\Collection[] Array with two elements. Suitable for PHP's list().
+     * @return static[] Array with two elements. Suitable for PHP's list().
      */
     function partitionBy($partitioner);
 
@@ -281,7 +277,7 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * @param \Colada\Collection|\Iterator|\IteratorAggregate|mixed $collection
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function union($collection);
 
@@ -294,7 +290,7 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * @param \Colada\Collection|\Iterator|\IteratorAggregate|mixed $collection
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function intersect($collection);
 
@@ -308,7 +304,7 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * @param \Colada\Collection|\Iterator|\IteratorAggregate|mixed $collection
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function complement($collection);
 
@@ -348,7 +344,7 @@ interface Collection extends \JsonSerializable, \Traversable
     /**
      * @throws \UnderflowException For empty collections.
      *
-     * @return \Colada\Collection Tail — all elements, except one head element.
+     * @return static Tail — all elements, except one head element.
      */
     function tail();
 
@@ -367,7 +363,7 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * @param mixed $element
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function add($element);
 
@@ -378,7 +374,7 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * @param mixed $element
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function remove($element);
 
@@ -387,12 +383,12 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * @param mixed $element
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function reject($element);
 
     /**
-     * @param string $delimiter
+     * @param mixed $delimiter Scalar or object with __toString().
      *
      * @return mixed
      */
@@ -411,9 +407,9 @@ interface Collection extends \JsonSerializable, \Traversable
     /**
      * Constructs new collection with elements from current one.
      *
-     * Useful, for example, to "freeze" collections from Map::asKeys() or Map::asElements().
+     * Useful, for example, to “freeze” collections from Map::asKeys() or Map::asElements().
      *
-     * @return \Colada\Collection
+     * @return static
      */
     function __clone();
 }
