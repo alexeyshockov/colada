@@ -155,4 +155,13 @@ interface Map extends \JsonSerializable, \ArrayAccess, \Traversable
      * @return array
      */
     function toArray();
+
+    /**
+     * Constructs new map with keys and elements from current one.
+     *
+     * Useful, for example, to apply all lazy operations.
+     *
+     * @return static
+     */
+    function __clone();
 }

@@ -13,16 +13,30 @@ use Colada\PairMap,
  */
 class PairMapTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Colada\PairMap
+     */
     private $dayNames;
 
+    /**
+     * @var array
+     */
     private $dayDates;
+
+    /**
+     * Internal map state.
+     *
+     * @var \SplObjectStorage
+     */
+    private $storage;
 
     public function setUp()
     {
         $this->dayDates = array(
-            'today'     => ($today = new \DateTime()),
-            'yesterday' => date_modify(clone $today, '-1 day'),
-            'tomorrow'  => date_modify(clone $today, '+1 day'),
+            'today'              => ($today = new \DateTime()),
+            'yesterday'          => date_modify(clone $today, '-1 day'),
+            'tomorrow'           => date_modify(clone $today, '+1 day'),
+            'day after tomorrow' => date_modify(clone $today, '+2 days'),
         );
 
         $storage = new \SplObjectStorage();
@@ -31,8 +45,31 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
         $storage[$this->dayDates['yesterday']] = 'yesterday';
         $storage[$this->dayDates['tomorrow']]  = 'tomorrow';
 
+        $this->storage = $storage;
+
         // Assume we have map with 3 pairs.
         $this->dayNames = new PairMap(new SplObjectStoragePairs($storage));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeClonable()
+    {
+        $map        = $this->dayNames;
+        $freezedMap = clone $this->dayNames;
+
+        assertTrue($freezedMap !== $map);
+        assertSame($map->asPairs()->toArray(), $freezedMap->asPairs()->toArray());
+
+        $freezedMapPairsArrayView = $freezedMap->asPairs()->toArray();
+
+        // Add element to $map (internal state modification).
+        $this->storage[$this->dayDates['day after tomorrow']]  = 'day after tomorrow';
+
+        // Cloned map will be the same.
+        assertNotSame($map->asPairs()->toArray(), $freezedMap->asPairs()->toArray());
+        assertSame($freezedMapPairsArrayView, $freezedMap->asPairs()->toArray());
     }
 
     /**
@@ -123,10 +160,7 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
         // Assume we have map with 3 pairs.
         $map = $this->dayNames;
 
-        $dayAfterTomorrow = new \DateTime();
-        $dayAfterTomorrow = $dayAfterTomorrow->modify('+2 days');
-
-        $modifiedMap = $map->put($dayAfterTomorrow, 'day after tomorrow');
+        $modifiedMap = $map->put($this->dayDates['day after tomorrow'], 'day after tomorrow');
 
         // Map is immutable.
         assertEquals(
@@ -141,10 +175,10 @@ class PairMapTest extends \PHPUnit_Framework_TestCase
         // Put works,
         assertEquals(
             array(
-                 array($this->dayDates['today'],     'today'),
-                 array($this->dayDates['yesterday'], 'yesterday'),
-                 array($this->dayDates['tomorrow'],  'tomorrow'),
-                 array($dayAfterTomorrow,  'day after tomorrow'),
+                 array($this->dayDates['today'],              'today'),
+                 array($this->dayDates['yesterday'],          'yesterday'),
+                 array($this->dayDates['tomorrow'],           'tomorrow'),
+                 array($this->dayDates['day after tomorrow'], 'day after tomorrow'),
             ),
             $modifiedMap->asPairs()->toArray()
         );

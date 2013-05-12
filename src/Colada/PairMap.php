@@ -411,4 +411,22 @@ class PairMap implements \Countable, \IteratorAggregate, Map
     {
         throw new \DomainException('Unable to modify immutable collection.');
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __clone()
+    {
+        $builder = static::createMapBuilder();
+
+        // TODO MapBuilder::putAll().
+        foreach ($this->asPairs() as $pair) {
+            $builder->put($pair[0], $pair[1]);
+        }
+
+        $map = $builder->build();
+
+        // “pairs” field must be present in all child classes. If not, this method must be overridden.
+        $this->__construct($map->pairs);
+    }
 }
