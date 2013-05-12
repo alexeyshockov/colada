@@ -59,8 +59,6 @@ function xrange($start = 0, $stop = null, $step = 1)
  * );
  * </code>
  *
- * @todo Check with function_exists().
- *
  * @return \Colada\X\FutureValue
  */
 function x()
@@ -103,8 +101,6 @@ function option($value)
  * $collection = collection(1, 2, 3);
  * </code>
  *
- * @todo Check with function_exists().
- *
  * @return \Colada\Collection
  */
 function collection()
@@ -121,11 +117,9 @@ function collection()
  * $set = set(1, 2, 3);
  * </code>
  *
- * @todo Check with function_exists().
- *
  * @return \Colada\Collection
  */
-function set($data = array())
+function set()
 {
     $builder = new SetBuilder();
 
@@ -167,7 +161,7 @@ function to_map($data)
 {
     $builder = new MapBuilder();
 
-    // TODO MapBuilder::putAll()?
+    // TODO MapBuilder::putAll().
     foreach ($data as $key => $element) {
         $builder->put($key, $element);
     }
