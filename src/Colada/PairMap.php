@@ -99,8 +99,6 @@ class PairMap implements \Countable, \IteratorAggregate, Map
 
     /**
      * {@inheritDoc}
-     *
-     * @todo Lazy.
      */
     public function flip()
     {
@@ -129,8 +127,6 @@ class PairMap implements \Countable, \IteratorAggregate, Map
 
     /**
      * {@inheritDoc}
-     *
-     * @todo Lazy.
      */
     public function acceptBy($filter)
     {
@@ -168,8 +164,6 @@ class PairMap implements \Countable, \IteratorAggregate, Map
 
     /**
      * {@inheritDoc}
-     *
-     * @todo Lazy.
      */
     public function mapElementsBy($mapper)
     {
