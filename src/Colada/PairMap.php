@@ -223,24 +223,12 @@ class PairMap implements \Countable, \IteratorAggregate, Map
 
     /**
      * {@inheritDoc}
-     *
-     * @todo Use acceptBy() inside.
      */
     public function pick($keys)
     {
-        $checker = function($key) use ($keys) { return CollectionHelper::in($key, $keys); };
-
-        return $this->asPairs()
-            ->foldBy(
-                function($builder, $pair) use($checker) {
-                    if ($checker($pair[0])) {
-                        $builder->put($pair[0], $pair[1]);
-                    }
-
-                    return $builder;
-                },
-                static::createMapBuilder()
-            )->build();
+        return $this->acceptBy(function($key) use ($keys) {
+            return CollectionHelper::in($key, $keys);
+        });
     }
 
     /**
