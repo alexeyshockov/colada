@@ -26,7 +26,7 @@ class CollectionBuilder
      *
      * @param mixed $collection
      *
-     * @return Collection
+     * @return \Colada\Collection
      */
     public static function buildFrom($collection)
     {
@@ -36,7 +36,8 @@ class CollectionBuilder
     }
 
     /**
-     * @param int|\Countable|mixed $sizeHint Hint for resulting collection size.
+     * @param \Countable|int|mixed $sizeHint Hint for resulting collection size.
+     * @param string               $class    Collection class.
      */
     public function __construct($sizeHint = 0, $class = '\\Colada\\IteratorCollection')
     {
@@ -46,7 +47,7 @@ class CollectionBuilder
         }
 
         if (!is_numeric($sizeHint)) {
-            $sizeHint = 1;
+            $sizeHint = 0;
         }
 
         $this->array = new \SplFixedArray($sizeHint);
@@ -61,7 +62,7 @@ class CollectionBuilder
     /**
      * @param mixed $element
      *
-     * @return CollectionBuilder
+     * @return \Colada\CollectionBuilder
      */
     public function add($element)
     {
@@ -78,7 +79,7 @@ class CollectionBuilder
     /**
      * @param mixed $elements
      *
-     * @return CollectionBuilder
+     * @return \Colada\CollectionBuilder
      */
     public function addAll($elements)
     {
@@ -105,7 +106,7 @@ class CollectionBuilder
     }
 
     /**
-     * @return CollectionBuilder
+     * @return \Colada\CollectionBuilder
      */
     public function clear()
     {
@@ -116,7 +117,7 @@ class CollectionBuilder
     }
 
     /**
-     * @return Collection
+     * @return \Colada\Collection
      */
     public function build()
     {

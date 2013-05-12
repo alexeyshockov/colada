@@ -50,7 +50,7 @@ class CollectionHelper
     }
 
     /**
-     * @param mixed $value
+     * @param mixed                    $value
      * @param \Colada\Collection|mixed $collection
      *
      * @return bool
@@ -70,12 +70,10 @@ class CollectionHelper
      * @param array|\ArrayAccess|\Colada\Map $value
      * @param mixed $key
      *
-     * @return Option
+     * @return \Colada\Option
      */
     public static function at($value, $key)
     {
-        // TODO Ensure type...
-
         if (is_object($value) && ($value instanceof \Colada\Map)) {
             return $value->get($key);
         } else {

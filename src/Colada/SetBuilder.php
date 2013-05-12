@@ -14,7 +14,7 @@ class SetBuilder extends CollectionBuilder
      *
      * @param mixed $element
      *
-     * @return SetBuilder
+     * @return \Colada\SetBuilder
      */
     public function add($element)
     {
@@ -33,7 +33,7 @@ class SetBuilder extends CollectionBuilder
      *
      * @param array|\Traversable|mixed $elements
      *
-     * @return SetBuilder
+     * @return \Colada\SetBuilder
      */
     public function addAll($elements)
     {
