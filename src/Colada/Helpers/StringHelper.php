@@ -83,20 +83,20 @@ class StringHelper
     }
 
     /**
-     * @todo Return collection?
-     *
-     * @param string $string
+     * @param string                $string
      * @param string|\Colada\RegExp $delimiter
      *
-     * @return array
+     * @return string[]|\Colada\Collection
      */
     public static function split($string, $delimiter)
     {
         if ($delimiter instanceof \Colada\RegExp) {
-            return preg_split($delimiter->getPattern(), $string);
+            $parts = preg_split($delimiter->getPattern(), $string);
         } else {
-            return explode($string, $delimiter);
+            $parts = explode($string, $delimiter);
         }
+
+        return to_collection($parts);
     }
 
     /**
@@ -123,22 +123,19 @@ class StringHelper
     /**
      * Returns collection of matches (match - collection too, of concrete matches).
      *
-     * Example:
-     * <code>
-     *
-     * </code>
-     *
      * @param $string
      * @param $pattern
      *
      * @return array
      */
-    // TODO Return list (\Colada\Collection).
     public static function matches($string, $pattern)
     {
         preg_match_all($pattern, $string, $matches);
 
-        return $matches;
+        $matches = to_collection($matches)->mapBy(x()->toCollection());
+
+        // Apply all lazy transformations.
+        return clone $matches;
     }
 
     /**
