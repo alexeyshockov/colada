@@ -438,7 +438,7 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Cloning in case of immutable collection "freeze" elements (useful for result of many lazy operations).
+     * Cloning in case of immutable collection “freeze” elements (useful for result of many lazy operations).
      *
      * @test
      */
@@ -451,9 +451,14 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
         assertTrue($freezedCollection !== $collection);
         assertSame($collection->toArray(), $freezedCollection->toArray());
 
+        $freezedCollectionArrayView = $freezedCollection->toArray();
+
+        // Add element to $collection (internal state modification).
         $array[4] = 5;
 
-        assertSame(array(1, 2, 3, 3), $freezedCollection->toArray());
+        // Cloned collection will be the same.
+        assertNotSame($collection->toArray(), $freezedCollection->toArray());
+        assertSame($freezedCollectionArrayView, $freezedCollection->toArray());
     }
 
     /**
