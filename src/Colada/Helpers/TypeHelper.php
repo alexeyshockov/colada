@@ -29,7 +29,7 @@ class TypeHelper
         return (true == $value);
     }
 
-    public function isArray($value)
+    public static function isArray($value)
     {
         return is_array($value);
     }
@@ -55,7 +55,7 @@ class TypeHelper
         }
     }
 
-    public function isTraversable($value)
+    public static function isTraversable($value)
     {
         return (is_object($value) && ($value instanceof \Traversable));
     }
