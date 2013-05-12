@@ -479,19 +479,8 @@ class IteratorCollection
      */
     public function partitionBy($partitioner)
     {
-        Contracts::ensureCallable($partitioner);
-
-        $builder1 = static::createCollectionBuilder($this->iterator);
-        $builder2 = static::createCollectionBuilder($this->iterator);
-        foreach ($this->iterator as $element) {
-            if (call_user_func($partitioner, $element)) {
-                $builder1->add($element);
-            } else {
-                $builder2->add($element);
-            }
-        }
-
-        return array($builder1->build(), $builder2->build());
+        // $partitioner type will be checked inside acceptBy().
+        return array($this->acceptBy($partitioner), $this->rejectBy($partitioner));
     }
 
     /**
