@@ -1,6 +1,5 @@
 <?php
 
-// FIXME Don't declare interface, if it's already exists.
 if (
     !(version_compare(PHP_VERSION, '5.4.0') >= 0)
     ||
@@ -11,6 +10,8 @@ if (
 
 /**
  * For compatibility with PHP 5.3.
+ *
+ * @ignore
  */
 interface JsonSerializable
 {
