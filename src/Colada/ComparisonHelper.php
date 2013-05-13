@@ -3,8 +3,6 @@
 namespace Colada;
 
 /**
- * @internal
- *
  * @author Alexey Shockov <alexey@shockov.com>
  */
 class ComparisonHelper
@@ -30,21 +28,55 @@ class ComparisonHelper
 
     private static function isEquationPossibleFor($element1, $element2)
     {
-        $class = new \ReflectionObject($element1);
+        return static::getMethodFrom($element1, 'isEqualTo')->mapBy(function($method) use($element2) {
+            $parameters = $method->getParameters();
 
-        $possible = false;
-        if ($class->hasMethod('isEqualTo')) {
-            $parameters = $class->getMethod('isEqualTo')->getParameters();
-            $parameter  = $parameters[0];
+            if (empty($parameters)) {
+                // May be func_get_args() inside...
+                return true;
+            } else {
+                $parameter = $parameters[0];
 
-            // NULL for non class parameters.
-            if ($parameterClass = $parameter->getClass()) {
-                if (is_object($element2) && $class->isInstance($element2)) {
-                    $possible = true;
+                // NULL for non class parameters.
+                if ($parameterClass = $parameter->getClass()) {
+                    if (is_object($element2) && $parameterClass->isInstance($element2)) {
+                        // Match by parameter type.
+                        return true;
+                    } else {
+                        // Not match by parameter type.
+                        return false;
+                    }
                 }
+
+                // Parameter type not defined.
+                return true;
+            }
+        })->orElse(false);
+    }
+
+    /**
+     * @param object|string $value      Object or class name.
+     * @param string        $methodName
+     *
+     * @return \Colada\Option
+     */
+    private static function getMethodFrom($value, $methodName)
+    {
+        if (is_object($value) && !($value instanceof \ReflectionClass)) {
+            $class = new \ReflectionObject($value);
+        } elseif (is_string($value)) {
+            $class = new \ReflectionClass($value);
+        }
+
+        $method = null;
+        if ($class->hasMethod($methodName)) {
+            $method = $class->getMethod($methodName);
+        } else {
+            if ($parentClass = $class->getParentClass()) {
+                $method = static::getMethodFrom($parentClass, $methodName);
             }
         }
 
-        return $possible;
+        return Option::from($method);
     }
 }
