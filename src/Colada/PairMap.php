@@ -3,7 +3,6 @@
 namespace Colada;
 
 use Colada\Helpers\CollectionHelper;
-use Colada\Helpers\CallbackHelper;
 
 /**
  * Universal map implementation.

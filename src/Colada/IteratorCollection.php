@@ -2,7 +2,6 @@
 
 namespace Colada;
 
-use Colada\Helpers\CallbackHelper;
 use Colada\Helpers\TypeHelper;
 
 Colada::registerFunctions();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Colada\Helpers;
+namespace Colada;
 
 /**
  * @author Alexey Shockov <alexey@shockov.com>
