@@ -3,7 +3,7 @@
 namespace Colada;
 
 /**
- * General collection interface (immutable). Currently one for all collection types (lists, sets).
+ * General collection interface (immutable). Currently one for all collection types (lists (sequences), sets).
  *
  * @todo Implement Equalable?..
  *
@@ -53,16 +53,24 @@ interface Collection extends \JsonSerializable, \Traversable
     function slice($offset, $length);
 
     /**
-     * Split collection (1, 2, 3, 4, 5) at 2 to get (1, 2) and (3, 4, 5).
+     * Splits collection on given element.
+     *
+     * <code>
+     * (1, 2, 3, 4, 5).splitAt(2) = ((1, 2), (3, 4, 5))
+     * </code>
      *
      * @param mixed $element
      *
-     * @return \Colada\Collection[] Array with two elements. Suitable for PHP's list().
+     * @return \Colada\Collection[]
      */
     function splitAt($element);
 
     /**
+     * All elements from start to given element (including).
+     *
+     * <code>
      * (1, 2, 3, 4, 5).takeTo(2) = (1, 2)
+     * </code>
      *
      * @param mixed $element
      *
@@ -71,7 +79,11 @@ interface Collection extends \JsonSerializable, \Traversable
     function takeTo($element);
 
     /**
+     * All elements from given element (excluding) to end.
+     *
+     * <code>
      * (1, 2, 3, 4, 5).dropFrom(2) = (3, 4, 5)
+     * </code>
      *
      * @param mixed $element
      *
@@ -109,8 +121,6 @@ interface Collection extends \JsonSerializable, \Traversable
     /**
      * Constructs new collection with elements, for which $filter returns true.
      *
-     * Lazy.
-     *
      * @param callback $filter
      *
      * @return static
@@ -120,8 +130,6 @@ interface Collection extends \JsonSerializable, \Traversable
     /**
      * Constructs new collection with elements, for which $filter returns false.
      *
-     * Lazy.
-     *
      * @param callback $filter
      *
      * @return static
@@ -130,8 +138,6 @@ interface Collection extends \JsonSerializable, \Traversable
 
     /**
      * Applies $mapper to each element of collection and constructs new one with results.
-     *
-     * Lazy.
      *
      * @param callback|mixed $mapper
      *
@@ -190,8 +196,6 @@ interface Collection extends \JsonSerializable, \Traversable
     /**
      * Applies $mapper to each element of collection and constructs new one with results (which must be collections of
      * new elements for each original element).
-     *
-     * Lazy.
      *
      * @see http://www.scala-lang.org/api/current/scala/collection/immutable/Set.html
      *
@@ -261,8 +265,6 @@ interface Collection extends \JsonSerializable, \Traversable
      * </code>
      *
      * P.S. Haskell's and Scala's zipWith() may be implemented in two steps: 1. zip(), 2. mapBy().
-     *
-     * @todo Lazy. With CollectionZipIterator.
      *
      * @param \Colada\Collection|\Iterator|\IteratorAggregate|mixed $collection
      *

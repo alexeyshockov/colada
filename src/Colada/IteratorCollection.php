@@ -325,6 +325,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
+    // Lazy.
     public function acceptBy($filter)
     {
         Contracts::ensureCallable($filter);
@@ -338,6 +339,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
+    // Lazy.
     public function rejectBy($filter)
     {
         // $filter type will be checked inside acceptBy().
@@ -347,6 +349,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
+    // Lazy.
     public function mapBy($mapper)
     {
         if (!is_callable($mapper)) {
@@ -364,6 +367,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
+    // Lazy.
     public function replace($filter, $value)
     {
         return $this->replaceBy($filter, function() use($value) { return $value; });
@@ -372,6 +376,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
+    // Lazy.
     public function replaceBy($filter, $value)
     {
         if (!is_callable($filter)) {
@@ -399,6 +404,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
+    // Lazy.
     public function flatten()
     {
         return $this->flatMapBy(x());
@@ -407,6 +413,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
+    // Lazy.
     public function flatMapBy($mapper)
     {
         if (!is_callable($mapper)) {
@@ -509,6 +516,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
+    // TODO Lazy. With CollectionZipIterator.
     public function zip($collection)
     {
         $collection1 = $this;
