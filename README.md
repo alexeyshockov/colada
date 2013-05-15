@@ -84,9 +84,4 @@ $var4 = array(
 
 ## Roadmap
 
-* 0.x — API stabilization.
-* 1.0 — Stable API.
-* 1.x — Other minor features (sorted collections, etc.).
-* 2.0 — Mutable collections.
-
-More detailed view may be found in [appropriate page](https://github.com/alexeyshockov/colada/issues/milestones).
+Detailed roadmap can be found in [appropriate page](https://github.com/alexeyshockov/colada/issues/milestones).
