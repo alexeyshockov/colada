@@ -556,7 +556,7 @@ class IteratorCollection
     /**
      * {@inheritDoc}
      */
-    public function intersect($collection)
+    public function intersection($collection)
     {
         $collection1 = $this;
         $collection2 = $this->normalizeCollection($collection);

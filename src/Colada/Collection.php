@@ -288,13 +288,11 @@ interface Collection extends \JsonSerializable, \Traversable
      *
      * For example, we have two sets: (1, 2, 3) and (3, 4, 5). Intersection will be (3).
      *
-     * @todo Rename to "intersection"?
-     *
      * @param \Colada\Collection|\Iterator|\IteratorAggregate|mixed $collection
      *
      * @return static
      */
-    function intersect($collection);
+    function intersection($collection);
 
     /**
      * Constructs set with elements which lie <i>outside</i> of a current collection and within another

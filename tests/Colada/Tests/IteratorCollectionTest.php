@@ -319,7 +319,7 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
         $collection1 = new IteratorCollection(new \ArrayIterator(array(1, 2, 3)));
         $collection2 = new IteratorCollection(new \ArrayIterator(array(3, 4, 5)));
 
-        assertSame(array(3), $collection1->intersect($collection2)->toArray());
+        assertSame(array(3), $collection1->intersection($collection2)->toArray());
     }
 
     /**
@@ -332,7 +332,7 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
         $collection1 = new IteratorCollection(new \ArrayIterator(array(1, 2, 3, 3)));
         $collection2 = new IteratorCollection(new \ArrayIterator(array(3, 3, 4, 5, 5)));
 
-        assertSame(array(3), $collection1->intersect($collection2)->toArray());
+        assertSame(array(3), $collection1->intersection($collection2)->toArray());
     }
 
     /**
