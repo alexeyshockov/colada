@@ -1,9 +1,9 @@
 <?php
 
-use Colada\CollectionBuilder,
-    Colada\SetBuilder,
-    Colada\MapBuilder,
-    Colada\RangeIterator;
+use Colada\CollectionBuilder;
+use Colada\SetBuilder;
+use Colada\MapBuilder;
+use Colada\RangeIterator;
 
 /**
  * xrange() from Python. Generator.
