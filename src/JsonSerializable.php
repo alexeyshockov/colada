@@ -1,10 +1,6 @@
 <?php
 
-if (
-    !(version_compare(PHP_VERSION, '5.4.0') >= 0)
-    ||
-    interface_exists('JsonSerializable', false)
-) {
+if (interface_exists('JsonSerializable', false)) {
     return;
 }
 
