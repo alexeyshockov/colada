@@ -71,10 +71,6 @@ class ComparisonHelper
         $method = null;
         if ($class->hasMethod($methodName)) {
             $method = $class->getMethod($methodName);
-        } else {
-            if ($parentClass = $class->getParentClass()) {
-                $method = static::getMethodFrom($parentClass, $methodName);
-            }
         }
 
         return Option::from($method);
