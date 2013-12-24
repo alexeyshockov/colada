@@ -7,6 +7,8 @@ require_once "PHPUnit/Framework/Assert/Functions.php";
 use Colada\IteratorCollection;
 
 use Colada\None;
+use Colada\Tests\Fixtures\Bird;
+use Colada\Tests\Fixtures\Bullfinch;
 
 /**
  * @todo partitionBy()
@@ -298,6 +300,7 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
 
         assertSame(array(1, 2, 3, 4, 5), $collection1->union($collection2)->toArray());
     }
+
     /**
      * Collection's elements may be not unique.
      *
@@ -469,5 +472,16 @@ class IteratorCollectionTest extends \PHPUnit_Framework_TestCase
         $collection = new IteratorCollection(new \ArrayIterator(array()));
 
         assertSame(true, $collection->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function unionShouldBeCorrectForObjectsCollections()
+    {
+        $collection1 = new IteratorCollection(new \ArrayIterator(array(new Bird(), new Bird())));
+        $collection2 = new IteratorCollection(new \ArrayIterator(array(new Bullfinch())));
+
+        assertEquals(array(new Bird(), new Bird(), new Bullfinch()), $collection1->union($collection2)->toArray());
     }
 }
