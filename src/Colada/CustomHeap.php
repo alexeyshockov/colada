@@ -2,33 +2,30 @@
 
 namespace Colada;
 
+use SplHeap;
+
 /**
- * @internal
+ * Container with internal ordering
  *
- * @author Alexey Shockov <alexey@shockov.com>
+ * Useful for sorting.
+ *
+ * @internal
  */
-class CustomHeap
-    extends \SplHeap
+class CustomHeap extends SplHeap
 {
-    /**
-     * @var callable
-     */
+    /** @var callable */
     private $comparator;
 
-    public function __construct($comparator)
+    public function __construct(callable $comparator)
     {
-        Contracts::ensureCallable($comparator);
-
         $this->comparator = $comparator;
     }
 
-    public function compare($element1, $element2)
+    public function compare($tuple1, $tuple2)
     {
-        // Some better syntax?
-        $comparator = $this->comparator;
+        $result = call_user_func($this->comparator, $tuple1, $tuple2);
 
         // For some reasons, elements in heap are in descending order...
-        // TODO Result type check?
-        return -call_user_func($comparator, $element1, $element2);
+        return -$result;
     }
 }

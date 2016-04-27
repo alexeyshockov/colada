@@ -1,0 +1,11 @@
+formatter.name: pretty
+code_generation: false
+extensions:
+    - PhpSpec\Extension\CodeCoverageExtension
+code_coverage:
+    format:
+        - html
+        - clover
+    output:
+        html: coverage
+        clover: coverage.xml

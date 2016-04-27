@@ -1,0 +1,31 @@
+imports:
+  - php
+
+tools:
+  php_code_sniffer:
+    filter:
+      excluded-paths: [ spec/* ]
+    config:
+      standard: PSR2
+
+  php_analyzer:
+    filter:
+      excluded-paths: [ spec/* ]
+
+  php_sim:
+    filter:
+      excluded-paths: [ spec/* ]
+
+filter:
+  excluded_paths:
+    - vendor/*
+
+# http://arturas.smorgun.com/2014/12/22/code-coverage-of-phpspec-on-scrutinizer.html
+build:
+  tests:
+    override:
+      -
+        command: 'bin/phpspec run -c phpspec-ci.yml'
+        coverage:
+          file: 'coverage.xml'
+          format: 'php-clover'

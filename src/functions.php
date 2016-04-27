@@ -1,182 +1,251 @@
 <?php
 
-use Colada\CollectionBuilder;
-use Colada\SetBuilder;
-use Colada\MapBuilder;
-use Colada\RangeIterator;
+namespace Colada;
+
+use Closure;
+use DateTimeInterface;
+use Traversable;
+use Iterator;
+use IteratorAggregate;
+use Generator;
+use IteratorIterator;
+use ArrayIterator;
+use PhpOption\Some;
 
 /**
- * xrange() from Python. Generator.
+ * @param mixed ...$values
  *
- * Like range(), but instead of returning a list, returns an object that generates the numbers in the
- * range on demand.  For looping, this is slightly faster than range() and more memory efficient.
- *
- * Examples:
- * <code>
- * foreach (xrange(10) as $number) {
- *     echo $number.' ';
- * }
- * // 0 1 2 3 4 5 6 7 8 9 10
- * </code>
- *
- * <code>
- * // Infinity sequence.
- * foreach (xrange(10, null) as $number) {
- *     if (($number % 20) == 0) {
- *         break;
- *     } else {
- *         echo $number.' ';
- *     }
- * }
- * // 10 11 12 13 14 15 16 17 18 19
- * </code>
- *
- * @param int  $start
- * @param null $stop
- * @param int  $step
- *
- * @return \Colada\RangeIterator
+ * @return Sequence
  */
-function xrange($start = 0, $stop = null, $step = 1)
+function seq(...$values)
 {
-    return new IteratorCollection(new RangeIterator($start, $stop, $step));
+    return new Sequence($values);
 }
 
 /**
- * Represents future value (useful for processing collection elements with {@see \Colada\Collection::mapBy()}, for example).
+ * @param mixed ...$values
  *
- * Some useful examples:
- *
- * <code>
- * $collection->acceptBy(x()->getName()->startsWith('Test'));
- * </code>
- *
- * vs.
- *
- * <code>
- * $collection->acceptBy(
- *     function($user) { return StringHelper::startsWith($user->getName(), 'Test'); }
- * );
- * </code>
- *
- * @return \Colada\X\FutureValue
+ * @return HashSet
  */
-function x()
+function hash_set(...$values)
 {
-    return new \Colada\X\FutureValue();
-}
-
-
-
-/**
- * @param string $pattern
- *
- * @return \Colada\RegExp
- */
-function regexp($pattern)
-{
-    return new \Colada\RegExp($pattern);
-}
-
-
-
-/**
- * @see \Colada\Option::from()
- *
- * @param mixed $value
- *
- * @return \Colada\Option
- */
-function option($value)
-{
-    return \Colada\Option::from($value);
-}
-
-
-
-/**
- * Like array(). Example:
- *
- * <code>
- * $collection = collection(1, 2, 3);
- * </code>
- *
- * @return \Colada\Collection
- */
-function collection()
-{
-    $builder = new CollectionBuilder();
-
-    return $builder->addAll(func_get_args())->build();
+    return new HashSet($values);
 }
 
 /**
- * Like array(). Example:
+ * @param array ...$tuples
  *
- * <code>
- * $set = set(1, 2, 3);
- * </code>
- *
- * @return \Colada\Collection
+ * @return HashMap
  */
-function set()
+function hash_map(array ...$tuples)
 {
-    $builder = new SetBuilder();
-
-    return $builder->addAll(func_get_args())->build();
-}
-
-
-
-/**
- * @param array|\Traversable|mixed $data
- *
- * @return \Colada\Collection
- */
-function to_collection($data)
-{
-    $builder = new CollectionBuilder();
-
-    return $builder->addAll($data)->build();
+    return HashMap::fromTuples($tuples);
 }
 
 /**
- * @param array|\Traversable|mixed $data
+ * @param array ...$tuples
  *
- * @return \Colada\Collection
+ * @return ArrayMap
  */
-function to_set($data)
+function array_map(array ...$tuples)
 {
-    $builder = new SetBuilder();
-
-    return $builder->addAll($data)->build();
+    return ArrayMap::fromTuples($tuples);
 }
 
 /**
- * @param array|\Traversable $data
+ * @param mixed $host
+ * @param callable $f
  *
- * @return \Colada\Map
+ * @return LazyIterator
  */
-function to_map($data)
+function unfold($host, callable $f)
 {
-    $builder = new MapBuilder();
+    return LazyIterator::fromResult(function () use ($host, $f) {
+        $values = $f($host);
+        while (is_object($values) && ($values instanceof Some)) {
+            list ($v, $host) = $values->get();
 
-    // TODO MapBuilder::putAll().
-    foreach ($data as $key => $element) {
-        $builder->put($key, $element);
+            yield $v;
+
+            $values = $f($host);
+        }
+    });
+}
+
+/**
+ * @param mixed $host
+ * @param callable $f
+ *
+ * @return LazyIterator
+ */
+function unfold_tuples($host, callable $f)
+{
+    return LazyIterator::fromResult(function () use ($host, $f) {
+        $values = $f($host);
+        while (is_object($values) && ($values instanceof Some)) {
+            list($kv, $host) = $values->get();
+            list($k, $v) = $kv;
+
+            yield $k => $v;
+
+            $values = $f($host);
+        }
+    });
+}
+
+/**
+ * Popular example of generators
+ *
+ * @param int $low
+ * @param int $high
+ * @param int $step
+ *
+ * @return Traversable
+ */
+function xrange($low, $high, $step = 1)
+{
+    for ($i = $low; $i <= $high; $i += $step) {
+        yield $i;
+    }
+}
+
+/**
+ * @param callable $predicate
+ *
+ * @return Closure
+ */
+function not(callable $predicate)
+{
+    return function (...$arguments) use ($predicate) {
+        return !$predicate(...$arguments);
+    };
+}
+
+const as_iterator = '\\Colada\\as_iterator';
+
+/**
+ * @param Traversable|array $t
+ *
+ * @return Iterator
+ */
+function as_iterator($t)
+{
+    InvalidArgumentException::assertTraversable($t);
+
+    if (is_array($t)) {
+        $i = new ArrayIterator($t);
+    } else {
+        if ($t instanceof IteratorAggregate) {
+            $i = $t->getIterator();
+        } elseif ($t instanceof Iterator) {
+            $i = $t;
+        } else {
+            $i = new IteratorIterator($t);
+            /*
+             * Without explicit rewinding iterator will be not initialized.
+             *
+             * Example:
+             * $ psysh
+             * >>> $dp = new DatePeriod('R6/2000-01-01T00:00:00Z/P1D')
+             * => DatePeriod {#177
+             *      ...
+             *    }
+             * >>> $i = new IteratorIterator($dp)
+             * => IteratorIterator {#184}
+             * >>> $i->valid()
+             * => false
+             * >>> $i->rewind()
+             * => null
+             * >>> $i->valid()
+             * => true
+             */
+            $i->rewind();
+        }
     }
 
-    return $builder->build();
+    return $i;
 }
 
-
+const as_generator = '\\Colada\\as_generator';
 
 /**
- * @param \Traversable $collection
+ * Lazy generator for passed traversable value
  *
- * @return \Colada\Collection
+ * @param Traversable|array $t
+ *
+ * @return Generator
  */
-function as_collection(\Traversable $collection)
+function as_generator($t)
 {
-    return new \IteratorCollection($collection);
+    $i = as_iterator($t);
+
+    // To prevent rewinding in foreach.
+    while ($i->valid()) {
+        yield $i->key() => $i->current();
+
+        $i->next();
+    }
+}
+
+const as_tuples_generator = '\\Colada\\as_tuples_generator';
+
+/**
+ * Lazy generator of tuples (key, value) for passed traversable value
+ *
+ * @param Traversable|array $t
+ *
+ * @return Generator
+ */
+function as_tuples_generator($t)
+{
+    $i = as_iterator($t);
+
+    // To prevent rewinding in foreach.
+    while ($i->valid()) {
+        yield [$i->key(), $i->current()];
+
+        $i->next();
+    }
+}
+
+const datetime_hash = '\\Colada\\datetime_hash';
+
+/**
+ * Hash function for value objects with DateTimeInterface
+ *
+ * @param DateTimeInterface $object
+ *
+ * @return int
+ */
+function datetime_hash(DateTimeInterface $object)
+{
+    // TODO Append class name?..
+    return $object->format(
+        // With nanoseconds, they may be available.
+        'Y-m-d\TH:i:s.u'
+    );
+}
+
+const any_hash = '\\Colada\\any_hash';
+
+/**
+ * @param mixed $v
+ *
+ * @return string
+ */
+function any_hash($v)
+{
+    if (is_scalar($v) || ($v === null)) {
+        $hash = md5('('.gettype($v).') '.$v);
+    } elseif (is_object($v)) {
+        $hash = spl_object_hash($v);
+    } elseif (is_array($v)) {
+        $hash = md5('('.gettype($v).') '.json_encode($v));
+    } elseif (is_resource($v)) {
+        $hash = md5('('.gettype($v).') ('.get_resource_type($v).') '.$v);
+    } else {
+        throw new InvalidArgumentException('Unsupported type.');
+    }
+
+    return $hash;
 }

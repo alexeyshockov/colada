@@ -2,46 +2,49 @@
     "name":        "alexeyshockov/colada",
     "type":        "library",
     "description": "Collections framework for PHP",
-    "keywords":    ["collections"],
+    "keywords":    ["collections", "functional"],
     "homepage":    "http://github.com/alexeyshockov/colada",
     "license":     "MIT",
     "support":     {
         "issues": "https://github.com/alexeyshockov/colada/issues",
         "wiki":   "https://github.com/alexeyshockov/colada/wiki"
     },
-
     "authors": [
         {
             "name":     "Alexey Shockov",
             "email":    "alexey@shockov.com",
             "homepage": "http://alexey.shockov.com/"
+        },
+        {
+            "name":     "Semen Barabash",
+            "email":    "semen.barabash@gmail.com"
         }
     ],
-
-    "require": {
-        "php": ">=5.3.2"
-    },
-
     "suggest": {
-        "react/curry": "Partial functions."
+        "alexeyshockov/colada-x": "Optimized callbacks.",
+        "react/partial": "Partial functions.",
+        "danielstjules/stringy": "Powerful string manipulations.",
+        "lstrojny/functional-php": "Some functional primitives for PHP."
     },
-
+    "require": {
+        "php": "~5.6 || ~7.0",
+        "phpoption/phpoption": "~1.5"
+    },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*@beta",
-        "phpunit/phpunit": "3.7.*"
+        "phpspec/phpspec": "~2.3",
+        "henrikbjorn/phpspec-code-coverage": "~1.0"
     },
-
-    "config": {
-        "bin-dir": "bin"
-    },
-
     "autoload": {
-        "psr-0": {
-            "Colada": "src/",
-            "JsonSerializable": "src/"
+        "psr-4": {
+            "Colada\\": "src/Colada"
         },
         "files": [
             "src/functions.php"
         ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.0.x-dev"
+        }
     }
 }

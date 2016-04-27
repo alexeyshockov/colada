@@ -1,11 +1,20 @@
+# Use container explicitly (see http://docs.travis-ci.com/user/workers/container-based-infrastructure/).
+sudo: false
+
 language: php
 
-php:
-  - 5.3
-  - 5.4
+matrix:
+  include:
+    - php: 5.6
+    - php: 7.0
+    - php: hhvm
 
-before_script:
-  - wget http://getcomposer.org/composer.phar
-  - php composer.phar install
+before_install:
+  - composer self-update
 
-script: phpunit
+install:
+  # --prefer-source to pass GitHub limits (see https://twitter.com/travisci/status/297761892775100418 for example).
+  - composer install --no-interaction --prefer-source
+
+script:
+  - vendor/bin/phpspec run -v
