@@ -76,7 +76,3 @@ vendor/bin/phpunit --testdox
 All classes or functions that are intended to be used by a user should be marked with `@api` PHPDoc tag. Anything without this mark 
 are internal and should not be used by the end user (no guarantees that the interface will stay the same between 
 versions).
-
-## Alternatives
-
-* https://github.com/consolidation/annotated-command — similar approach, but from a different angle
