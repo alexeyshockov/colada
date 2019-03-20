@@ -1,87 +1,82 @@
-# Colada. Collections Framework for PHP [![Build Status](https://secure.travis-ci.org/alexeyshockov/colada.png)](http://travis-ci.org/alexeyshockov/colada)
+# Colada
+
+[![Latest Stable Version](https://poser.pugx.org/alexeyshockov/colada/v/stable)](https://packagist.org/packages/alexeyshockov/colada)
+[![Build Status](https://travis-ci.org/alexeyshockov/colada.svg?branch=master)](https://travis-ci.org/alexeyshockov/colada)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/f82172ad33818d09b5a7/test_coverage)](https://codeclimate.com/github/alexeyshockov/colada/test_coverage)
 
 ## Goal
 
 _Convenient_ and _safe_ way to work with collections.
 
-## Benefits
-
-* Rich maps (any type for keys).
-* Functional idioms:
-    * immutable collections (safest and usable for most cases),
-    * lazy operations — don't skimp on it.
-* Optional values (to solve NPE problem).
+...And it's been (more or less) solved by some other libraries, like [nikic/iter](https://github.com/nikic/iter), 
+[doctrine/collections](https://github.com/doctrine/collections) or even 
+[php-ds/php-ds](https://github.com/php-ds/polyfill). That's why the current version of the library contains just a few 
+helpers for that libraries, to conveniently integrate them together. 
 
 ## Installation
 
-Colada currently may be installed as submodule for your Git project:
-
-``` bash
-git submodule add git://github.com/alexeyshockov/colada.git vendor/colada
 ```
-
-or throught [Composer](https://github.com/composer/composer):
-
-``` json
-{
-    "require": {
-        "alexeyshockov/colada": "dev-master"
-    }
-}
+composer require alexeyshockov/colada:~3.0
 ```
 
 ## Usage
 
-Follow project's [wiki](https://github.com/alexeyshockov/colada/wiki) for usage information and examples.
+The library's functions are split by 
 
-Detailed [API documentation](http://alexeyshockov.github.com/colada/api/) (for current stable release).
+### \Colada\ds\{group_by}
 
-## Playing with interactive shell
+Helpers from this namespace require [php-ds/php-ds](https://github.com/php-ds/polyfill) to be available.
 
-Colada includes small wrapper for standard PHP interactive shell, which adds some useful functions to it.
+`group_by()` function prodices a two dimension array (`\ArrayObject` or `\Ds\Map`, depends on the group key type), from 
+an iterable based on a group function.
 
-Lets play with it!
-
-``` bash
-$ ./shell.sh
-// Call use_colada() function to benefit from all shortcuts ;)
-Interactive shell
-
-php > use_colada();
-php > d(collection(-2, -1, 0, 1, 2));
-$var0 = array(0 => -2, 1 => -1, 2 => 0, 3 => 1, 4 => 2)
-php > // Call above are identical to: $var0->mapBy(function($x) { return $x + 1; });
-php > d($var0->mapBy(x()->increment()));
-$var1 = array(0 => -1, 1 => 0, 2 => 1, 3 => 2, 4 => 3)
-php > d($var0->acceptBy(x()->isPositive()));
-$var2 = array(0 => 0, 1 => 1, 2 => 2)
-php > d($var0->rejectBy(x()->isPositive()));
-$var3 = array(0 => -2, 1 => -1)
-
-php > d($var0->groupsBy(function($x) { return ($x >= 0 ? 'positive' : 'negative'); }));
-$var4 = array(
-  0 =>
-  array(
-    0 => 'negative',
-    1 =>
-    array(
-      0 => -2,
-      1 => -1,
-    ),
-  ),
-  1 =>
-  array(
-    0 => 'positive',
-    1 =>
-    array(
-      0 => 0,
-      1 => 1,
-      2 => 2,
-    ),
-  ),
-)
+```php
+TODO
 ```
 
-## Roadmap
+### \Colada\GuzzleHttp\{coroutine_invoke, coroutine, time_sleep}
+### \Colada\React\{coroutine_invoke, coroutine}
 
-Detailed roadmap can be found in [appropriate page](https://github.com/alexeyshockov/colada/issues/milestones).
+Helpers from this namespace require [guzzlehttp/promises](https://github.com/guzzle/promises) or 
+[react/promise](https://github.com/reactphp/promise) to be available.
+
+This is the same concept applied to two most popular libs with async capabilities. If you are familiar with async/await 
+in C# or node.js or coroutines in Go, this should be simple. Take a look at the script, written in callback-style and in 
+coroutine-style:
+
+```php
+TODO
+```
+
+```php
+TODO
+```
+
+### \Colada\iter\opt\{get, head, last, find_one}
+
+Helpers from this namespace require [phpoption/phpoption](https://github.com/schmittjoh/php-option) to be available.
+
+### \Colada\iter\{to_kv_pairs, each_n_and_last, uasort, uksort}
+
+Simple helpers for general `iterable` types.
+
+`uasort()` and `uksort()` are basically equivalents for the internal ones, but work for arbitrary `iterable` type.
+
+## Contributing
+
+### Running Tests
+
+To run all the tests, install the vendors (with Composer) and execute:
+```
+vendor/bin/phpunit --testdox
+```
+
+### Public API
+
+All classes or functions that are intended to be used by a user should be marked with `@api` PHPDoc tag. Anything without this mark 
+are internal and should not be used by the end user (no guarantees that the interface will stay the same between 
+versions).
+
+## Alternatives
+
+* https://github.com/consolidation/annotated-command — similar approach, but from a different angle

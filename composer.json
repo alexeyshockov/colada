@@ -2,17 +2,15 @@
     "name":        "alexeyshockov/colada",
     "type":        "library",
     "description": "Collections framework for PHP",
-    "keywords":    ["collections"],
+    "keywords":    ["collections", "iterators", "generators", "promises", "async", "guzzle", "react"],
     "homepage":    "http://github.com/alexeyshockov/colada",
     "license":     "MIT",
     "support":     {
-        "issues": "https://github.com/alexeyshockov/colada/issues",
-        "wiki":   "https://github.com/alexeyshockov/colada/wiki"
+        "issues": "https://github.com/alexeyshockov/colada/issues"
     },
-
     "authors": [
         {
-            "name":     "Alexey Shockov",
+            "name":     "Alexey Shokov",
             "email":    "alexey@shockov.com",
             "homepage": "http://alexey.shockov.com/"
         },
@@ -21,31 +19,72 @@
             "email":    "semen.barabash@gmail.com"
         }
     ],
-
     "require": {
-        "php": ">=5.3.2"
+        "php": "~7.1"
     },
-
-    "suggest": {
-        "react/curry": "Partial functions."
-    },
-
     "require-dev": {
-        "phpspec/phpspec": "2.0.*@beta",
-        "phpunit/phpunit": "3.7.*"
-    },
+        "phpunit/phpunit": "~7.0",
+        "giorgiosironi/eris": "^0.11.0",
+        "squizlabs/php_codesniffer": "~3.0",
 
-    "config": {
-        "bin-dir": "bin"
-    },
+        "phpoption/phpoption": "~1.5",
 
+        "react/partial": "~3.0",
+        "lstrojny/functional-php": "~1.4",
+        "nikic/iter": "~1.6",
+        "php-ds/php-ds": "~1.0",
+        "nesbot/carbon": "~2.0",
+        "danielstjules/stringy": "~2.1 || ~3.0",
+        "symfony/stopwatch": "~3.0 || ~4.0",
+        "guzzlehttp/guzzle": "~6.3",
+
+        "react/promise": "@stable",
+        "react/dns": "@stable"
+    },
+    "suggest": {
+        "phpoption/phpoption": "Optional values for PHP (\\Colada\\iter\\opt)",
+        "alexeyshockov/colada-x": "A small helper function to write closures faster",
+        "react/partial": "Partial functions",
+        "lstrojny/functional-php": "Some functional primitives",
+        "nikic/iter": "Basic helper functions to work with collections (generators)",
+        "php-ds/php-ds": "Effective data structures for PHP (\\Colada\\iter\\ds)",
+        "nesbot/carbon": "Convenient date and time manipulations",
+        "danielstjules/stringy": "Convenient string manipulations",
+        "symfony/stopwatch": "Timing related stuff (\\Colada\\iter\\sw)",
+        "guzzlehttp/guzzle": "The most used library for HTTP interaction"
+    },
     "autoload": {
-        "psr-0": {
-            "Colada": "src/",
-            "JsonSerializable": "src/"
+        "psr-4": {
+            "Colada\\": "src/"
         },
         "files": [
-            "src/functions.php"
+            "src/ds.php",
+            "src/functions.php",
+            "src/gen.guzzle.php",
+            "src/gen.react.php",
+            "src/iter.opt.php",
+            "src/iter.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Colada\\Tests\\": "tests/"
+        },
+        "files": [
+            "vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
+    },
+    "scripts": {
+        "ci": [
+            "@check-style",
+            "@test"
+        ],
+        "test": "vendor/bin/phpunit --testdox",
+        "check-style": "vendor/bin/phpcs --standard=PSR2 src"
     }
 }

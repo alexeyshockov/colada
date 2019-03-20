@@ -1,11 +1,16 @@
+sudo: false
 language: php
 
 php:
-  - 5.3
-  - 5.4
+  - 7.1
+  - 7.2
+  - 7.3
 
-before_script:
-  - wget http://getcomposer.org/composer.phar
-  - php composer.phar install
+before_install:
+  - composer self-update
 
-script: phpunit
+install:
+  - composer install --no-interaction
+
+script:
+  - composer ci
