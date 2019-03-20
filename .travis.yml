@@ -6,11 +6,28 @@ php:
   - 7.2
   - 7.3
 
+matrix:
+  include:
+    - php: 7.1
+      env: COVERAGE="yes"
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 before_install:
   - composer self-update
 
 install:
   - composer install --no-interaction
 
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
 script:
   - composer ci
+
+after_script:
+  - if [ "$COVERAGE" == "yes" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi

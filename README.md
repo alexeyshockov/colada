@@ -23,7 +23,7 @@ composer require alexeyshockov/colada:~3.0
 
 The library's functions are split by 
 
-### \Colada\ds\{group_by}
+### `\Colada\ds\{group_by}`
 
 Helpers from this namespace require [php-ds/php-ds](https://github.com/php-ds/polyfill) to be available.
 
@@ -34,8 +34,8 @@ an iterable based on a group function.
 TODO
 ```
 
-### \Colada\GuzzleHttp\{coroutine_invoke, coroutine, time_sleep}
-### \Colada\React\{coroutine_invoke, coroutine}
+### `\Colada\GuzzleHttp\{coroutine_invoke, coroutine, time_sleep}`
+### `\Colada\React\{coroutine_invoke, coroutine}`
 
 Helpers from this namespace require [guzzlehttp/promises](https://github.com/guzzle/promises) or 
 [react/promise](https://github.com/reactphp/promise) to be available.
@@ -52,11 +52,11 @@ TODO
 TODO
 ```
 
-### \Colada\iter\opt\{get, head, last, find_one}
+### `\Colada\iter\opt\{get, head, last, find_one}`
 
 Helpers from this namespace require [phpoption/phpoption](https://github.com/schmittjoh/php-option) to be available.
 
-### \Colada\iter\{to_kv_pairs, each_n_and_last, uasort, uksort}
+### `\Colada\iter\{to_kv_pairs, each_n_and_last, uasort, uksort}`
 
 Simple helpers for general `iterable` types.
 
