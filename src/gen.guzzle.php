@@ -2,6 +2,7 @@
 
 namespace Colada\GuzzleHttp;
 
+use Generator;
 use GuzzleHttp\Promise\PromiseInterface;
 
 /**
@@ -85,6 +86,18 @@ function coroutine(callable $generatorFn): callable
         // Proxy arguments to the generator function
         return (new CoroutineInvocation($generatorFn(...$args)))->promise();
     };
+}
+
+/**
+ * Makes a coroutine (promise) from a generator instance
+ *
+ * @param Generator $gen A generator instance that represents a coroutine
+ *
+ * @return PromiseInterface
+ */
+function to_coroutine(Generator $gen)
+{
+    return (new CoroutineInvocation($gen))->promise();
 }
 
 /**

@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/alexeyshockov/colada/v/stable)](https://packagist.org/packages/alexeyshockov/colada)
 [![Build Status](https://travis-ci.org/alexeyshockov/colada.svg?branch=master)](https://travis-ci.org/alexeyshockov/colada)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/f82172ad33818d09b5a7/test_coverage)](https://codeclimate.com/github/alexeyshockov/colada/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/9fad70ac2b82e3a52c5c/test_coverage)](https://codeclimate.com/github/alexeyshockov/colada/test_coverage)
 
 ## Goal
 
@@ -21,7 +21,7 @@ composer require alexeyshockov/colada:~3.0
 
 ## Usage
 
-The library's functions are split by 
+The library's functions are split by namespaces, one namespace = specific function a dependency (in most cases).
 
 ### `\Colada\ds\{group_by}`
 
