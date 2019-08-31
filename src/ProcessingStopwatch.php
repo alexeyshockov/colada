@@ -90,7 +90,9 @@ final class ProcessingStopwatch
     public function lapEvery(int $step, callable $handler = null): self
     {
         $this->lapStep = $step;
-        $this->lapHandler = $handler ?? static function () {};
+        $this->lapHandler = $handler ?? static function () {
+            // Null callable
+        };
 
         return $this;
     }
