@@ -34,14 +34,9 @@ class Sleep implements PromisorInterface
     public function __construct($sleepTime)
     {
         $this->sleepTime = $sleepTime;
-        $this->start = $this->currentTime();
+        $this->start = hrtime(true);
 
         $this->promise = new Promise($this, [$this, 'stop']);
-    }
-
-    private function currentTime()
-    {
-        return function_exists('hrtime') ? hrtime(true) : microtime(true);
     }
 
     /** @internal */
@@ -51,7 +46,7 @@ class Sleep implements PromisorInterface
             return;
         }
 
-        if ((($this->currentTime() - $this->start) * 1e+6) > $this->sleepTime) {
+        if (((hrtime(true) - $this->start) * 1e+6) > $this->sleepTime) {
             $this->promise->resolve(true);
 
             return;
@@ -67,7 +62,7 @@ class Sleep implements PromisorInterface
     {
         $this->stopped = true;
 
-        $diff = $this->currentTime() - $this->start;
+        $diff = hrtime(true) - $this->start;
 
         // Return an array like \time_nanosleep() and \time_sleep_until()
         $this->promise->reject([

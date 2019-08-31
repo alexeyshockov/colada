@@ -9,9 +9,9 @@ use Symfony\Component\Stopwatch\StopwatchPeriod;
 /**
  * @api
  */
-final class ProgressLap
+final class ProcessingStopwatchLap
 {
-    /** @var Progress */
+    /** @var ProcessingStopwatch */
     private $progress;
 
     /** @var StopwatchPeriod */
@@ -23,7 +23,7 @@ final class ProgressLap
     /** @var int */
     private $position;
 
-    public function __construct(Progress $progress, StopwatchPeriod $swPeriod, int $processed, int $position)
+    public function __construct(ProcessingStopwatch $progress, StopwatchPeriod $swPeriod, int $processed, int $position)
     {
         $this->progress = $progress;
         $this->swPeriod = $swPeriod;
@@ -31,7 +31,7 @@ final class ProgressLap
         $this->position = $position;
     }
 
-    public function overall(): Progress
+    public function overall(): ProcessingStopwatch
     {
         return $this->progress;
     }
@@ -39,9 +39,17 @@ final class ProgressLap
     /**
      * @return DateInterval|CarbonInterval
      */
-    public function averageDuration(): DateInterval
+    public function averageElementDuration(): DateInterval
     {
         return ms2interval($this->swPeriod->getDuration() / $this->processed);
+    }
+
+    /**
+     * @return DateInterval|CarbonInterval
+     */
+    public function duration(): DateInterval
+    {
+        return ms2interval($this->swPeriod->getDuration());
     }
 
     public function processed(): int
