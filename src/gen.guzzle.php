@@ -74,6 +74,7 @@ function coroutine_invoke(callable $generatorFn): PromiseInterface
  *
  *     // Outputs "abc"
  *     $promise->then(function ($v) { echo $v; });
+ *
  * @api
  *
  * @param callable $generatorFn Generator function to wrap into a promise
@@ -90,6 +91,8 @@ function coroutine(callable $generatorFn): callable
 
 /**
  * Makes a coroutine (promise) from a generator instance
+ *
+ * @api
  *
  * @param Generator $gen A generator instance that represents a coroutine
  *
