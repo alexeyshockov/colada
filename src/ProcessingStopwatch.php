@@ -36,10 +36,12 @@ final class ProcessingStopwatch
 
     public static function create(): ProcessingStopwatch
     {
+        $position = $processed = 0;
+
         return new self(
             (new StopwatchEvent(hrtime(true)))->start(),
-            $position = 0,
-            $processed = 0
+            $position,
+            $processed
         );
     }
 
