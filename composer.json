@@ -46,7 +46,7 @@
         "symfony/stopwatch": "~3.0 || ~4.0"
     },
     "suggest": {
-        "alexeyshockov/colada-x": "A small helper function to write closures faster",
+        "alexeyshockov/colada-x": "A small helper function to write closures faster (for PHP < 7.4)",
         "danielstjules/stringy": "Convenient string manipulations",
         "guzzlehttp/guzzle": "The most used library for HTTP interaction",
         "lstrojny/functional-php": "Some functional primitives",
