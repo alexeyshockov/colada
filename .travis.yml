@@ -11,7 +11,7 @@ matrix:
       env: COVERAGE="yes"
     - php: 7.2
     - php: 7.3
-    - php: 7.4snapshot
+    - php: 7.4
 
 cache:
   directories:
