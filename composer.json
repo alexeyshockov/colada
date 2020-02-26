@@ -32,7 +32,7 @@
     "require-dev": {
         "danielstjules/stringy": "~2.1 || ~3.0",
         "giorgiosironi/eris": "^0.11.0",
-        "guzzlehttp/guzzle": "~6.3",
+        "guzzlehttp/guzzle": "~6.3 || ~7.0@dev",
         "lstrojny/functional-php": "~1.4",
         "nesbot/carbon": "~2.0",
         "nikic/iter": "~1.6 || ~2.0",
@@ -48,7 +48,7 @@
     "suggest": {
         "alexeyshockov/colada-x": "A small helper function to write closures faster (for PHP < 7.4)",
         "danielstjules/stringy": "Convenient string manipulations",
-        "guzzlehttp/guzzle": "The most used library for HTTP interaction",
+        "guzzlehttp/guzzle": "The most popular library for HTTP interactions",
         "lstrojny/functional-php": "Some functional primitives",
         "nesbot/carbon": "Convenient date and time manipulations",
         "nikic/iter": "Basic helper functions to work with collections (generators)",
