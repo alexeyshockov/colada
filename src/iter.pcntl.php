@@ -12,6 +12,8 @@ namespace Colada\iter\pcntl;
  */
 function with_signal_break(iterable $inner): iterable
 {
+    pcntl_async_signals(true);
+
     $stop = false;
     $handler = function () use (&$stop) {
         $stop = true;
