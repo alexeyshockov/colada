@@ -9,6 +9,20 @@ use Exception;
 use RuntimeException;
 
 /**
+ * @param float|int $size
+ * @param int $precision
+ *
+ * @return string
+ */
+function format_bytes($size, int $precision = 2)
+{
+    $base = log($size, 1024);
+    $suffixes = ['', 'K', 'M', 'G', 'T'];
+
+    return round(pow(1024, $base - floor($base)), $precision) .' '. $suffixes[floor($base)];
+}
+
+/**
  * @param float $ms
  *
  * @return DateInterval|CarbonInterval

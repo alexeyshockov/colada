@@ -2,8 +2,6 @@
 
 use Colada\ProcessingStopwatch;
 use Colada\ProcessingStopwatchLap;
-use Colada\ProgressBuilder;
-use Colada\ProgressLap;
 
 require '../vendor/autoload.php';
 
